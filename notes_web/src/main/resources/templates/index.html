@@ -1,0 +1,51 @@
+<html  xmlns:th="http://www.thymeleaf.org"  lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>编程笔记</title>
+
+    <link rel="stylesheet" href="./css/notes.css">
+</head>
+
+<script th:inline="javascript">
+
+</script>
+<body>
+    <!-- header -->
+    <div th:replace="header"></div>
+    <div class="layui-container">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md9 layui-col-lg12">
+                <div th:each="item:${noteList.getRecords()}" >
+                    <div class="layui-panel notes-radiu" style="margin: 10px;">
+                        <div class="notes-item">
+                            <h3 class="notes-title">
+                                <a th:href="@{/content(uid=${item.uid})}" target="_blank" th:text="${item.title}"></a>
+                            </h3>
+                            <div class="notes-summary">
+                                <p th:text="${item.summary}"></p>
+                            </div>
+                            <div class="notes-info">
+                                <a th:href="@{/userCenter(uid=${item.userUid})}" target="_blank">
+                                <span>
+                                    <img class="notes-avatar"
+                                         src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fp7.itc.cn%2Fq_70%2Fimages03%2F20210301%2F7ec7b69f96f1451d8810ac1736f8f609.jpeg&refer=http%3A%2F%2Fp7.itc.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1648347524&t=1945e922e64ed2c193c8f217c08a045f">
+                                    <span class="notes-author"><a th:text="${item.author}"></a></span>
+                                </span>
+                                </a>
+                                <span class="layui-col-space12">
+                                    <span class="layui-col-space12"><i class=""></i><span>17327</span></span>
+                                    <span class="layui-col-space12">分类:<a class="ksd-topic-tags">教程</a></span>
+                                    <span class="layui-col-space12"><i class="layui-icon layui-icon-time"></i>
+                                        <span th:text="${#calendars.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}"></span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

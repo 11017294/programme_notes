@@ -1,0 +1,97 @@
+
+[	java:S112S"FDefine and throw a dedicated exception instead of using a generic one.(¨‹í
+j
+java:S3008"ORename this field "YYYY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŞÈØ³ùÿÿÿÿ
+h
+java:S3008"RRename this field "YYYY_MM" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Å°İ®
+k
+java:S3008"URename this field "YYYY_MM_DD" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ñ«¦Û
+o
+java:S3008 "YRename this field "YYYYMMDDHHMMSS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óƒ±ë
+y
+java:S3008""^Rename this field "YYYY_MM_DD_HH_MM_SS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚ã™Áıÿÿÿÿ
+
+java:S4144"cUpdate this method so that its implementation is not identical to "getOneDayStartTime" on line 136.(¹èË¥øÿÿÿÿ
+
+java:S4144ª"cUpdate this method so that its implementation is not identical to "getOneDayStartTime" on line 148.(ğÍş·şÿÿÿÿ
+2
+java:S2386"Make this member "protected".(È¥Ü
+Z
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(İÑ’x
+Z
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(È¥Ü
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(²Ğ‡Àùÿÿÿÿ
+H
+java:S1874Š",Remove this use of "Date"; it is deprecated.(¨‘©Ìøÿÿÿÿ
+H
+java:S1874 ",Remove this use of "Date"; it is deprecated.(¨‘©Ìøÿÿÿÿ
+S
+java:S3252—"7Use static access with "java.util.Calendar" for "DATE".(Ä¸Ê›ùÿÿÿÿ
+P
+java:S2110¿"4"24" is not a valid value for setting "HOUR_OF_DAY".(ÈßÿÙûÿÿÿÿ
+P
+java:S2110Ì"4"24" is not a valid value for setting "HOUR_OF_DAY".(ÈßÿÙûÿÿÿÿ
+W	java:S125†"<This block of commented-out lines of code should be removed.(”„ˆ±üÿÿÿÿ
+W	java:S125ø"<This block of commented-out lines of code should be removed.(„öİ£ıÿÿÿÿ
+W	java:S125‚"<This block of commented-out lines of code should be removed.(‘¹¡¬ÿÿÿÿÿ
+G
+java:S1068$"1Remove this unused "parsePatterns" private field.(”ü”‘
+j
+java:S1192h"TDefine a constant instead of duplicating this literal "yyyy-MM-dd 23:59:59" 5 times.(å«°˜
+j
+java:S1192]"TDefine a constant instead of duplicating this literal "yyyy-MM-dd 00:00:00" 8 times.(Ô”×ƒ
+n
+java:S1192""SUse already-defined constant 'FORMAT_STRING' instead of duplicating its value here.(‚ã™Áıÿÿÿÿ
+a
+java:S1192"KDefine a constant instead of duplicating this literal "yyyy-MM-dd" 6 times.(Ñ«¦Û
+Œ
+java:S1319¶"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(×†Œµûÿÿÿÿ
+w
+java:S1488P"\Immediately return this expression instead of assigning it to the temporary variable "date".(ÜÑãòüÿÿÿÿ
+q
+java:S1488×"ZImmediately return this expression instead of assigning it to the temporary variable "ts".(¡Æ–ı
+v
+java:S1488Ø"_Immediately return this expression instead of assigning it to the temporary variable "maxDate".(ƒ„¦Ù
+q
+java:S1488¡"[Immediately return this expression instead of assigning it to the temporary variable "day".(¨éù
+v
+java:S1488¯"_Immediately return this expression instead of assigning it to the temporary variable "maxDate".(ƒ„¦Ù
+z
+java:S1488ã"^Immediately return this expression instead of assigning it to the temporary variable "format".(à‡Şşÿÿÿÿ
+{
+java:S1488‡"_Immediately return this expression instead of assigning it to the temporary variable "newDate".(˜º®İıÿÿÿÿ
+u
+java:S1488É"^Immediately return this expression instead of assigning it to the temporary variable "result".(îõ†™
+e
+java:S1104"OMake log a static final constant or non-public and provide accessors if needed.(ØúÔ
+k
+java:S1104"PMake YYYY a static final constant or non-public and provide accessors if needed.(ŞÈØ³ùÿÿÿÿ
+i
+java:S1104"SMake YYYY_MM a static final constant or non-public and provide accessors if needed.(Å°İ®
+l
+java:S1104"VMake YYYY_MM_DD a static final constant or non-public and provide accessors if needed.(Ñ«¦Û
+p
+java:S1104 "ZMake YYYYMMDDHHMMSS a static final constant or non-public and provide accessors if needed.(óƒ±ë
+z
+java:S1104""_Make YYYY_MM_DD_HH_MM_SS a static final constant or non-public and provide accessors if needed.(‚ã™Áıÿÿÿÿ
+?
+java:S1444")Make this "public static log" field final(ØúÔ
+E
+java:S1444"*Make this "public static YYYY" field final(ŞÈØ³ùÿÿÿÿ
+C
+java:S1444"-Make this "public static YYYY_MM" field final(Å°İ®
+F
+java:S1444"0Make this "public static YYYY_MM_DD" field final(Ñ«¦Û
+J
+java:S1444 "4Make this "public static YYYYMMDDHHMMSS" field final(óƒ±ë
+T
+java:S1444""9Make this "public static YYYY_MM_DD_HH_MM_SS" field final(‚ã™Áıÿÿÿÿ
+]
+java:S2184õ"FCast one of the operands of this multiplication operation to a "long".(¦›çö
+b
+java:S2184ö"FCast one of the operands of this multiplication operation to a "long".(á™¹ğûÿÿÿÿ
+b
+java:S2184÷"FCast one of the operands of this multiplication operation to a "long".(íïêşÿÿÿÿ
+Y
+java:S2259á"BA "NullPointerException" could be thrown; "dEnd" is nullable here.(€•¢Æ

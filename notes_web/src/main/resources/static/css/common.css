@@ -1,0 +1,21 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-size: 14px;
+    font-family: "PingFangSC-Regular", "PingFangSC", "微软雅黑", "Microsoft YaHei", "miui", "system-ui", "Helvetica", "Arial", "Verdana", "sans-serif";
+    background-color: #f0f2f5;
+    line-height: 1.5;
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* 圆角 */
+.notes-radiu {
+    border-radius: 7px;
+}

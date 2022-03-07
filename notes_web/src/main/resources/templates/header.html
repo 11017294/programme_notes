@@ -1,0 +1,53 @@
+<!-- 引入 layui.css -->
+<link rel="stylesheet" href="./layui/css/layui.css">
+
+<!-- 引入 自定义css样式 -->
+<link rel="stylesheet" href="./css/common.css">
+
+<!-- 引入 layui.js -->
+<script src="./layui/layui.js"></script>
+<!-- 引入 自定义js -->
+<script src="./js/index.js"></script>
+
+<style>
+
+</style>
+
+<script type="text/javascript" th:inline="javascript">
+    //window.waterMark = [[${ session.personName + '（' + session.personCode + "）" }]];
+</script>
+
+<div id="header" class="layui-row layui-nav">
+    <div class="layui-col-md2">
+        <a class="layui-nav-img" >编程笔记</a>
+    </div>
+    <div class="layui-col-md8">
+        <ul class="layui-bg-white">
+            <li class="layui-nav-item layui-this" ><a th:href="@{/index}">首页</a></li>
+            <li class="layui-nav-item"><a th:href="@{/notes}">笔记</a></li>
+            <li class="layui-nav-item"><a th:href="@{/index}">云记事</a></li>
+            <li class="layui-nav-item"><a th:href="@{/makeNotes}" target="_blank" >记笔记</a></li>
+        </ul>
+        <ul class="layui-layout-right">
+            <li class="layui-nav-item layui-hide layui-show-md-inline-block" th:if="${user}">
+                <a href="">
+                    <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fp7.itc.cn%2Fq_70%2Fimages03%2F20210301%2F7ec7b69f96f1451d8810ac1736f8f609.jpeg&refer=http%3A%2F%2Fp7.itc.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1648347524&t=1945e922e64ed2c193c8f217c08a045f"
+                         class="layui-nav-img">
+                    [[${user.userName}]]
+                </a>
+                <dl class="layui-nav-child layui-anim layui-anim-upbit">
+                    <dd><a href="">个人中心</a></dd>
+                    <dd><a href="">个人设置</a></dd>
+                    <dd><a href="">退出登录</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" th:unless="${user}">
+                <img src="./img/头像.png" class="layui-nav-img">a
+            </li>
+            <span class="layui-nav-bar" style="left: 138.375px; width: 0px; opacity: 0; top: 56px;"></span></ul>
+    </div>
+    <div class="layui-col-md2">
+
+    </div>
+
+</div>
