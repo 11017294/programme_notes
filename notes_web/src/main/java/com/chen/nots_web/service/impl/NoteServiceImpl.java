@@ -74,7 +74,19 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
             wrapper.eq(SQLConf.USER_UID, noteVO.getUserUid());
         }
         Page<Note> page = new Page<>(noteVO.getCurrentPage(), noteVO.getPageSize());
-        return noteMapper.selectPage(page, wrapper);
+        IPage<Note> noteList = noteMapper.selectPage(page, wrapper);
+        for (Note note : noteList.getRecords()) {
+            if(StrUtil.isNotBlank(note.getTagUid())){
+                String[] tagUids = note.getTagUid().split(",");
+                String tagContents = String.join(",", tagService.getTagContentList(tagUids));
+                note.setTagsName(tagContents);
+            }
+            NoteSort noteSort = noteSortService.getById(note.getNoteSortUid());
+            if(ObjectUtil.isNotEmpty(noteSort)){
+                note.setNoteSortName(noteSort.getSortName());
+            }
+        }
+        return noteList;
     }
 
     @Override

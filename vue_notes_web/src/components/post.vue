@@ -95,7 +95,6 @@ export default {
     float: right;
 }
 
-
 .post-entry {
     .feature {
         position: absolute;

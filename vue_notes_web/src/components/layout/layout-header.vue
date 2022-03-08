@@ -108,7 +108,7 @@
                         this.$router.push('/login')
                     };break;
                     case "personalCenter" : {
-                        this.$router.push('/personalCenter')
+                        this.$router.push('/noteManagement')
                     };break;
                 }
             }

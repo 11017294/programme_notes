@@ -56,11 +56,9 @@ export default {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 }
 .el-main {
-    margin: 10px 50px;
-    line-height: 36px;
-    text-align: center;
+    line-height: 35px;
+    margin: 10px 40px;
     background-color: #ffffff;
-    padding: 10px;
 }
 
 .box-bottom {
