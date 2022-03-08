@@ -6,4 +6,12 @@
         select * from t_tag
     </select>
 
+
+    <select id="getTagContentList" resultType="java.lang.String">
+        select content from t_tag where uid in
+        <foreach collection="array" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
 </mapper>

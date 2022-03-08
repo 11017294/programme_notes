@@ -23,7 +23,7 @@
                 </el-col>
                 <el-col :span="5">
                     <el-form-item label="标签">
-                        <el-select v-model="noteForm.topicTags" multiple placeholder="请选择">
+                        <el-select v-model="tagValue" multiple placeholder="请选择">
                             <el-option
                                 v-for="item in tagData"
                                 :key="item.uid"
@@ -67,7 +67,7 @@ export default {
                 title: '',
                 summary: '',
                 noteSortUid: '',
-                topicTags: '',
+                tagUid: '',
                 isOriginal: '1',
                 content: ''
             },
@@ -81,11 +81,13 @@ export default {
         commitNotes() {
             let that = this;
             var params = new URLSearchParams();
+            this.noteForm.tagUid = that.tagValue.join(",");
             for(let key in that.noteForm){
                 params.append(key, that.noteForm[key])
             }
             addNote(params).then(res => {
-                this.$message.info("成功")
+                that.$message.success("成功")
+                that.$router.push('/')
             }).catch(err => {
                 this.$message.error(err)
             })

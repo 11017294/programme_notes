@@ -16,4 +16,6 @@ import java.util.List;
 public interface TagMapper extends SuperMapper<Tag> {
 
     List<Tag> getAll();
+
+    List<String> getTagContentList(String[] tagUids);
 }

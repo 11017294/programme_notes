@@ -27,4 +27,12 @@ public class TagServiceImpl extends SuperServiceImpl<TagMapper, Tag> implements 
     public List<Tag> getPageList() {
         return tagMapper.getAll();
     }
+
+    @Override
+    public List<String> getTagContentList(String[] tagUids) {
+        if(tagUids.length < 1){
+            return null;
+        }
+        return tagMapper.getTagContentList(tagUids);
+    }
 }

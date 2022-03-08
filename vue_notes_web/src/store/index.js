@@ -13,6 +13,7 @@ const state = {
     socials: '',
     websiteInfo: '',
     isLogin: false,
+    userInfo: {},
     token: ''
 }
 const mutations = {

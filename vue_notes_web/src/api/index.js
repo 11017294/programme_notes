@@ -91,7 +91,6 @@ export function getNoteSort(params) {
     })
 }
 
-
 /**
  * 获取标签
  * @param params
@@ -100,6 +99,19 @@ export function getNoteSort(params) {
 export function getTag(params) {
     return request({
         url: '/test/tag/getList',
+        method: 'get',
+        params: params
+    })
+}
+
+/**
+ * 根据id获取笔记列表
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function getNotesById(params) {
+    return request({
+        url: '/test/note/getNoteByUserId',
         method: 'get',
         params: params
     })

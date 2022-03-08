@@ -33,6 +33,7 @@
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item command="login" v-show="!this.$store.state.isLogin">登录</el-dropdown-item>
                     <el-dropdown-item command="logout" v-show="this.$store.state.isLogin">登出</el-dropdown-item>
+                    <el-dropdown-item command="personalCenter" v-show="!this.$store.state.isLogin">个人中心</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -106,6 +107,9 @@
                     case "login" : {
                         this.$router.push('/login')
                     };break;
+                    case "personalCenter" : {
+                        this.$router.push('/personalCenter')
+                    };break;
                 }
             }
         }
@@ -128,6 +132,7 @@
         -moz-transition: .3s all linear;
         -o-transition: .3s all ease;
         -ms-transition: .3s all ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
         &.hidden{
             top: -100px;
         }

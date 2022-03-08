@@ -34,23 +34,22 @@
                                     <span>{{ post.author }}</span>
                                 </div>
                             </router-link>
-
                         </div>
                     </div>
                     <div class="item-float-left" v-if="post.noteSortUid">
-                        分类：<a href="javascript:void(0);">{{ post.noteSortStr }}</a>
+                        分类：<a href="javascript:void(0);">{{ post.noteSortName }}</a>
                     </div>
                     <div class="createTime item-float-left"><span class="iconfont">&#xe603;</span>{{ post.createTime | parseTime }}</div>
                 </div>
                 <div class="info-meta">
                     <div class="comnum">
                       <span>
-                        <i class="iconfont iconcomment"></i>
-                        <a href="https://zhebk.cn/Web/Akina.html">{{ post.commentsCount }} 条评论</a>
+<!--                        <i class="iconfont iconcomment"></i>
+                        <a href="https://zhebk.cn/Web/Akina.html">{{ post.commentsCount }} 条评论</a>-->
                       </span>
                     </div>
                     <div class="views">
-                        <span><i class="iconfont iconeyes"></i>{{ post.viewsCount }} 热度</span>
+                        <span><i class="iconfont iconeyes"></i>{{ post.clickCount }} 热度</span>
                     </div>
                 </div>
             </footer>

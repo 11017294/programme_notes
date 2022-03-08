@@ -1,15 +1,20 @@
 package com.chen.nots_web.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chen.nots_web.entity.Note;
+import com.chen.nots_web.entity.NoteSort;
 import com.chen.nots_web.global.SQLConf;
 import com.chen.nots_web.global.service.serviceImpl.SuperServiceImpl;
 import com.chen.nots_web.mapper.NoteMapper;
 import com.chen.nots_web.service.NoteService;
+import com.chen.nots_web.service.NoteSortService;
+import com.chen.nots_web.service.TagService;
 import com.chen.nots_web.vo.NoteVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,7 +30,13 @@ import java.util.List;
 public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implements NoteService {
 
     @Resource
-    NoteMapper noteMapper;
+    private NoteMapper noteMapper;
+
+    @Autowired
+    private TagService tagService;
+
+    @Autowired
+    private NoteSortService noteSortService;
 
     @Override
     public IPage search(NoteVO noteVO) {
@@ -42,6 +53,17 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
         }
         Page page = new Page(noteVO.getCurrentPage(), noteVO.getPageSize());
         IPage<Note> noteList = noteMapper.selectPage(page, wrapper);
+        for (Note note : noteList.getRecords()) {
+            if(StrUtil.isNotBlank(note.getTagUid())){
+                String[] tagUids = note.getTagUid().split(",");
+                String tagContents = String.join(",", tagService.getTagContentList(tagUids));
+                note.setTagsName(tagContents);
+            }
+            NoteSort noteSort = noteSortService.getById(note.getNoteSortUid());
+            if(ObjectUtil.isNotEmpty(noteSort)){
+                note.setNoteSortName(noteSort.getSortName());
+            }
+        }
         return noteList;
     }
 

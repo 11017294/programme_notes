@@ -32,7 +32,7 @@ public class NoteController {
     @ApiOperation(value = "根据用户id获取笔记", notes = "根据用户id获取笔记")
     @GetMapping("/getNoteByUserId")
     public ResultBase getNoteByUserId(NoteVO noteVO){
-        return ResultBase.ok().data("noteList", noteService.getNoteByUserId(noteVO));
+        return ResultBase.ok().data("list", noteService.getNoteByUserId(noteVO));
     }
 
     @ApiOperation(value = "增加笔记", notes = "增加笔记")

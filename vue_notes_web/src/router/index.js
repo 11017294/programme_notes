@@ -52,6 +52,40 @@ const routes = [
         name: 'takeNotes',
         component: () => import('../views/TakeNotes.vue'),
         meta: { title: '记笔记'}
+    },
+    {
+        path: '/personalCenter',
+        name: 'personalCenter',
+        component: () => import('../views/PersonalCenter.vue'),
+        meta: { title: '个人中心'},
+        children: [
+            {
+                path: '/myNotes',
+                name: 'myNotes',
+                component: () => import('../components/PersonalCenter/notes'),
+                children: [
+                    {
+                        path: '/noteManagement',
+                        name: 'noteManagement',
+                        component: () => import('../components/PersonalCenter/note-management'),
+                        meta: { title: '笔记'},
+                    },
+                    {
+                        path: '/myCollect',
+                        name: 'myCollect',
+                        component: () => import('../components/PersonalCenter/my-collect'),
+                        meta: { title: '笔记'},
+                    },
+                ],
+                meta: { title: '笔记'},
+            },
+            {
+                path: '/myInstall',
+                name: 'myInstall',
+                component: () => import('../components/PersonalCenter/install'),
+                meta: { title: '设置'},
+            }
+        ]
     }
 ]
 
@@ -68,15 +102,15 @@ router.beforeEach((to, from, next) => {
         title = `${to.meta.title} - ${title}`
     }
     document.title = title
-    if (to.path !== from.path) {
+/*    if (to.path !== from.path) {
         store.dispatch('setLoading', true);
-    }
+    }*/
     next();
 })
 router.afterEach((to, from) => {
     // 最多延迟 关闭 loading
-    setTimeout(() => {
+   /* setTimeout(() => {
         store.dispatch('setLoading', false);
-    }, 0)
+    }, 1000)*/
 })
 export default router

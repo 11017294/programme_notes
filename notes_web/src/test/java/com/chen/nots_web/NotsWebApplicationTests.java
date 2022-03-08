@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import com.chen.nots_web.service.TagService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
@@ -14,10 +16,11 @@ import java.util.List;
 @SpringBootTest
 class NotsWebApplicationTests {
 
+    @Autowired
+    TagService tagService;
+
     @Test
     void contextLoads() {
-
-
     }
 
     public static void main(String[] args) {
