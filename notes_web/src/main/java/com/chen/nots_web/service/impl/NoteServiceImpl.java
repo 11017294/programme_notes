@@ -1,5 +1,6 @@
 package com.chen.nots_web.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -7,12 +8,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chen.nots_web.entity.Note;
 import com.chen.nots_web.entity.NoteSort;
+import com.chen.nots_web.global.RedisConf;
 import com.chen.nots_web.global.SQLConf;
 import com.chen.nots_web.global.service.serviceImpl.SuperServiceImpl;
 import com.chen.nots_web.mapper.NoteMapper;
 import com.chen.nots_web.service.NoteService;
 import com.chen.nots_web.service.NoteSortService;
 import com.chen.nots_web.service.TagService;
+import com.chen.nots_web.utils.RedisUtil;
 import com.chen.nots_web.vo.NoteVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +40,9 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
 
     @Autowired
     private NoteSortService noteSortService;
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Override
     public IPage search(NoteVO noteVO) {
@@ -99,19 +105,7 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
     @Override
     public String addNote(NoteVO noteVO) {
         Note note = new Note();
-        note.setTitle(noteVO.getTitle());
-        note.setSummary(noteVO.getSummary());
-        note.setContent(noteVO.getContent());
-        note.setTagUid(noteVO.getTagUid());
-        note.setFileUid(noteVO.getFileUid());
-        note.setIsOriginal(noteVO.getIsOriginal());
-        note.setAuthor(noteVO.getAuthor());
-        note.setArticlesPart(noteVO.getArticlesPart());
-        note.setNoteSortUid(noteVO.getNoteSortUid());
-        note.setIsPublish(note.getIsPublish());
-        note.setOpenComment(noteVO.getOpenComment());
-        note.setUserUid(noteVO.getUserUid());
-        note.setArticleSource(noteVO.getArticleSource());
+        BeanUtil.copyProperties(noteVO, note);
         note.insert();
         return note.getUid();
     }

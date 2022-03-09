@@ -43,6 +43,11 @@ const mutations = {
     },
     DEL_TOKEN: (state) => {
         state.token = ''
+        state.userInfo = {}
+        localStorage.removeItem('Authorization')
+    },
+    SET_USERINFO: (state, v) => {
+        state.userInfo = v
     }
 }
 const actions = {

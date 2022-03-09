@@ -1,16 +1,16 @@
 <template>
     <div class="notesInfo">
-        <el-form ref="form" :model="noteForm" label-width="80px">
-            <el-form-item label="标题">
+        <el-form ref="form" :model="noteForm" :rules="rules" label-width="80px">
+            <el-form-item label="标题" prop="title">
                 <el-input placeholder="请输入标题" style="width: 50%" v-model="noteForm.title"></el-input>
             </el-form-item>
 
-            <el-form-item label="简介">
+            <el-form-item label="简介" prop="summary">
                 <el-input placeholder="请输入简介" style="width: 50%" v-model="noteForm.summary"></el-input>
             </el-form-item>
             <el-row>
                 <el-col :span="5">
-                    <el-form-item label="分类">
+                    <el-form-item label="分类" prop="noteSortUid">
                         <el-select v-model="noteForm.noteSortUid" placeholder="请选择分类">
                             <el-option
                                 v-for="item in noteSortData"
@@ -22,7 +22,7 @@
                     </el-form-item>
                 </el-col>
                 <el-col :span="5">
-                    <el-form-item label="标签">
+                    <el-form-item label="标签" prop="tagValue">
                         <el-select v-model="tagValue" multiple placeholder="请选择">
                             <el-option
                                 v-for="item in tagData"
@@ -43,12 +43,12 @@
                 </el-col>
             </el-row>
             <el-form-item label="内容">
-                <el-input type="textarea" resize="none" :rows="25" style="width: 48%" v-model="markdown_body"></el-input>
+                <el-input type="textarea" resize="none" :rows="25" style="width: 48%" v-model="markdown_body" prop="content"></el-input>
                 <el-input type="textarea" resize="none" :rows="25" style="width: 48%" v-model="noteForm.content"></el-input>
             </el-form-item>
             <el-form-item class="but">
                 <el-button plain @click="returnPage">取消</el-button>
-                <el-button type="primary" @click="commitNotes()">提交</el-button>
+                <el-button type="primary" @click="commitNotes('noteForm')">提交</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -74,17 +74,45 @@ export default {
             noteSortData: [],
             tagData: [],
             tagValue: [],
-            markdown_body: ''
+            markdown_body: '',
+            rules: {
+                title: [
+                    { required: true, message: '请输入标题', trigger: 'blur' },
+                    { min: 4, max: 50, message: '长度在 4 到 50 个字符', trigger: 'blur' }
+                ],
+                summary: [
+                    { required: true, message: '请输入简介', trigger: 'blur' },
+                    { min: 10, max: 50, message: '长度在 10 到 80 个字符', trigger: 'blur' }
+                ],
+                noteSortUid: [
+                    { required: true, message: '请选择分类', trigger: 'change' }
+                ],
+                tagValue: [
+                    { required: true, message: '请选择标签', trigger: 'change' }
+                ],
+                content: [
+                    { required: true, message: '内容不能为空', trigger: 'blur' },
+                    { min: 3, max: 500, message: '长度在 10 到 500 个字符', trigger: 'blur' }
+                ],
+            }
         }
     },
     methods: {
-        commitNotes() {
+        commitNotes(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (!valid) {
+                    return false;
+                }
+            });
             let that = this;
             var params = new URLSearchParams();
             this.noteForm.tagUid = that.tagValue.join(",");
             for(let key in that.noteForm){
                 params.append(key, that.noteForm[key])
             }
+            let userInfo = that.$store.state.userInfo;
+            params.append("author", userInfo.userName)
+            params.append("userUid", userInfo.userUid)
             addNote(params).then(res => {
                 that.$message.success("成功")
                 that.$router.push('/')

@@ -117,7 +117,6 @@ public class LoginController {
     public ResultBase logout() {
         ServletRequestAttributes attribute = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attribute.getRequest();
-        //String token = request.getAttribute(SysConf.TOKEN).toString();
         String token = request.getHeader("Authorization");
         if (StringUtils.isEmpty(token)) {
             return ResultBase.error("退出失败");

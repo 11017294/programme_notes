@@ -94,6 +94,9 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 })
+
+// 全局前置导航钩子 beforeEach
+// 会在路由即将改变前触发
 router.beforeEach((to, from, next) => {
     let title = '编程笔记'
     if (to.meta.params){
@@ -102,14 +105,25 @@ router.beforeEach((to, from, next) => {
         title = `${to.meta.title} - ${title}`
     }
     document.title = title
+    let isLogin = window.localStorage.getItem('Authorization')
+    if (!isLogin) {
+        if (to.path == '/login' || to.path == '/' ) {
+            next()
+        } else {
+            Vue.prototype.$message('没有访问权限或登录已过期，请重新登录！')
+            next('/login')
+        }
+    }
 /*    if (to.path !== from.path) {
         store.dispatch('setLoading', true);
     }*/
     next();
 })
+
+
 router.afterEach((to, from) => {
     // 最多延迟 关闭 loading
-   /* setTimeout(() => {
+/*    setTimeout(() => {
         store.dispatch('setLoading', false);
     }, 1000)*/
 })

@@ -1,17 +1,23 @@
 package com.chen.nots_web.controller;
 
 
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
+import com.chen.nots_web.global.RedisConf;
+import com.chen.nots_web.global.SysConf;
 import com.chen.nots_web.service.UserService;
+import com.chen.nots_web.utils.JsonUtils;
+import com.chen.nots_web.utils.RedisUtil;
 import com.chen.nots_web.vo.ResultBase;
 import com.chen.nots_web.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -29,6 +35,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @ApiOperation(value = "获取用户列表", notes = "获取用户列表")
     @PostMapping("/getList")
@@ -64,6 +72,18 @@ public class UserController {
     public ResultBase resetUserPassword(@RequestBody UserVO userVO) {
         log.info("重置用户密码: {}", userVO);
         return ResultBase.ok().data("id", userService.resetUserPassword(userVO));
+    }
+
+    @ApiOperation(value = "获取用户信息", notes = "获取用户信息")
+    @GetMapping("/verify/{accessToken}")
+    public ResultBase verifyUser(@PathVariable("accessToken") String accessToken) {
+        String userInfo = redisUtil.get(RedisConf.LOGIN_TOKEN_KEY + RedisConf.SEGMENTATION + accessToken);
+        if (StrUtil.isBlank(userInfo)) {
+            return ResultBase.error("令牌无效");
+        } else {
+            Map<String, Object> map = JsonUtils.jsonToMap(userInfo);
+            return ResultBase.ok().data("info", map);
+        }
     }
 
 }

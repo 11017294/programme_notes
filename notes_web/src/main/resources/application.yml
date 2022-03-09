@@ -53,6 +53,7 @@ server:
   port: 9090
   servlet:
     context-path: /api
+  max-http-header-size: 2MB
 # 下面这些内容是为了让MyBatis映射
 # 指定Mybatis的Mapper文件
 mybatis:

@@ -91,6 +91,8 @@ public class RedisConf {
      */
     public final static String USER_TOKEN = "USER_TOKEN";
 
+    public final static String SYMBOL_COLON = ":";
+
     /**
      * 激活用户的时间
      */

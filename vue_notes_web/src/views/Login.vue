@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import {login, register} from "@/api"
+import {authVerify, login, register} from "@/api"
 
 export default {
     name: "login",
@@ -98,14 +98,20 @@ export default {
                 var params = new URLSearchParams();
                 params.append("userName", that.form.userName)
                 params.append("passWord", that.form.passWord)
-                login(params).then(res => {
-                    that.$store.commit("SET_IS_LOGIN", true)
-                    that.$store.commit("SET_TOKEN", res.data.token)
-                    that.$message({
-                        message: '登录成功！',
-                        type: 'success'
-                    });
-                    this.$router.push('/')
+                login(params).then(response => {
+                    let token = response.data.token;
+                    authVerify(token).then(res => {
+                        that.$store.commit("SET_IS_LOGIN", true)
+                        that.$store.commit("SET_TOKEN", token)
+                        that.$store.commit("SET_USERINFO", res.data.info)
+                        that.$message({
+                            message: '登录成功！',
+                            type: 'success'
+                        });
+                        this.$router.push('/')
+                    }).catch(err => {
+                        that.$message.error(err);
+                    })
                 }).catch(err => {
                     that.$message.error(err);
                 })

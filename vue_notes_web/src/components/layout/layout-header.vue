@@ -31,9 +31,9 @@
                     </el-avatar>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item command="login" v-show="!this.$store.state.isLogin">登录</el-dropdown-item>
-                    <el-dropdown-item command="logout" v-show="this.$store.state.isLogin">登出</el-dropdown-item>
-                    <el-dropdown-item command="personalCenter" v-show="!this.$store.state.isLogin">个人中心</el-dropdown-item>
+                    <el-dropdown-item command="login" v-show="!isLogin">登录</el-dropdown-item>
+                    <el-dropdown-item command="personalCenter" v-show="isLogin">个人中心</el-dropdown-item>
+                    <el-dropdown-item command="logout" v-show="isLogin">登出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -41,9 +41,10 @@
 </template>
 
 <script>
-    import HeaderSearch from '@/components/header-search'
-    import {fetchCategory, logout} from '../../api'
-    export default {
+import HeaderSearch from '@/components/header-search'
+import {fetchCategory, logout} from '../../api'
+
+export default {
         name: "layout-header",
         components: {HeaderSearch},
         data() {
@@ -53,12 +54,15 @@
                 hidden: false,
                 category: [],
                 mobileShow: false,
-                userInfo: { },      // 用户信息
+
             }
         },
         computed: {
             isLogin() {     // 是否登录
                 return this.$store.state.isLogin
+            },
+            userInfo() {    // 用户信息
+                return this.$store.state.userInfo
             }
         },
         mounted(){
@@ -100,6 +104,7 @@
                                 message: '您已退出登录！',
                                 type: 'success'
                             });
+                            this.$router.push('/')
                         }).catch(err => {
                             this.$message.error(err)
                         })

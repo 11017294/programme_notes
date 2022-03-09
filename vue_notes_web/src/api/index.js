@@ -117,6 +117,15 @@ export function getNotesById(params) {
     })
 }
 
+/**
+ * 通过token获取信息
+ * @param params
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export function authVerify (params) {
+    return request.get('test/user/verify/' + params, {})
+}
+
 export function fetchFocus() {
     return request({
         url: '/focus/list',

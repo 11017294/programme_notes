@@ -40,7 +40,7 @@ export default {
             var params = new URLSearchParams();
             params.append("pageSize", this.pageSize);
             params.append("currentPage", this.currentPage + 1);
-            params.append("userUid", "chen");
+            params.append("userUid", that.$store.state.userInfo.userUid);
             getNotesById(params)
                 .then(res => {
                     that.convertSearchData(that, res)
@@ -54,7 +54,7 @@ export default {
             var params = new URLSearchParams();
             params.append("pageSize", that.pageSize);
             params.append("currentPage", that.currentPage);
-            params.append("userUid", "chen");
+            params.append("userUid", that.$store.state.userInfo.userUid);
             getNotesById(params)
                 .then(res => {
                     that.convertSearchData(that, res)
