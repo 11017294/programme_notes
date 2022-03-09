@@ -150,24 +150,10 @@
                     that.isEnd = true;
                 }
             },
-            getToken() {
-                let token = localStorage.getItem('Authorization');
-                if(token == undefined){
-                    return;
-                }
-                authVerify(token).then(res => {
-                    this.$store.commit("SET_IS_LOGIN", true)
-                    this.$store.commit("SET_TOKEN", token)
-                    this.$store.commit("SET_USERINFO", res.data.info)
-                }).catch(err => {
-                    this.$message.error(err);
-                })
-            }
         },
         mounted() {
             this.fetchFocus();
             this.fetchList();
-            this.getToken();
         }
     }
 </script>

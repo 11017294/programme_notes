@@ -11,6 +11,8 @@
     import layoutBody from '@/components/layout/layout-body'
     import layoutFooter from '@/components/layout/layout-footer'
     import Loading from '@/components/loading'
+    import {authVerify} from "@/api";
+
     export default {
         name: "app",
         components: {
@@ -18,6 +20,25 @@
             layoutBody,
             layoutFooter,
             Loading
+        },
+        methods: {
+            getToken() {
+                let token = localStorage.getItem('Authorization');
+                if(token == undefined){
+                    return;
+                }
+                console.log(111)
+                authVerify(token).then(res => {
+                    this.$store.commit("SET_IS_LOGIN", true)
+                    this.$store.commit("SET_TOKEN", token)
+                    this.$store.commit("SET_USERINFO", res.data.info)
+                }).catch(err => {
+                    this.$message.error(err);
+                })
+            }
+        },
+        mounted() {
+            this.getToken()
         }
     }
 </script>

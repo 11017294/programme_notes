@@ -18,10 +18,16 @@
                         </div>
                     </header>
                     <!-- 正文输出 -->
-                    <div class="entry-content"
-                         v-html="noteData.content"
-                    >{{ noteData.content }}
-                    </div>
+                    <mavon-editor
+                        class="md"
+                        :value="noteData.content"
+                        :subfield="false"
+                        :defaultOpen="'preview'"
+                        :toolbarsFlag="false"
+                        :editable="false"
+                        :scrollStyle="true"
+                        :ishljs="true"
+                    />
                     <!-- 文章底部 -->
                     <section-title>
                         <footer class="post-footer">
@@ -107,42 +113,16 @@ export default {
         },
         fetchContent() {
             let that = this;
-            fetchContent({uid: this.noteUid}).then(res => {
-                if(res.code == 0){
-                    this.noteData = res.data.note
-                }
+            fetchContent({uid: that.noteUid}).then(res => {
+                that.noteData = res.data.note
             })
         },
-        // 生成目录
-        createMenus() {
-            let arr = []
-            for (let i = 6; i > 0; i--) {
-                let temp = []
-                let e = document.querySelector(".entry-content").querySelectorAll(`h${i}`)
-                for (let j = 0; j < e.length; j++) {
-                    let child = this.fetchH(arr, e[j].offsetTop, (j + 1 === e.length) ? undefined : e[j + 1].offsetTop)
-                    temp.push({
-                        h: i,
-                        title: e[j].innerText,
-                        id: e[j].id,
-                        offsetTop: e[j].offsetTop,
-                        child
-                    })
-                }
-                if (temp.length) {
-                    arr = temp
-                }
-            }
-            this.menus = arr
-        }
     },
     mounted() {
         this.fetchContent();
-        //this.createMenus()
     },
     created() {
         this.noteUid = this.$route.params.uid;
-        //this.getComment()
     }
 }
 </script>
@@ -196,9 +176,6 @@ article.hentry {
             text-decoration: none;
             margin-bottom: 30px;
         }
-    }
-
-    .entry-content {
     }
 
     footer.post-footer {
