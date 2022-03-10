@@ -11,11 +11,36 @@
                     <!-- 文章头部 -->
                     <header class="entry-header">
                         <!-- 标题输出 -->
-                        <h1 class="entry-title">{{ noteData.title }}</h1>
-                        <hr>
-                        <div class="breadcrumbs">
-                            <div id="crumbs">{{ noteData.createTime }}</div>
-                        </div>
+                        <el-row>
+                            <h1 class="entry-title">{{ noteData.title }}</h1>
+                        </el-row>
+                        <el-row  class="breadcrumbs">
+                            <el-col :span="1.5">
+                                <el-avatar :size="30" v-if="noteData.author"
+                                           src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn15%2F240%2Fw640h400%2F20180413%2Fd7da-fytnfyp4017293.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649072353&t=0c915b5df3fece3c17aac06082b455c1">
+                                </el-avatar>
+                                <el-avatar :size="30" v-else="post.author">
+                                    <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+                                </el-avatar>
+                            </el-col>
+                            <el-col :span="2">
+                                <span>{{ noteData.author }}</span>
+                            </el-col>
+                            <el-col :span="5">
+                                分类：<a href="javascript:void(0);">{{ noteData.noteSortName }}</a>
+                            </el-col>
+                            <el-col :span="3">
+                                <span><i class="iconfont iconeyes"></i> {{ noteData.clickCount }}</span>
+                            </el-col>
+                            <el-col :span="3">
+                                <span><i class="iconfont icon-shoucang"></i> {{ noteData.collectCount }}</span>
+                            </el-col>
+                            <el-col :span="5">
+                                <span class="iconfont">&#xe603;</span> {{ noteData.createTime | parseTime }}
+                            </el-col>
+                        </el-row>
+
+
                     </header>
                     <!-- 正文输出 -->
                     <mavon-editor
@@ -24,6 +49,7 @@
                         :subfield="false"
                         :defaultOpen="'preview'"
                         :toolbarsFlag="false"
+                        :external-link="externalLink"
                         :editable="false"
                         :scrollStyle="true"
                         :ishljs="true"
@@ -31,11 +57,7 @@
                     <!-- 文章底部 -->
                     <section-title>
                         <footer class="post-footer">
-                            <!-- 阅读次数 -->
-                            <div class="post-like">
-                                <i class="iconfont iconeyes"></i>
-                                <span class="count">685</span>
-                            </div>
+
 <!--                            <div class="donate" @click="showDonate=!showDonate">
                                 <span>赏</span>
                                 <ul class="donate_inner" :class="{'show':showDonate}">
@@ -44,28 +66,29 @@
                                     <li class="alidonate"><img src="http://cdn.fengziy.cn/gblog/ali_pay.jpg">
                                         <p>支付宝</p></li>
                                 </ul>
-                            </div>-->
-                            <!-- 文章标签 -->
+                            </div>
+                             文章标签-->
                             <div class="post-tags">
                                 <i class="iconfont iconcategory"></i>
                                 <router-link to="/category/web">Web</router-link>
                             </div>
                         </footer>
                     </section-title>
-                    <!--
-                                        &lt;!&ndash;声明&ndash;&gt;
-                                        <div class="open-message">
-                                            <p>声明：Gblog博客|版权所有，违者必究|如未注明，均为原创|本网站采用<a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank">BY-NC-SA</a>协议进行授权</p>
-                                            <p>转载：转载请注明原文链接 - <a href="/">看一遍闭着眼都会安装Lua了</a></p>
-                                        </div>
-                                        &lt;!&ndash;评论&ndash;&gt;
-                                        <div class="comments">
-                                            <comment v-for="item in comments" :key="item.comment.id" :comment="item.comment">
-                                                <template v-if="item.reply.length">
-                                                    <comment v-for="reply in item.reply" :key="reply.id" :comment="reply"></comment>
-                                                </template>
-                                            </comment>
-                                        </div>-->
+                    <!--声明-->
+                    <div class="open-message">
+                        <p>声明：编程笔记|版权所有，违者必究|如未注明</p>
+                        <p>转载：转载请注明原文链接<a href="/"></a></p>
+                    </div>
+                    <!--评论-->
+<!--
+                    <div class="comments">
+                        <comment v-for="item in comments" :key="item.comment.id" :comment="item.comment">
+                            <template v-if="item.reply.length">
+                                <comment v-for="reply in item.reply" :key="reply.id" :comment="reply"></comment>
+                            </template>
+                        </comment>
+                    </div>
+                    -->
                 </article>
             </main>
         </div>
@@ -88,6 +111,14 @@ export default {
             menus: [],
             noteData: {},
             noteUid: null,
+            externalLink: {     // 需要配置的内容
+                markdown_css: () => '/md/markdown/github-markdown.min.css',
+                hljs_js: () => '/md/highlightjs/highlight.min.js',
+                hljs_css: (css) => '/md/highlightjs/styles/' + css + '.min.css',
+                hljs_lang: (lang) => '/md/highlightjs/languages/' + lang + '.min.js',
+                katex_css: () => '/md/katex/katex.min.css',
+                katex_js: () => '/md/katex/katex.min.js',
+            },
         }
     },
     components: {
@@ -171,10 +202,10 @@ article.hentry {
         }
 
         .breadcrumbs {
-            font-size: 14px;
             color: #D2D2D2;
             text-decoration: none;
             margin-bottom: 30px;
+            line-height: 1.8;
         }
     }
 
@@ -188,11 +219,6 @@ article.hentry {
         i {
             font-size: 18px;
             margin-right: 5px;
-        }
-
-        .post-like {
-            float: right;
-            margin: 7px 0 0 20px;
         }
 
         .post-share {

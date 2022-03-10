@@ -1,64 +1,47 @@
 <template>
-    <article class="post post-list">
-        <div class="post-entry">
-            <div class="feature">
-                <router-link :to="`/article/${post.uid}`">
-                    <img :src="post.photoUrl"/>
-                </router-link>
-            </div>
+    <el-card class="box-card">
+        <el-row>
+            <el-col :min-span="6">
             <h1 class="entry-title">
-                <!--                <router-link :to="`/article/${post.id}`"><span v-if="post.isTop" style="color:#ff6d6d;font-weight:600">[置顶] </span>{{post.title}}</router-link>-->
                 <router-link :to="`/article/${post.uid}`">{{ post.title }}</router-link>
             </h1>
-            <div class="p-time">
-                <div class="post-more item-float-right">
-                    <router-link :to="`/article/${post.uid}`">
-                        <i class="iconfont iconfish-li" style="font-size: 25px;"></i>
-                    </router-link>
-                </div>
-            </div>
-            <p class="summary">{{ post.summary }}</p>
-            <footer class="entry-footer">
-                <div class="notes-info">
-                    <div class="author item-float-left">
-                        <div class="item-float-left">
-                            <router-link :to="`/article/${post.uid}`">
-<!--                                <img :src="post.banner"/>-->
-                                <el-avatar :size="30" class="item-float-left" v-if="post.author"
-                                           src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn15%2F240%2Fw640h400%2F20180413%2Fd7da-fytnfyp4017293.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649072353&t=0c915b5df3fece3c17aac06082b455c1">
-                                </el-avatar>
-                                <el-avatar :size="30" class="item-float-left" v-else="post.author">
-                                    <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
-                                </el-avatar>
-                                <div class="item-float-left">
-                                    <span>{{ post.author }}</span>
-                                </div>
-                            </router-link>
-                        </div>
-                    </div>
-                    <div class="item-float-left" v-if="post.noteSortUid">
-                        分类：<a href="javascript:void(0);">{{ post.noteSortName }}</a>
-                    </div>
-                    <div class="createTime item-float-left"><span class="iconfont">&#xe603;</span>{{ post.createTime | parseTime }}</div>
-                </div>
-                <div class="info-meta">
-                    <div class="comnum">
-                      <span>
-<!--                        <i class="iconfont iconcomment"></i>
-                        <a href="https://zhebk.cn/Web/Akina.html">{{ post.commentsCount }} 条评论</a>-->
-                      </span>
-                    </div>
-                    <div class="views">
-                        <span><i class="iconfont iconeyes"></i>{{ post.clickCount }} 热度</span>
-                    </div>
-                </div>
-            </footer>
-        </div>
-        <hr/>
-    </article>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col class="box-summary">
+                <p class="summary">{{ post.summary }}</p>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="1.5">
+                <el-avatar :size="30" v-if="post.author"
+                           src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn15%2F240%2Fw640h400%2F20180413%2Fd7da-fytnfyp4017293.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649072353&t=0c915b5df3fece3c17aac06082b455c1">
+                </el-avatar>
+                <el-avatar :size="30" v-else="post.author">
+                    <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+                </el-avatar>
+            </el-col>
+            <el-col :span="2">
+                    <span>{{ post.author }}</span>
+            </el-col>
+            <el-col :span="5">
+                分类：<a href="javascript:void(0);">{{ post.noteSortName }}</a>
+            </el-col>
+            <el-col :span="3">
+                <span><i class="iconfont iconeyes"></i> {{ post.clickCount }}</span>
+            </el-col>
+            <el-col :span="3">
+                <span><i class="iconfont icon-shoucang"></i> {{ post.collectCount }}</span>
+            </el-col>
+            <el-col :span="5">
+                <span class="iconfont">&#xe603;</span> {{ post.createTime | parseTime }}
+            </el-col>
+        </el-row>
+    </el-card>
 </template>
 
 <script>
+import '../assets/iconfont/iconfont.css'
 
 export default {
     name: "post",
@@ -71,6 +54,21 @@ export default {
 </script>
 
 <style scoped lang="less">
+
+.box-card {
+    margin: 10px 0;
+    line-height: 1.8;
+}
+
+.entry-title {
+    font-weight: 600;
+}
+
+.box-summary {
+    min-height: 80px;
+    padding: 10px 0;
+}
+/*
 .notes-info {
     align-items: center;
     line-height: 1.8;
@@ -222,7 +220,7 @@ export default {
     background: #EFEFEF;
 }
 
-/*******/
+!*******!
 @media (max-width: 1060px) {
     .info-meta {
         display: none;
@@ -262,5 +260,5 @@ export default {
     .post-list hr {
         margin-top: 20px;
     }
-}
+}*/
 </style>
