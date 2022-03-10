@@ -6,7 +6,7 @@
                 class="el-menu-vertical-demo">
 <!--                @open="handleOpen"
                 @close="handleClose">-->
-                <el-menu-item index="1" @click="menuClick('/')">
+                <el-menu-item index="1" @click="menuClick('/edit-user-info')">
                     <i class="el-icon-setting"></i>
                     <span slot="title">修改信息</span>
                 </el-menu-item>
@@ -56,11 +56,11 @@ export default {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 }
 .el-main {
-    margin: 10px 50px;
+    margin: 1px;
+    padding: 5px;
+    height: 700px;
     line-height: 36px;
-    text-align: center;
     background-color: #ffffff;
-    padding: 10px;
 }
 
 .box-bottom {

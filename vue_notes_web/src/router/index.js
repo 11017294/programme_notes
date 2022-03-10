@@ -83,6 +83,14 @@ const routes = [
                 path: '/myInstall',
                 name: 'myInstall',
                 component: () => import('../components/PersonalCenter/install'),
+                children: [
+                    {
+                        path: '/edit-user-info',
+                        name: 'edit-user-info',
+                        component: () => import('../components/PersonalCenter/edit-user-info'),
+                        meta: { title: '设置'},
+                    },
+                ],
                 meta: { title: '设置'},
             }
         ]

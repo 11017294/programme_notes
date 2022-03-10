@@ -5,7 +5,7 @@
                 <el-menu default-active="1" class="el-menu-demo" mode="horizontal" @select="">
                     <el-menu-item index="1" @click="menuClick('/noteManagement')">笔记</el-menu-item>
                     <el-menu-item></el-menu-item>
-                    <el-menu-item index="2" @click="menuClick('/myInstall')">设置</el-menu-item>
+                    <el-menu-item index="2" @click="menuClick('/edit-user-info')">设置</el-menu-item>
                 </el-menu>
             </el-header>
             <router-view></router-view>
