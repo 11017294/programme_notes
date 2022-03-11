@@ -3,7 +3,7 @@
 <mapper namespace="com.chen.nots_web.mapper.NoteSortMapper">
 
     <select id="getAll" resultType="com.chen.nots_web.entity.NoteSort">
-        select * from t_note_sort
+        select * from t_note_sort where is_delete = 0
     </select>
 
 </mapper>

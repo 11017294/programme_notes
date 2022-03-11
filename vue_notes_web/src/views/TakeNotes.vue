@@ -47,11 +47,11 @@
                         </el-radio-group>
                     </el-form-item>
                 </el-col>
-                <el-col :span="4">
+                <el-col :span="5">
                     <el-form-item class="but">
                         <el-button plain @click="returnPage">取消</el-button>
                         <el-button type="info" @click="resetForm">重置</el-button>
-                        <el-button type="primary" @click="commitNotes">提交</el-button>
+                        <el-button type="primary" @click="commitNote">提交</el-button>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -86,7 +86,8 @@ export default {
                 summary: '',
                 noteSortUid: '',
                 tagUid: '',
-                isOriginal: '1',tagValue: [],
+                isOriginal: '1',
+                tagValue: [],
                 content: ''
             },
             noteSortData: [],
@@ -167,7 +168,7 @@ export default {
             this.$refs['noteForm'].resetFields();
             this.noteForm.isOriginal = '1'
         },
-        commitNotes() {     // 提交笔记
+        commitNote() {     // 提交笔记
             this.$refs['noteForm'].validate((valid) => {
                 if (valid) {
                     if(this.noteForm.content.length <= 20){
@@ -175,7 +176,7 @@ export default {
                         return;
                     }
                     let that = this;
-                    var params = new URLSearchParams();
+                    let params = new URLSearchParams();
                     this.noteForm.tagUid = that.noteForm.tagValue.join(",");
                     for(let key in that.noteForm){
                         params.append(key, that.noteForm[key])

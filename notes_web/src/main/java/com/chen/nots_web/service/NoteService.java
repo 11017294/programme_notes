@@ -47,4 +47,22 @@ public interface NoteService extends SuperService<Note> {
      * @return
      */
     String editNote(NoteVO noteVO);
+
+    /**
+     * 对分类和标签进行处理
+     * @return
+     */
+    Note setSortAndTagByNote(Note note);
+
+    /**
+     * 对分类进行处理
+     * @return
+     */
+    Note setSortByNote(Note note);
+
+    /**
+     * 对标签进行处理
+     * @return
+     */
+    Note setTagByNote(Note note);
 }

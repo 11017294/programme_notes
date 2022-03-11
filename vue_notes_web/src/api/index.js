@@ -74,7 +74,7 @@ export function addNote(params) {
     return request({
         url: '/test/note/add',
         method: 'post',
-        params: params
+        data: params
     })
 }
 
@@ -124,6 +124,31 @@ export function getNotesById(params) {
  */
 export function authVerify (params) {
     return request.get('test/user/verify/' + params, {})
+}
+
+/**
+ * 通过id获取用户信息
+ * @param params
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export function getUserById (params) {
+    return request.get('test/user/getUserById/' + params, {})
+}
+
+/**
+ * 通过id修改用户信息
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function editUser(params) {
+    return request({
+        url: 'test/user/edit',
+        method: 'post',
+        data: params,
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    })
 }
 
 export function fetchFocus() {

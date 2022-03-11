@@ -8,7 +8,7 @@
 
 
     <select id="getTagContentList" resultType="java.lang.String">
-        select content from t_tag where uid in
+        select content from t_tag where is_delete = 0 and uid in
         <foreach collection="array" item="id" index="index" open="(" close=")" separator=",">
             #{id}
         </foreach>

@@ -11,7 +11,7 @@
     import layoutBody from '@/components/layout/layout-body'
     import layoutFooter from '@/components/layout/layout-footer'
     import Loading from '@/components/loading'
-    import {authVerify} from "@/api";
+    import {authVerify, getUserById} from "@/api";
 
     export default {
         name: "app",
@@ -28,10 +28,18 @@
                     return;
                 }
                 console.log(111)
-                authVerify(token).then(res => {
-                    this.$store.commit("SET_IS_LOGIN", true)
-                    this.$store.commit("SET_TOKEN", token)
-                    this.$store.commit("SET_USERINFO", res.data.info)
+                let that = this;
+                authVerify(token).then(res => {     // 根据token获取用户登录信息
+                    that.$store.commit("SET_IS_LOGIN", true)
+                    that.$store.commit("SET_TOKEN", token)
+                    that.$store.commit("SET_USERINFO", res.data.info)
+
+                    let userUid = that.$store.state.userInfo.userUid;
+                    getUserById(userUid).then(res => {  // 根据用户id获取用户个人信息
+                        localStorage.setItem('userInfo', JSON.stringify(res.data.user));
+                    }).catch(err => {
+                        that.$message.error(err);
+                    })
                 }).catch(err => {
                     this.$message.error(err);
                 })

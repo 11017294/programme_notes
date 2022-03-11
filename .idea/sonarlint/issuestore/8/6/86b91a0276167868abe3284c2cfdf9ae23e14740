@@ -1,8 +1,0 @@
-
-IWeb:AvoidCommentedOutCodeCheck"Remove this commented out code.(Úèê
-CWeb:BoldAndItalicTagsCheck"Replace this <i> tag by <em>.(À•ƒ‹
-NWeb:AvoidCommentedOutCodeCheck!"Remove this commented out code.(’‹¿Çüÿÿÿÿ
-HWeb:BoldAndItalicTagsCheck,"Replace this <i> tag by <em>.(’¢Ñøÿÿÿÿ
-NWeb:AvoidCommentedOutCodeCheck1"Remove this commented out code.(‹òá¤ıÿÿÿÿ
-Pjavascript:S1481m"5Remove the declaration of the unused 'that' variable.(íŞ™.
-Mjavascript:S1854m"2Remove this useless assignment to variable "that".(íŞ™.

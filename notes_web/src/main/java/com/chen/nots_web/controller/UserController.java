@@ -2,9 +2,7 @@ package com.chen.nots_web.controller;
 
 
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONUtil;
 import com.chen.nots_web.global.RedisConf;
-import com.chen.nots_web.global.SysConf;
 import com.chen.nots_web.service.UserService;
 import com.chen.nots_web.utils.JsonUtils;
 import com.chen.nots_web.utils.RedisUtil;
@@ -14,7 +12,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -45,6 +42,15 @@ public class UserController {
         return ResultBase.ok().data("list", userService.getPageList(userVO));
     }
 
+    @ApiOperation(value = "通过id获取用户信息", notes = "通过id获取用户信息")
+    @GetMapping("/getUserById/{id}")
+    public ResultBase getUserById(@PathVariable("id") String id) {
+        if (StrUtil.isBlank(id)) {
+            return ResultBase.error("没有传入参数id");
+        } else {
+            return ResultBase.ok().data("user", userService.getUserById(id));
+        }
+    }
 
     @ApiOperation(value = "新增用户", notes = "新增用户")
     @PostMapping("/add")
@@ -74,7 +80,7 @@ public class UserController {
         return ResultBase.ok().data("id", userService.resetUserPassword(userVO));
     }
 
-    @ApiOperation(value = "获取用户信息", notes = "获取用户信息")
+    @ApiOperation(value = "通过token获取用户信息", notes = "通过token获取用户信息")
     @GetMapping("/verify/{accessToken}")
     public ResultBase verifyUser(@PathVariable("accessToken") String accessToken) {
         String userInfo = redisUtil.get(RedisConf.LOGIN_TOKEN_KEY + RedisConf.SEGMENTATION + accessToken);

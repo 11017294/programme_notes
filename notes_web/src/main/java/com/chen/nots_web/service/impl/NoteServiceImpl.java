@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chen.nots_web.entity.Note;
 import com.chen.nots_web.entity.NoteSort;
-import com.chen.nots_web.global.RedisConf;
 import com.chen.nots_web.global.SQLConf;
 import com.chen.nots_web.global.service.serviceImpl.SuperServiceImpl;
 import com.chen.nots_web.mapper.NoteMapper;
@@ -60,15 +59,7 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
         Page page = new Page(noteVO.getCurrentPage(), noteVO.getPageSize());
         IPage<Note> noteList = noteMapper.selectPage(page, wrapper);
         for (Note note : noteList.getRecords()) {
-            if(StrUtil.isNotBlank(note.getTagUid())){
-                String[] tagUids = note.getTagUid().split(",");
-                String tagContents = String.join(",", tagService.getTagContentList(tagUids));
-                note.setTagsName(tagContents);
-            }
-            NoteSort noteSort = noteSortService.getById(note.getNoteSortUid());
-            if(ObjectUtil.isNotEmpty(noteSort)){
-                note.setNoteSortName(noteSort.getSortName());
-            }
+            this.setSortAndTagByNote(note);
         }
         return noteList;
     }
@@ -82,15 +73,7 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
         Page<Note> page = new Page<>(noteVO.getCurrentPage(), noteVO.getPageSize());
         IPage<Note> noteList = noteMapper.selectPage(page, wrapper);
         for (Note note : noteList.getRecords()) {
-            if(StrUtil.isNotBlank(note.getTagUid())){
-                String[] tagUids = note.getTagUid().split(",");
-                String tagContents = String.join(",", tagService.getTagContentList(tagUids));
-                note.setTagsName(tagContents);
-            }
-            NoteSort noteSort = noteSortService.getById(note.getNoteSortUid());
-            if(ObjectUtil.isNotEmpty(noteSort)){
-                note.setNoteSortName(noteSort.getSortName());
-            }
+            this.setSortAndTagByNote(note);
         }
         return noteList;
     }
@@ -129,5 +112,31 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
         note.setUpdateTime(new Date());
         note.updateById();
         return note.getUid();
+    }
+
+    @Override
+    public Note setSortAndTagByNote(Note note) {
+        this.setSortByNote(note);
+        this.setTagByNote(note);
+        return note;
+    }
+
+    @Override
+    public Note setSortByNote(Note note) {
+        NoteSort noteSort = noteSortService.getById(note.getNoteSortUid());
+        if(ObjectUtil.isNotEmpty(noteSort)){
+            note.setNoteSortName(noteSort.getSortName());
+        }
+        return note;
+    }
+
+    @Override
+    public Note setTagByNote(Note note) {
+        if(StrUtil.isNotBlank(note.getTagUid())){
+            String[] tagUids = note.getTagUid().split(",");
+            String tagContents = String.join(",", tagService.getTagContentList(tagUids));
+            note.setTagsName(tagContents);
+        }
+        return note;
     }
 }

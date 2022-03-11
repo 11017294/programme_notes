@@ -1,6 +1,5 @@
 package com.chen.nots_web.vo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.chen.nots_web.global.vo.BaseVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -118,7 +118,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         }
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq(SQLConf.UID, uid);
-        wrapper.select(User.class, i -> !i.getProperty().equals(SQLConf.PASS_WORD));
+        wrapper.select(User.class, i -> !i.getColumn().equals(SQLConf.PASS_WORD));
         return userMapper.selectOne(wrapper);
     }
 
