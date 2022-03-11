@@ -40,6 +40,19 @@ export function login(params) {
 }
 
 /**
+ * 修改密码
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function updateUserPwd(params) {
+    return request({
+        url: '/test/user/updateUserPwd',
+        method: 'post',
+        data: params
+    })
+}
+
+/**
  * 注册
  * @param params
  * @returns {AxiosPromise}

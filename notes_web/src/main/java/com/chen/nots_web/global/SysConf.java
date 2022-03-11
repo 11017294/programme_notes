@@ -7,6 +7,7 @@ package com.chen.nots_web.global;
  */
 public class SysConf {
 
+    public final static String UID = "uid";
     // 获取第一条
     public final static String LIMIT_ONE = "limit 1";
     // 创建时间
@@ -21,6 +22,7 @@ public class SysConf {
     public final static String USER_NAME = "user_name";
     // 用户uid
     public final static String USER_UID = "user_uid";
+
 
     public final static String TOKEN = "token";
     public final static String SYMBOL_COLON = ":";

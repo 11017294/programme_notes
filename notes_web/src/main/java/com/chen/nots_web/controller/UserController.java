@@ -1,8 +1,12 @@
 package com.chen.nots_web.controller;
 
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.SecureUtil;
+import com.chen.nots_web.entity.User;
 import com.chen.nots_web.global.RedisConf;
+import com.chen.nots_web.global.SysConf;
 import com.chen.nots_web.service.UserService;
 import com.chen.nots_web.utils.JsonUtils;
 import com.chen.nots_web.utils.RedisUtil;
@@ -14,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -78,6 +83,19 @@ public class UserController {
     public ResultBase resetUserPassword(@RequestBody UserVO userVO) {
         log.info("重置用户密码: {}", userVO);
         return ResultBase.ok().data("id", userService.resetUserPassword(userVO));
+    }
+
+    @ApiOperation(value = "修改用户密码", notes = "修改用户密码")
+    @PostMapping("/updateUserPwd")
+    public ResultBase updateUserPwd(HttpServletRequest request, String oldPwd, String newPwd) {
+        String userUid = request.getAttribute(SysConf.USER_UID).toString();
+        User user = userService.getById(userUid);
+        if(ObjectUtil.isNull(user) || !SecureUtil.md5(oldPwd).equals(user.getPassWord())){
+            return ResultBase.error("旧密码错误不正确");
+        }
+        user.setPassWord(SecureUtil.md5(newPwd));
+        user.updateById();
+        return ResultBase.ok().data("id", user.getUid());
     }
 
     @ApiOperation(value = "通过token获取用户信息", notes = "通过token获取用户信息")
