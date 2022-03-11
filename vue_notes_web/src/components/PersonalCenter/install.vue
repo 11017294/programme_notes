@@ -10,9 +10,9 @@
                     <i class="el-icon-setting"></i>
                     <span slot="title">修改信息</span>
                 </el-menu-item>
-                <el-menu-item index="2" @click="menuClick('/')">
-                    <i class="el-icon-menu"></i>
-                    <span slot="title">我的收藏</span>
+                <el-menu-item index="2" @click="menuClick('/edit-password')">
+                    <i class="el-icon-unlock"></i>
+                    <span slot="title">修改密码</span>
                 </el-menu-item>
                 <el-menu-item index="3" @click="menuClick('/')">
                     <i class="el-icon-setting"></i>

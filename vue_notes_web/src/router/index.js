@@ -90,6 +90,12 @@ const routes = [
                         component: () => import('../components/PersonalCenter/edit-user-info'),
                         meta: { title: '设置'},
                     },
+                    {
+                        path: '/edit-password',
+                        name: 'edit-password',
+                        component: () => import('../components/PersonalCenter/edit-password'),
+                        meta: { title: '设置'},
+                    },
                 ],
                 meta: { title: '设置'},
             }
