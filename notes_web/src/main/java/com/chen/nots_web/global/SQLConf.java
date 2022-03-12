@@ -25,6 +25,9 @@ public class SQLConf {
     public final static String COMMENT_STATUS = "comment_status";
     // 昵称
     public final static String NICK_NAME = "nick_name";
+    // 头像
+    public final static String AVATAR = "avatar";
+
 
 
     // 笔记标题

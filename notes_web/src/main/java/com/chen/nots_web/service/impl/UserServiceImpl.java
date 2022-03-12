@@ -157,4 +157,13 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         user.updateById();
         return user.getUid();
     }
+
+    @Override
+    public String getAvatar(String userUid) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select(SQLConf.AVATAR);
+        wrapper.eq(SQLConf.UID, userUid);
+        wrapper.last(SysConf.LIMIT_ONE);
+        return userMapper.selectOne(wrapper).getAvatar();
+    }
 }

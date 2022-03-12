@@ -26,8 +26,8 @@
                 <span class="el-dropdown-link">
                     <el-avatar :size="30">
                         <img v-if="!isLogin" src="../../assets/noLogin.png">
-                        <img v-if="isLogin&&userInfo.photoUrl!=undefined" :src="userInfo.photoUrl">
-                        <img v-if="isLogin&&userInfo.photoUrl==undefined" src="../../assets/defaultAvatar.png">
+                        <img v-if="isLogin&&avatar!=undefined" :src="this.global.file_path + avatar">
+                        <img v-if="isLogin&&avatar==undefined" src="../../assets/defaultAvatar.png">
                     </el-avatar>
                 </span>
                 <el-dropdown-menu slot="dropdown">
@@ -63,6 +63,9 @@ export default {
             },
             userInfo() {    // 用户信息
                 return this.$store.state.userInfo
+            },
+            avatar() {    // 用户头像
+                return JSON.parse(localStorage.getItem('userInfo')).avatar
             }
         },
         mounted(){

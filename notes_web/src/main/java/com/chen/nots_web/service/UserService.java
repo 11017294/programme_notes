@@ -55,4 +55,10 @@ public interface UserService extends SuperService<User> {
      * @return
      */
     String resetUserPassword(UserVO userVO);
+
+    /**
+     * 获取用户头像
+     * @param userUid
+     */
+    String getAvatar(String userUid);
 }

@@ -69,7 +69,6 @@ export default {
     name: "edit-user-info",
     data() {
         return {
-            imageUrl: '',
             userInfo: {
                 uid: '',
                 userName: '',
@@ -99,7 +98,7 @@ export default {
             param.append("file", file)
             uploadAvatar(param)
                 .then(res => {
-                    this.imageUrl = res.data.fileUrl;
+                    this.$message.success('更换成功');
                 }).catch(err => {
                 this.$message(err)
             })

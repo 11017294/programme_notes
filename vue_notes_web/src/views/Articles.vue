@@ -16,10 +16,10 @@
                         </el-row>
                         <el-row  class="breadcrumbs">
                             <el-col :span="1.5">
-                                <el-avatar :size="30" v-if="noteData.author"
-                                           src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn15%2F240%2Fw640h400%2F20180413%2Fd7da-fytnfyp4017293.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649072353&t=0c915b5df3fece3c17aac06082b455c1">
+                                <el-avatar :size="30" v-if="noteData.userAvatar"
+                                           :src="this.global.file_path + noteData.userAvatar">
                                 </el-avatar>
-                                <el-avatar :size="30" v-else="post.author">
+                                <el-avatar :size="30" v-else="post.userAvatar">
                                     <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
                                 </el-avatar>
                             </el-col>

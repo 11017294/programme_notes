@@ -14,6 +14,7 @@ import com.chen.nots_web.mapper.NoteMapper;
 import com.chen.nots_web.service.NoteService;
 import com.chen.nots_web.service.NoteSortService;
 import com.chen.nots_web.service.TagService;
+import com.chen.nots_web.service.UserService;
 import com.chen.nots_web.utils.RedisUtil;
 import com.chen.nots_web.vo.NoteVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,12 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
 
     @Resource
     private NoteMapper noteMapper;
-
     @Autowired
     private TagService tagService;
-
     @Autowired
     private NoteSortService noteSortService;
-
+    @Autowired
+    private UserService userService;
     @Autowired
     private RedisUtil redisUtil;
 
@@ -118,6 +118,7 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
     public Note setSortAndTagByNote(Note note) {
         this.setSortByNote(note);
         this.setTagByNote(note);
+        this.setUserAvatar(note);
         return note;
     }
 
@@ -136,6 +137,15 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
             String[] tagUids = note.getTagUid().split(",");
             String tagContents = String.join(",", tagService.getTagContentList(tagUids));
             note.setTagsName(tagContents);
+        }
+        return note;
+    }
+
+    @Override
+    public Note setUserAvatar(Note note) {
+        if(StrUtil.isNotBlank(note.getUserUid())){
+            String avatar = userService.getAvatar(note.getUserUid());
+            note.setUserAvatar(avatar);
         }
         return note;
     }

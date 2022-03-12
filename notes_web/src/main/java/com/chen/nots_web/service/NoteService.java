@@ -65,4 +65,11 @@ public interface NoteService extends SuperService<Note> {
      * @return
      */
     Note setTagByNote(Note note);
+
+    /**
+     * 获取用户头像
+     * @param note
+     * @return
+     */
+    Note setUserAvatar(Note note);
 }
