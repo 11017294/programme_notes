@@ -23,6 +23,7 @@
         <oshi.version>3.9.1</oshi.version>
         <commonsIO.version>2.6</commonsIO.version>
         <google.code.gson.version>2.7</google.code.gson.version>
+        <qiniu.version>[[7.7.0, 7.7.99]</qiniu.version>
     </properties>
 
     <dependencies>
@@ -121,6 +122,12 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${commonsIO.version}</version>
+        </dependency>
+        <!-- 七牛云 -->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>${qiniu.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>

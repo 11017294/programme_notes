@@ -1,9 +1,17 @@
 <template>
     <el-card>
-        <el-form ref="form" :model="userInfo" label-width="80px" >
+        <el-form ref="form" :model="userInfo" label-width="80px">
             <el-row>
                 <el-form-item>
-                    <el-avatar shape="square" :size="100" :fit="fit" :src="userInfo.avatar"></el-avatar>
+                    <el-upload
+                        class="avatar-uploader"
+                        action="h"
+                        :show-file-list="false"
+                        :on-success="handleAvatarSuccess"
+                        :before-upload="beforeAvatarUpload">
+                        <img v-if="userInfo.avatar" :src="this.global.file_path + userInfo.avatar" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
                 </el-form-item>
             </el-row>
             <el-row>
@@ -55,12 +63,13 @@
 </template>
 
 <script>
-import {editUser} from "@/api";
+import {editUser, uploadAvatar} from "@/api";
 
 export default {
     name: "edit-user-info",
     data() {
         return {
+            imageUrl: '',
             userInfo: {
                 uid: '',
                 userName: '',
@@ -76,6 +85,28 @@ export default {
         }
     },
     methods: {
+        beforeAvatarUpload(file) {
+            const isJPG = file.type === 'image/jpeg';
+            const isPNG = file.type === 'image/png';
+            const isLt2M = file.size / 1024 / 1024 < 2;
+            if (!isJPG && !isPNG) {
+                this.$message.error('上传头像图片格式为 [JPG, PNG]');
+            }
+            if (!isLt2M) {
+                this.$message.error('上传头像图片大小不能超过 2MB!');
+            }
+            let param = new FormData();
+            param.append("file", file)
+            uploadAvatar(param)
+                .then(res => {
+                    this.imageUrl = res.data.fileUrl;
+                }).catch(err => {
+                this.$message(err)
+            })
+
+            return isJPG && isLt2M;
+        },
+
         getUserInfo() {
             this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
         },
@@ -111,4 +142,28 @@ export default {
 
 <style scoped>
 
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+}
+.avatar-uploader-icon {
+    border: 1px dashed #d9d9d9;
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+}
+.avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+}
 </style>

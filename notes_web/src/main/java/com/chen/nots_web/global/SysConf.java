@@ -31,6 +31,11 @@ public class SysConf {
     public final static String OS = "OS";
     public final static String BROWSER = "BROWSER";
 
+    // 上传七牛云相关
+    public final static String FILE_PATH_USER = "user/";
+    public final static String FILE_PATH_NOTES = "notes/";
+
+
 
 
 

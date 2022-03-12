@@ -157,10 +157,20 @@ export function editUser(params) {
     return request({
         url: 'test/user/edit',
         method: 'post',
-        data: params,
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8'
-        }
+        data: params
+    })
+}
+
+/**
+ * 上传头像
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function uploadAvatar(params) {
+    return request({
+        url: 'test/fileUpload/uploadAvatar',
+        method: 'post',
+        data: params
     })
 }
 

@@ -8,7 +8,7 @@
                 @close="handleClose">-->
                 <el-menu-item index="1" @click="menuClick('/edit-user-info')">
                     <i class="el-icon-setting"></i>
-                    <span slot="title">修改信息</span>
+                    <span slot="title">修改资料</span>
                 </el-menu-item>
                 <el-menu-item index="2" @click="menuClick('/edit-password')">
                     <i class="el-icon-unlock"></i>

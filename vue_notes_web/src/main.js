@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import Global from './Global'
 import router from './router'
 import store from './store'
 import './assets/css/style.less'
@@ -14,6 +15,7 @@ import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 Vue.use(mavonEditor)
 
+Vue.prototype.global = Global
 Vue.config.productionTip = false
 Vue.filter('parseTime', (v) => parseTime(v,'{y}-{m}-{d}'))
 new Vue({

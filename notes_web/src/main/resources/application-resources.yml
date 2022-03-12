@@ -1,0 +1,9 @@
+# 该配置文件用于配置项目变量值,便于维护
+
+notes:
+  qiNiuYun:
+    accessKey: "9az4bbUEnl-GtKjW6Ft2_csVTHiSqqSW6Q_6eni-"
+    secretKey: "s0RVUgtLWmKZNhtnuN_6EQ4EOCLHOMh4-CktbiC6"
+    bucket: "programme-notes"
+    domain: "http://r8icnk0yx.hn-bkt.clouddn.com/"
+
