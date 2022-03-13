@@ -33,7 +33,9 @@
                                 <span><i class="iconfont iconeyes"></i> {{ noteData.clickCount }}</span>
                             </el-col>
                             <el-col :span="3">
-                                <span><i class="iconfont icon-shoucang"></i> {{ noteData.collectCount }}</span>
+                                <div @click="collect" :class="[collectClass]">
+                                    <span><i class="iconfont icon-shoucang"></i> {{ noteData.collectCount }}</span>
+                                </div>
                             </el-col>
                             <el-col :span="5">
                                 <span class="iconfont">&#xe603;</span> {{ noteData.createTime | parseTime }}
@@ -100,7 +102,7 @@ import Banner from '@/components/banner'
 import sectionTitle from '@/components/section-title'
 import comment from '@/components/comment'
 import menuTree from '@/components/menu-tree'
-import {fetchComment, fetchContent} from '../api'
+import {fetchComment, fetchContent, getUserCollectNote, userCollectNote} from '../api'
 
 export default {
     name: 'articles',
@@ -119,6 +121,16 @@ export default {
                 katex_css: () => '/md/katex/katex.min.css',
                 katex_js: () => '/md/katex/katex.min.js',
             },
+            isCollect : false,
+        }
+    },
+    computed: {
+        collectClass() {
+            if(this.isCollect){
+                return "inCollect";
+            } else {
+                return "noCollect";
+            }
         }
     },
     components: {
@@ -146,8 +158,35 @@ export default {
             let that = this;
             fetchContent({uid: that.noteUid}).then(res => {
                 that.noteData = res.data.note
+                console.log(that.noteData.uid)
+                if(that.$store.state.isLogin){
+
+                    getUserCollectNote({"noteUid": that.noteData.uid})
+                        .then(res => {
+                            if(res.data.collect){
+                                that.isCollect = true;
+                            } else {
+                                that.isCollect = false;
+                            }
+                        })
+                        .catch(err => {})
+                } else {
+                    that.isCollect = false;
+                }
             })
         },
+        collect() {
+            if(this.$store.state.isLogin){
+                this.isCollect = !this.isCollect;
+                userCollectNote({"noteUid": this.post.uid})
+                    .then(res => {
+                        this.post.collectCount = res.data.collectCount;
+                    })
+                    .catch(err => {})
+            } else{
+                this.$message.warning("你未登录还不能收藏笔记")
+            }
+        }
     },
     mounted() {
         this.fetchContent();
@@ -164,6 +203,14 @@ export default {
     .site-main {
         padding: 80px 0 0 0;
     }
+}
+
+.noCollect {
+    cursor: pointer;
+}
+.inCollect {
+    cursor: pointer;
+    color: orange;
 }
 
 #article-menus {

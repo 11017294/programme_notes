@@ -68,19 +68,22 @@ export default {
     },
     methods: {
         collect() {
-            this.isCollect = !this.isCollect;
-            userCollectNote({"noteUid": this.post.uid})
-                .then(res => {
-                    this.post.collectCount = res.data.collectCount;
-                })
-                .catch(err => {})
+            if(this.$store.state.isLogin){
+                this.isCollect = !this.isCollect;
+                userCollectNote({"noteUid": this.post.uid})
+                    .then(res => {
+                        this.post.collectCount = res.data.collectCount;
+                    })
+                    .catch(err => {})
+            } else{
+                this.$message.warning("你未登录还不能收藏笔记")
+            }
         }
     },
     mounted() {
         if(this.$store.state.isLogin){
             getUserCollectNote({"noteUid": this.post.uid})
                 .then(res => {
-                    console.log(res.data.collect)
                     if(res.data.collect){
                         this.isCollect = true;
                     } else {
