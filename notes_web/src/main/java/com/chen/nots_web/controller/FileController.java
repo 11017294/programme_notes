@@ -1,5 +1,6 @@
 package com.chen.nots_web.controller;
 
+import com.chen.nots_web.entity.Picture;
 import com.chen.nots_web.entity.User;
 import com.chen.nots_web.global.SysConf;
 import com.chen.nots_web.service.FileUploadService;
@@ -41,6 +42,11 @@ public class FileController {
             return ResultBase.error("未检测到文件");
         }
         String fileUrl = fileUploadService.uploadImage(file, SysConf.FILE_PATH_USER);
+        // 保存图片信息
+        Picture picture = new Picture();
+        picture.setPicName(fileUrl);
+        picture.insert();
+        // 修改用户头像
         String userUid = request.getAttribute(SysConf.USER_UID).toString();
         User user = userService.getById(userUid);
         user.setAvatar(fileUrl);

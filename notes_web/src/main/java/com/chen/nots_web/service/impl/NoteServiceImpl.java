@@ -6,21 +6,21 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.chen.nots_web.entity.Collect;
 import com.chen.nots_web.entity.Note;
 import com.chen.nots_web.entity.NoteSort;
 import com.chen.nots_web.global.SQLConf;
 import com.chen.nots_web.global.service.serviceImpl.SuperServiceImpl;
 import com.chen.nots_web.mapper.NoteMapper;
-import com.chen.nots_web.service.NoteService;
-import com.chen.nots_web.service.NoteSortService;
-import com.chen.nots_web.service.TagService;
-import com.chen.nots_web.service.UserService;
+import com.chen.nots_web.service.*;
 import com.chen.nots_web.utils.RedisUtil;
+import com.chen.nots_web.vo.CollectVO;
 import com.chen.nots_web.vo.NoteVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +40,8 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
     private NoteSortService noteSortService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CollectService collectService;
     @Autowired
     private RedisUtil redisUtil;
 
@@ -148,5 +150,20 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
             note.setUserAvatar(avatar);
         }
         return note;
+    }
+
+    @Override
+    public IPage getCollectNoteByUserId(CollectVO collectVO) {
+        List<Collect> collectList = collectService.getCollectListByUserUid(collectVO.getUserUid());
+        List<String> noteUidList = new ArrayList<>();
+        collectList.forEach(item -> {
+            noteUidList.add(item.getNoteUid());
+        });
+        QueryWrapper<Note> wrapper = new QueryWrapper<>();
+        wrapper.in(SQLConf.UID, noteUidList);
+        Page page = new Page<>();
+        page.setCurrent(collectVO.getCurrentPage());
+        page.setSize(collectVO.getPageSize());
+        return noteMapper.selectPage(page, wrapper);
     }
 }

@@ -2,6 +2,7 @@ package com.chen.nots_web.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.chen.nots_web.service.NoteService;
+import com.chen.nots_web.vo.CollectVO;
 import com.chen.nots_web.vo.NoteVO;
 import com.chen.nots_web.vo.ResultBase;
 import io.swagger.annotations.Api;
@@ -33,6 +34,12 @@ public class NoteController {
     @GetMapping("/getNoteByUserId")
     public ResultBase getNoteByUserId(NoteVO noteVO){
         return ResultBase.ok().data("list", noteService.getNoteByUserId(noteVO));
+    }
+
+    @ApiOperation(value = "根据用户id获取收藏的笔记", notes = "根据用户id获取收藏的笔记")
+    @GetMapping("/getCollectNoteByUserId")
+    public ResultBase getCollectNoteByUserId(CollectVO collectVO){
+        return ResultBase.ok().data("list", noteService.getCollectNoteByUserId(collectVO));
     }
 
     @ApiOperation(value = "增加笔记", notes = "增加笔记")

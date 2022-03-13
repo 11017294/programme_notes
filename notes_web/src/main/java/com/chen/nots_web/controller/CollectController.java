@@ -46,7 +46,6 @@ public class CollectController {
         return ResultBase.ok().data("collect", collectService.getOne(wrapper));
     }
 
-
     @ApiOperation(value = "用户收藏笔记", notes = "用户收藏笔记", response = String.class)
     @GetMapping("/userCollectNote")
     public ResultBase userCollectNote(HttpServletRequest request, String noteUid){

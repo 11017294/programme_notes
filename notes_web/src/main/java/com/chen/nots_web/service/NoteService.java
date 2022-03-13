@@ -3,6 +3,7 @@ package com.chen.nots_web.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.chen.nots_web.entity.Note;
 import com.chen.nots_web.global.service.SuperService;
+import com.chen.nots_web.vo.CollectVO;
 import com.chen.nots_web.vo.NoteVO;
 
 import java.util.List;
@@ -72,4 +73,11 @@ public interface NoteService extends SuperService<Note> {
      * @return
      */
     Note setUserAvatar(Note note);
+
+    /**
+     * 通过用户uid获取笔记列表
+     * @param collectVO
+     * @return
+     */
+    IPage getCollectNoteByUserId(CollectVO collectVO);
 }
