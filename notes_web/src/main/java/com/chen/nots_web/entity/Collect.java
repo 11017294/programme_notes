@@ -13,12 +13,12 @@ import lombok.Data;
  * </p>
  *
  * @author MaybeBin
- * @since 2022-02-14
+ * @since 2022-03-13
  */
 @Data
 @TableName("t_collect")
 @ApiModel(value = "Collect对象", description = "收藏表")
-public class Collect extends SuperEntity{
+public class Collect extends SuperEntity<Collect> {
 
     private static final long serialVersionUID = 1L;
 

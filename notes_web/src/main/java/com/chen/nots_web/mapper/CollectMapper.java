@@ -2,6 +2,7 @@ package com.chen.nots_web.mapper;
 
 import com.chen.nots_web.entity.Collect;
 import com.chen.nots_web.global.mapper.SuperMapper;
+import org.apache.ibatis.annotations.Delete;
 
 /**
  * <p>
@@ -9,8 +10,11 @@ import com.chen.nots_web.global.mapper.SuperMapper;
  * </p>
  *
  * @author MaybeBin
- * @since 2022-02-14
+ * @since 2022-03-13
  */
 public interface CollectMapper extends SuperMapper<Collect> {
+
+    @Delete("delete from t_collect where uid = #{uid}")
+    int deleteCollectByUid(String uid);
 
 }

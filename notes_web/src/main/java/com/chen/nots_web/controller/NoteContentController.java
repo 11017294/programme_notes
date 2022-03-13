@@ -48,7 +48,7 @@ public class NoteContentController {
             String ip = IpUtils.getIpAddr(request);
             // 从Redis取出数据，判断该用户是否点击过
             String jsonResult = stringRedisTemplate.opsForValue().get(
-                    RedisConf.BLOG_CLICK + RedisConf.SYMBOL_COLON + ip + RedisConf.WELL_NUMBER + note.getUid());
+                    RedisConf.NOTE_CLICK + RedisConf.SYMBOL_COLON + ip + RedisConf.WELL_NUMBER + note.getUid());
             if (StrUtil.isBlank(jsonResult)) {
                 // 给博客点击数增加
                 Integer clickCount = note.getClickCount() + 1;
@@ -57,7 +57,7 @@ public class NoteContentController {
 
                 //将该用户点击记录存储到redis中, 24小时后过期
                 stringRedisTemplate.opsForValue().set(
-                        RedisConf.BLOG_CLICK + RedisConf.SYMBOL_COLON + ip + RedisConf.WELL_NUMBER + note.getUid(),
+                        RedisConf.NOTE_CLICK + RedisConf.SYMBOL_COLON + ip + RedisConf.WELL_NUMBER + note.getUid(),
                         note.getClickCount().toString(), 24, TimeUnit.HOURS);
             }
             return ResultBase.ok().data("note", note);

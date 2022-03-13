@@ -30,7 +30,9 @@
                 <span><i class="iconfont iconeyes"></i> {{ post.clickCount }}</span>
             </el-col>
             <el-col :span="3">
-                <span><i class="iconfont icon-shoucang"></i> {{ post.collectCount }}</span>
+                <div @click="collect" :class="[collectClass]">
+                    <span><i class="iconfont icon-shoucang"></i> {{ post.collectCount }}</span>
+                </div>
             </el-col>
             <el-col :span="5">
                 <span class="iconfont">&#xe603;</span> {{ post.createTime | parseTime }}
@@ -41,6 +43,7 @@
 
 <script>
 import '../assets/iconfont/iconfont.css'
+import {getUserCollectNote, userCollectNote} from "@/api";
 
 export default {
     name: "post",
@@ -48,11 +51,59 @@ export default {
         post: {
             type: Object
         }
+    },
+    data() {
+        return {
+            isCollect : false,
+        }
+    },
+    computed: {
+        collectClass() {
+            if(this.isCollect){
+                return "inCollect";
+            } else {
+                return "noCollect";
+            }
+        }
+    },
+    methods: {
+        collect() {
+            this.isCollect = !this.isCollect;
+            userCollectNote({"noteUid": this.post.uid})
+                .then(res => {
+                    this.post.collectCount = res.data.collectCount;
+                })
+                .catch(err => {})
+        }
+    },
+    mounted() {
+        if(this.$store.state.isLogin){
+            getUserCollectNote({"noteUid": this.post.uid})
+                .then(res => {
+                    console.log(res.data.collect)
+                    if(res.data.collect){
+                        this.isCollect = true;
+                    } else {
+                        this.isCollect = false;
+                    }
+                })
+                .catch(err => {})
+        } else {
+            this.isCollect = false;
+        }
     }
 }
 </script>
 
 <style scoped lang="less">
+
+.noCollect {
+    cursor: pointer;
+}
+.inCollect {
+    cursor: pointer;
+    color: orange;
+}
 
 .box-card {
     margin: 10px 0;
@@ -66,6 +117,9 @@ export default {
 .box-summary {
     min-height: 80px;
     padding: 10px 0;
+}
+.cs{
+
 }
 /*
 .notes-info {

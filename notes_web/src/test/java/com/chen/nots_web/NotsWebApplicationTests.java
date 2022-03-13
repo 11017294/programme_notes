@@ -25,8 +25,8 @@ class NotsWebApplicationTests {
 
     public static void main(String[] args) {
         List<String> tables = new ArrayList<>();
-        tables.add("t_tag");
-        tables.add("t_note_sort");
+        tables.add("t_picture");
+        tables.add("t_collect");
         FastAutoGenerator.create("jdbc:mysql://localhost:3306/programme_Notes?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT&allowPublicKeyRetrieval=true",
                         "root",
                         "333")

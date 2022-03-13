@@ -98,14 +98,15 @@ export default {
             param.append("file", file)
             uploadAvatar(param)
                 .then(res => {
+                    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+                    userInfo.setItem("avatar", res.data.fileUrl);
+                    localStorage.setItem('userInfo', JSON.stringify(userInfo));
                     this.$message.success('更换成功');
                 }).catch(err => {
                 this.$message(err)
             })
-
             return isJPG && isLt2M;
         },
-
         getUserInfo() {
             this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
         },

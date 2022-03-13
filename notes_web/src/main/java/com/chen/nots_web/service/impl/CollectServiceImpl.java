@@ -1,19 +1,20 @@
 package com.chen.nots_web.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chen.nots_web.entity.Collect;
 import com.chen.nots_web.entity.Note;
 import com.chen.nots_web.global.SQLConf;
+import com.chen.nots_web.global.SysConf;
 import com.chen.nots_web.global.service.serviceImpl.SuperServiceImpl;
 import com.chen.nots_web.mapper.CollectMapper;
 import com.chen.nots_web.service.CollectService;
 import com.chen.nots_web.service.NoteService;
-import com.chen.nots_web.vo.UserVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,40 +23,50 @@ import java.util.List;
  * </p>
  *
  * @author MaybeBin
- * @since 2022-02-14
+ * @since 2022-03-13
  */
 @Service
 public class CollectServiceImpl extends SuperServiceImpl<CollectMapper, Collect> implements CollectService {
 
     @Resource
-    CollectMapper collectMapper;
-
-    @Resource
-    NoteService noteService;
+    private CollectMapper collectMapper;
+    @Autowired
+    private NoteService noteService;
 
     @Override
-    public int getCollectCount(String userUid) {
-        QueryWrapper wrapper = new QueryWrapper();
+    public int userCollectNote(String userUid, String noteUid) {
+        QueryWrapper<Collect> wrapper = new QueryWrapper<>();
         wrapper.eq(SQLConf.USER_UID, userUid);
-        return collectMapper.selectCount(wrapper);
+        wrapper.eq(SQLConf.NOTE_UID, noteUid);
+        wrapper.last(SysConf.LIMIT_ONE);
+        Collect isCollect = collectMapper.selectOne(wrapper);
+        if(ObjectUtil.isNotEmpty(isCollect)){
+            // 修改收藏数
+            Note note = noteService.getById(noteUid);
+            note.setCollectCount(note.getCollectCount() - 1);
+            note.setUpdateTime(new Date());
+            note.updateById();
+            // 删除收藏记录
+            collectMapper.deleteCollectByUid(isCollect.getUid());
+            return note.getCollectCount();
+        }
+        // 修改收藏数
+        Note note = noteService.getById(noteUid);
+        note.setCollectCount(note.getCollectCount() + 1);
+        note.setUpdateTime(new Date());
+        note.updateById();
+        // 添加收藏
+        Collect collect = new Collect();
+        collect.setNoteUid(noteUid);
+        collect.setUserUid(userUid);
+        collect.insert();
+        return note.getCollectCount();
     }
 
     @Override
-    public List<Note> getCollectByUserId(UserVO userVO) {
-        QueryWrapper wrapper = new QueryWrapper();
-        wrapper.select(SQLConf.NOTE_UID);
-        wrapper.eq(SQLConf.USER_UID, userVO.getUid());
-
-        Page page = new Page();
-        page.setCurrent(userVO.getCurrentPage());
-        page.setSize(userVO.getPageSize());
-        List<Collect> collectList = collectMapper.selectPage(page, wrapper).getRecords();
-        List<String> noteUidList = new ArrayList<>();
-        collectList.forEach(item -> {
-            noteUidList.add(item.getNoteUid());
-        });
-
-        // 调用getNoteInUid方法获取所收藏的笔记
-        return noteService.getNoteInUid(noteUidList);
+    public List<Collect> getCollectListByUserUid(String UserUid) {
+        QueryWrapper<Collect> wrapper = new QueryWrapper<>();
+        wrapper.eq(SQLConf.USER_UID, UserUid);
+        return collectMapper.selectList(wrapper);
     }
 }

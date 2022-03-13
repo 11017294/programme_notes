@@ -174,6 +174,32 @@ export function uploadAvatar(params) {
     })
 }
 
+/**
+ * 获取用户是否收藏笔记
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function getUserCollectNote(params) {
+    return request({
+        url: '/test/collect/getUserCollectNote',
+        method: 'get',
+        params: params
+    })
+}
+
+/**
+ * 用户收藏笔记
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function userCollectNote(params) {
+    return request({
+        url: '/test/collect/userCollectNote',
+        method: 'get',
+        params: params
+    })
+}
+
 export function fetchFocus() {
     return request({
         url: '/focus/list',

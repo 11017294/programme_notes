@@ -1,9 +1,7 @@
 package com.chen.nots_web.service;
 
 import com.chen.nots_web.entity.Collect;
-import com.chen.nots_web.entity.Note;
 import com.chen.nots_web.global.service.SuperService;
-import com.chen.nots_web.vo.UserVO;
 
 import java.util.List;
 
@@ -13,22 +11,22 @@ import java.util.List;
  * </p>
  *
  * @author MaybeBin
- * @since 2022-02-14
+ * @since 2022-03-13
  */
 public interface CollectService extends SuperService<Collect> {
 
     /**
-     * 根据用户uid获取收藏数
+     * 收藏笔记
      * @param userUid
+     * @param noteUid
      * @return
      */
-    int getCollectCount(String userUid);
+    int userCollectNote(String userUid, String noteUid);
 
     /**
-     * 根据用户uid获取收藏的笔记uid
-     * 根据笔记uid查询所收藏的笔记
-     * @param userVO
+     * 根据用户uid查询收藏记录
+     * @param UserUid
      * @return
      */
-    List<Note> getCollectByUserId(UserVO userVO);
+    List<Collect> getCollectListByUserUid(String UserUid);
 }

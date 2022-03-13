@@ -45,6 +45,7 @@ const mutations = {
         state.token = ''
         state.userInfo = {}
         localStorage.removeItem('Authorization')
+        localStorage.removeItem('userInfo')
     },
     SET_USERINFO: (state, v) => {
         state.userInfo = v

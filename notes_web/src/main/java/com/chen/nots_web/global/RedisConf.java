@@ -12,9 +12,9 @@ public class RedisConf {
     public final static String REQUEST_LIMIT = "REQUEST_LIMIT";
 
     /**
-     * 博客分类
+     * 笔记分类
      */
-    public final static String BLOG_SORT_BY_MONTH = "BLOG_SORT_BY_MONTH";
+    public final static String NOTE_SORT_BY_MONTH = "NOTE_SORT_BY_MONTH";
 
     /**
      * Redis分隔符
@@ -37,14 +37,14 @@ public class RedisConf {
     public final static String MONTH_SET = "MONTH_SET";
 
     /**
-     * 博客等级
+     * 笔记等级
      */
-    public final static String BLOG_LEVEL = "BLOG_LEVEL";
+    public final static String NOTE_LEVEL = "NOTE_LEVEL";
 
     /**
-     * 博客点击
+     * 笔记点击
      */
-    public final static String BLOG_CLICK = "BLOG_CLICK";
+    public final static String NOTE_CLICK = "NOTE_CLICK";
 
     /**
      * IP地址解析
@@ -52,14 +52,14 @@ public class RedisConf {
     public final static String IP_SOURCE = "IP_SOURCE";
 
     /**
-     * 最热博客
+     * 最热笔记
      */
-    public final static String HOT_BLOG = "HOT_BLOG";
+    public final static String HOT_NOTE = "HOT_NOTE";
 
     /**
-     * 最新博客
+     * 最新笔记
      */
-    public final static String NEW_BLOG = "NEW_BLOG";
+    public final static String NEW_NOTE = "NEW_NOTE";
 
     /**
      * 管理员Token
@@ -119,9 +119,14 @@ public class RedisConf {
     public final static String ADMIN_VISIT_MENU = "ADMIN_VISIT_MENU";
 
     /**
-     * 博客点赞
+     * 笔记点赞
      */
-    public final static String BLOG_PRAISE = "BLOG_PRAISE";
+    public final static String NOTE_PRAISE = "NOTE_PRAISE";
+
+    /**
+     * 笔记收藏
+     */
+    public final static String NOTE_COLLECT = "NOTE_COLLECT";
 
     /**
      * ALL
@@ -154,23 +159,23 @@ public class RedisConf {
     public final static String WEEK_VISIT = "WEEK_VISIT";
 
     /**
-     * 博客标签下包含的博客数量
+     * 笔记标签下包含的笔记数量
      */
-    public final static String BLOG_COUNT_BY_TAG = "BLOG_COUNT_BY_TAG";
+    public final static String NOTE_COUNT_BY_TAG = "NOTE_COUNT_BY_TAG";
 
     /**
-     * 博客分类下包含的博客数量
+     * 笔记分类下包含的笔记数量
      */
-    public final static String BLOG_COUNT_BY_SORT = "BLOG_COUNT_BY_SORT";
+    public final static String NOTE_COUNT_BY_SORT = "NOTE_COUNT_BY_SORT";
 
     /**
-     * 全年博客贡献数
+     * 全年笔记贡献数
      */
-    public final static String BLOG_CONTRIBUTE_COUNT = "BLOG_CONTRIBUTE_COUNT";
+    public final static String NOTE_CONTRIBUTE_COUNT = "NOTE_CONTRIBUTE_COUNT";
 
-    public final static String BLOG_LINK = "BLOG_LINK";
+    public final static String NOTE_LINK = "NOTE_LINK";
 
-    public final static String BLOG_TAG = "BLOG_TAG";
+    public final static String NOTE_TAG = "NOTE_TAG";
 
     /**
      * 用户收到评论数

@@ -152,3 +152,28 @@ CREATE TABLE `t_tag` (
 /*Data for the table `t_tag` */
 
 insert  into `t_tag`(`uid`,`content`,`is_delete`,`click_count`,`create_time`,`update_time`,`sort`) values ('0b51c75ed5744cdcadefe0ad947be9b6','数据库',1,78,'2020-10-13 10:01:00','2020-12-26 11:24:33',0),('15721a34adba068763b5a2fb1991fc57','JVM',1,33,'2020-10-13 10:01:00','2021-01-24 10:00:58',3),('188396dc0efcae369856fe472df1ed09','标签2',0,0,'2020-10-13 10:01:10','2020-10-13 10:01:15',6),('1c76b9848f5f4d71a5e88b20dbaf38f4','RabbitMQ',1,106,'2020-10-13 10:01:00','2020-12-26 11:24:33',0),('1d1fd6d26c8e40a38637ef6126c45cd0','Linux',1,336,'2020-10-13 10:01:00','2020-10-13 10:01:03',1),('2a31dd6c2b1b464e9e222a1198bc739a','虚拟机',1,58,'2020-10-13 10:01:00','2020-12-26 11:24:34',0),('2f5779e877da48958c985d69b311d0d6','大数据',1,72,'2020-10-13 10:01:00','2020-12-26 11:24:34',0),('3c16b9093e9b1bfddbdfcb599b23d835','Nginx',1,32,'2020-10-13 10:01:00','2020-12-26 11:24:36',0),('53c5a0f3142e4f54820315936f78383b','Spring Boot',1,73,'2020-10-13 10:01:00','2020-12-26 11:24:35',0),('5626932d452c2ad863d9b3cb0b69d22d','学习笔记',1,237,'2020-10-13 10:01:00','2021-06-13 07:48:23',5),('5c939107ddb746b989156737805df625','机器学习',1,109,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('618346963de0fc724e44c6f9120aea9c','Github',1,17,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('6d35ddd5075f4c0e885ffb2e3b3a0365','Tomcat',1,58,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('7e0e93ea6cdb44ae92e58f48e6496ed7','Java',1,1644,'2020-10-13 10:01:00','2021-06-13 07:47:58',4),('8c9d43de144245eb8176854eca5ae244','AI',1,20,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('8d5ce3e0c0784b95adb7f9e7b76dca93','建站系统',1,100,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('a9a747d944c24845815356f72723ef8e','前端开发',1,114,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('b22b9bdc32a442dd65dee82cdc5cf800','计算机网络',1,16,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('ca928e8718654aa5a802e2f69277b137','面试',1,193,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('d3c3fc43f38445389c970ff0732a6586','NLP',1,39,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('dececd440fdc4fa28dffe6404e696dd4','Python',1,19,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('e2c7913050cf4ab9aa92902316aaf075','校园生活',1,169,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('e81bc2dca42c4031be7d66fef4a71e16','Spring Cloud',1,110,'2020-10-13 10:01:00','2020-12-26 11:24:32',2),('ebf63989f11741bc89494c52fc6bae4c','Docker',1,96,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('f5d458db6a044eaebc22232efa1e3b54','深度学习',1,66,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('f90d3c2fd9434302951130e897a89164','Vue',1,90,'2020-10-13 10:01:00','2020-10-13 10:01:03',0),('fb72516226474cf0bfa0f310bfa75426','Redis',1,61,'2020-10-13 10:01:00','2020-10-13 10:01:03',0);
+
+DROP TABLE IF EXISTS `t_collect`;
+
+CREATE TABLE `t_collect` (
+                             `uid` varchar(32) NOT NULL COMMENT '唯一uid',
+                             `user_uid` varchar(32) NOT NULL COMMENT '用户的uid',
+                             `note_uid` varchar(32) NOT NULL COMMENT '笔记的uid',
+                             `is_delete` tinyint(1) UNSIGNED ZEROFILL NOT NULL DEFAULT 0 COMMENT '是否删除，1表示已删除',
+                             `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+                             `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+                             PRIMARY KEY (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='收藏表';
+
+DROP TABLE IF EXISTS `t_picture`;
+
+CREATE TABLE `t_picture` (
+                             `uid` varchar(32) NOT NULL COMMENT '唯一uid',
+                             `file_uid` varchar(32) DEFAULT NULL COMMENT '图片uid',
+                             `pic_name` varchar(255) DEFAULT NULL COMMENT '图片名',
+                             `picture_sort_uid` varchar(32) DEFAULT NULL COMMENT '分类uid',
+                             `is_delete` tinyint(1) UNSIGNED ZEROFILL NOT NULL DEFAULT 0 COMMENT '是否删除，1表示已删除',
+                             `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+                             `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+                             PRIMARY KEY (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片表';
