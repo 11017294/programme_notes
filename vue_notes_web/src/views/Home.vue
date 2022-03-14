@@ -90,7 +90,7 @@
                 fetchFocus().then(res => {
                     this.features = res.data || []
                 }).catch(err => {
-                    console.log(err)
+                    this.$message.error(err)
                 })
             },
             fetchList() {
@@ -104,7 +104,7 @@
                 fetchList(params).then(res => {
                     that.convertSearchData(that, res)
                 }).catch(err => {
-                    console.log(err)
+                    that.$message.error(err)
                 })
             },
             loadMore() {
@@ -118,7 +118,7 @@
                 fetchList(params).then(res => {
                     that.convertSearchData(that, res)
                 }).catch(err => {
-                    console.log(err)
+                    that.$message.error(err)
                 })
             },
             convertSearchData(that, response) {
@@ -130,7 +130,7 @@
                     that.total = data.total;
                     that.pageSize = data.size;
                     that.currentPage = data.current;
-                    var noteData = data.records;
+                    let noteData = data.records;
                     that.noteData = noteData;
                     // 判断搜索的笔记是否有内容
                     if(response.data.total <= 0) {
@@ -152,7 +152,7 @@
             },
         },
         mounted() {
-            this.fetchFocus();
+            //this.fetchFocus();
             this.fetchList();
         }
     }

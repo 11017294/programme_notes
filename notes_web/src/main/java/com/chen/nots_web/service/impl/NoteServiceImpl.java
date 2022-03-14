@@ -159,6 +159,9 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
         collectList.forEach(item -> {
             noteUidList.add(item.getNoteUid());
         });
+        if(noteUidList.size() <= 0) {
+            return new Page();
+        }
         QueryWrapper<Note> wrapper = new QueryWrapper<>();
         wrapper.in(SQLConf.UID, noteUidList);
         Page page = new Page<>();

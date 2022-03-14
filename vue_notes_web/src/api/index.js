@@ -131,6 +131,19 @@ export function getNotesById(params) {
 }
 
 /**
+ * 根据用户id获取收藏的笔记
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function getCollectNoteByUserId(params) {
+    return request({
+        url: '/test/note/getCollectNoteByUserId',
+        method: 'get',
+        params: params
+    })
+}
+
+/**
  * 通过token获取信息
  * @param params
  * @returns {Promise<AxiosResponse<any>>}

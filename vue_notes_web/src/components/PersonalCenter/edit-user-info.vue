@@ -3,6 +3,7 @@
         <el-form ref="form" :model="userInfo" label-width="80px">
             <el-row>
                 <el-form-item>
+                    <el-tooltip class="item" effect="light" content="点击头像可更换" placement="left" >
                     <el-upload
                         class="avatar-uploader"
                         action="h"
@@ -12,6 +13,7 @@
                         <img v-if="userInfo.avatar" :src="this.global.file_path + userInfo.avatar" class="avatar">
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
+                    </el-tooltip>
                 </el-form-item>
             </el-row>
             <el-row>

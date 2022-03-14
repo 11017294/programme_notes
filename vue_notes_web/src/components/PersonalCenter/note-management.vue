@@ -12,8 +12,11 @@
         </el-card>
 
         <!--加载更多-->
-        <div class="more" v-show="!isEnd">
+        <div class="more" v-show="total&&!isEnd">
             <div class="more-btn" @click="loadMore">查看更多</div>
+        </div>
+        <div class="more" v-show="!total">
+            <div>你的笔记空空如也</div>
         </div>
     </main>
 </template>
@@ -66,7 +69,6 @@ export default {
         convertSearchData(that, response) {
             if (response.code == 0) {
                 let data = response.data.list;
-                console.log(response)
                 that.isEnd = false;
                 //获取总页数
                 that.totalPages = data.records.length;

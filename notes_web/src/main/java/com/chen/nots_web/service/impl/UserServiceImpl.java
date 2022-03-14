@@ -164,6 +164,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         wrapper.select(SQLConf.AVATAR);
         wrapper.eq(SQLConf.UID, userUid);
         wrapper.last(SysConf.LIMIT_ONE);
-        return userMapper.selectOne(wrapper).getAvatar();
+        User user = userMapper.selectOne(wrapper);
+        return user == null ? "" : user.getAvatar();
     }
 }
