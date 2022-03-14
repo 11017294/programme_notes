@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -10,6 +9,12 @@ const routes = [
         name: 'home',
         component: () => import('../views/Home.vue'),
         meta: { title: '首页'}
+    },
+    {
+        path: '/pigeonhole',
+        name: 'pigeonhole',
+        component: () => import('../views/Pigeonhole.vue'),
+        meta: { title: '分类'},
     },
     {
         path: '/category/:cate',

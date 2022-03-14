@@ -30,6 +30,12 @@ public class NoteController {
         return ResultBase.ok().data("list", noteService.search(noteVO));
     }
 
+    @ApiOperation(value = "根据条件获取笔记列表", notes = "根据条件获取笔记列表")
+    @GetMapping("/getNoteList")
+    public ResultBase getNoteList(NoteVO noteVO) {
+        return ResultBase.ok().data("list", noteService.getNoteList(noteVO));
+    }
+
     @ApiOperation(value = "根据用户id获取笔记", notes = "根据用户id获取笔记")
     @GetMapping("/getNoteByUserId")
     public ResultBase getNoteByUserId(NoteVO noteVO){

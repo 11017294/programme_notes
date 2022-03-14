@@ -44,6 +44,16 @@ public class SQLConf {
     public final static String USER_UID = "user_uid";
     // 笔记uid
     public final static String NOTE_UID = "note_uid";
+    // 是否原创
+    public final static String IS_ORIGINAL = "is_original";
+    // 分类
+    public final static String NOTE_SORT_UID = "note_sort_uid";
+    // 是否发布
+    public final static String IS_PUBLISH = "is_publish";
+    // 是否开启评论
+    public final static String OPEN_COMMENT = "open_comment";
+    // 文章来源
+    public final static String ARTICLE_SOURCE = "article_source";
 
     // 字典类型
     public final static String DICT_TYPE = "dict_type";

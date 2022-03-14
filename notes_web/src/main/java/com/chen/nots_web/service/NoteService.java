@@ -80,4 +80,11 @@ public interface NoteService extends SuperService<Note> {
      * @return
      */
     IPage getCollectNoteByUserId(CollectVO collectVO);
+
+    /**
+     * 根据条件获取笔记列表
+     * @param noteVO
+     * @return
+     */
+    IPage getNoteList(NoteVO noteVO);
 }
