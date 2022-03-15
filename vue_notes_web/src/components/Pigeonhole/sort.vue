@@ -75,7 +75,7 @@ export default {
         },
         loadMore() {
             let that = this;
-            var params = new URLSearchParams();
+            let params = new URLSearchParams();
             params.append("pageSize", this.pageSize);
             params.append("currentPage", this.currentPage + 1);
             params.append("noteSortUid", that.$store.state.userInfo.userUid);

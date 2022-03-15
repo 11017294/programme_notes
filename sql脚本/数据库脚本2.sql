@@ -177,3 +177,17 @@ CREATE TABLE `t_picture` (
                              `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
                              PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片表';
+
+
+DROP TABLE IF EXISTS `t_message`;
+
+CREATE TABLE `t_message` (
+                             `uid` varchar(32) NOT NULL COMMENT '唯一uid',
+                             `content` varchar(32) DEFAULT NULL COMMENT '内容',
+                             `email` varchar(60) DEFAULT NULL COMMENT '邮箱',
+                             `user_uid` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '投稿用户UID',
+                             `is_delete` tinyint(1) UNSIGNED ZEROFILL NOT NULL DEFAULT 0 COMMENT '是否删除，1表示已删除',
+                             `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+                             `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+                             PRIMARY KEY (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='留言表';

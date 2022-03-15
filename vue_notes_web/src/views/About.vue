@@ -3,12 +3,12 @@
         <div class="site-content">
             <div class="content-warp">
                 <div class="about-site about-info">
-                    <section-title><span>❤</span>关于博客</section-title>
+<!--                    <section-title><span>❤</span>关于博客</section-title>
                     <div class="info-card">
                         <p>偶然之间看见了<a target="_blank" class="out-link" href="https://zhebk.cn/Web/Akina.html">Akina For Typecho</a>博客的主题，风格很是喜欢。</p>
                         <p>然后就开始用Vue搭建这种风格的博客，在此呢也将这套模板开放给大家。</p>
                         <p><a target="_blank" href="https://gitee.com/fengziy/Gblog" style="color: #ff6d6d;">Gitee仓库</a> | <a target="_blank" href="https://github.com/fengziye/Gblog" style="color: #ff6d6d;">Github仓库</a>记得star★哟</p>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="about-me about-info">
                     <section-title id="Guestbook"><span>❤</span>给我留言</section-title>
@@ -16,15 +16,15 @@
                         <div class="contactForm">
                             <div class="form-item">
                                 <label for="mail">邮箱</label>
-                                <input class="v" type="email" name="mail" id="mail">
+                                <input class="v" type="email" v-model="email">
                             </div>
                             <div class="form-item">
                                 <label for="content">内容</label>
-                                <textarea class="v" id="content" name="content"></textarea>
+                                <textarea class="v" id="content" v-model="content"></textarea>
                             </div>
                             <div class="form-item">
                                 <label></label>
-                                <button>提交</button>
+                                <button @click="commit">提交</button>
                             </div>
                         </div>
                     </div>
@@ -36,20 +36,42 @@
 <script>
     import sectionTitle from '@/components/section-title'
     import {getTime,getTimeInterval} from '@/utils'
+    import {addMessage} from "@/api";
     // import Quote from "@/components/quote";
     // import {fetchFriend} from '../api'
     export default {
         name: "About",
         data() {
             return {
-                list: []
+                list: [],
+                email: '',
+                content: ''
             }
         },
         components: {
             // Quote,
             sectionTitle
         },
-        methods: {},
+        methods: {
+            commit() {
+                if(this.email == '' || this.content == ''){
+                    this.$message.error("邮箱和内容不能为空")
+                    return;
+                }
+                let params = new URLSearchParams();
+                params.append("content", this.content);
+                params.append("email", this.email);
+                addMessage(params)
+                    .then(res => {
+                        this.$message.success("您的留言我们已收到，其等待后续的回复")
+                        this.email = '';
+                        this.content = '';
+                    })
+                    .catch(err => {
+                        this.$message.error(err)
+                })
+            }
+        },
         mounted() {
         }
     }

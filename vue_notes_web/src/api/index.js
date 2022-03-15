@@ -226,6 +226,19 @@ export function getNoteList(params) {
     })
 }
 
+/**
+ * 添加留言
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function addMessage(params) {
+    return request({
+        url: '/test/message/addMessage',
+        method: 'get',
+        params: params
+    })
+}
+
 export function fetchFocus() {
     return request({
         url: '/focus/list',
