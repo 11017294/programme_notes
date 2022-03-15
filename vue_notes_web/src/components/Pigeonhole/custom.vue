@@ -10,15 +10,12 @@
             </el-timeline>
         </el-aside>
         <el-main>
-            <Post/>
         </el-main>
     </el-container>
 </template>
 
 <script>
 
-import Post from '@/components/post'
-import List from '@/components/Pigeonhole/list'
 
 export default {
     name: "customAside",
@@ -26,10 +23,6 @@ export default {
         return {
             noteData: [],
         };
-    },
-    components: {
-        List,
-        Post
     }
 }
 </script>

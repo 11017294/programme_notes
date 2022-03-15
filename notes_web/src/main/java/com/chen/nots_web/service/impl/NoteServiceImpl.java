@@ -13,7 +13,6 @@ import com.chen.nots_web.global.SQLConf;
 import com.chen.nots_web.global.service.serviceImpl.SuperServiceImpl;
 import com.chen.nots_web.mapper.NoteMapper;
 import com.chen.nots_web.service.*;
-import com.chen.nots_web.utils.NoteSelectUtil;
 import com.chen.nots_web.utils.RedisUtil;
 import com.chen.nots_web.vo.CollectVO;
 import com.chen.nots_web.vo.NoteVO;
@@ -173,11 +172,14 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
 
     @Override
     public IPage getNoteList(NoteVO noteVO) {
-        QueryWrapper<Note> wrapper = new NoteSelectUtil<Note>(noteVO)
-                .tagUidLike()
-                .noteSortUidEq()
-                .noSelectContent(Note.class)
-                .getWrapper();
+        QueryWrapper<Note> wrapper = new QueryWrapper<>();
+        if(StrUtil.isNotBlank(noteVO.getTagUid())) {
+            wrapper.like(SQLConf.TAG_UID, noteVO.getTagUid());
+        }
+        if(StrUtil.isNotBlank(noteVO.getNoteSortUid())) {
+            wrapper.eq(SQLConf.NOTE_SORT_UID, noteVO.getNoteSortUid());
+        }
+        wrapper.select(Note.class, i -> !i.getProperty().equals(SQLConf.CONTENT));
         Page page = new Page(noteVO.getCurrentPage(), noteVO.getPageSize());
         IPage<Note> noteList = noteMapper.selectPage(page, wrapper);
         for (Note note : noteList.getRecords()) {

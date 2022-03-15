@@ -213,6 +213,19 @@ export function userCollectNote(params) {
     })
 }
 
+/**
+ * 条件查询（分类、标签）
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function getNoteList(params) {
+    return request({
+        url: '/test/note/getNoteList',
+        method: 'get',
+        params: params
+    })
+}
+
 export function fetchFocus() {
     return request({
         url: '/focus/list',

@@ -2,19 +2,19 @@
     <div class="pigeonholeCenter">
         <el-container>
             <el-header>
-                <el-tabs v-model="activeName" @tab-click="handleClick" stretch="true">
-                    <el-tab-pane label="自定义" name="customModule">
+                <el-tabs v-model="activeName" stretch>
+<!--                    <el-tab-pane label="自定义" name="customModule">
                         <Custom/>
-                    </el-tab-pane>
+                    </el-tab-pane>-->
                     <el-tab-pane label="分类" name="sortModule">
                         <Sort/>
                     </el-tab-pane>
                     <el-tab-pane label="标签" name="tagModule">
                         <Tag/>
                     </el-tab-pane>
-                    <el-tab-pane label="时间" name="timeModule">
+<!--                    <el-tab-pane label="时间" name="timeModule">
                         <Time/>
-                    </el-tab-pane>
+                    </el-tab-pane>-->
                 </el-tabs>
             </el-header>
         </el-container>
@@ -32,7 +32,7 @@ export default {
     name: "pigeonhole",
     data() {
         return {
-            activeName: 'customModule'
+            activeName: 'sortModule'
         };
     },
     components: {
