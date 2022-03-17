@@ -27,8 +27,7 @@
                 <span class="el-dropdown-link">
                     <el-avatar :size="30">
                         <img v-if="!isLogin" src="../../assets/noLogin.png">
-                        <img v-if="isLogin&&avatar!=undefined" :src="this.global.file_path + avatar">
-                        <img v-if="isLogin&&avatar==undefined" src="../../assets/defaultAvatar.png">
+                        <img v-if="isLogin" :src="this.global.file_path + avatar">
                     </el-avatar>
                 </span>
                 <el-dropdown-menu slot="dropdown">

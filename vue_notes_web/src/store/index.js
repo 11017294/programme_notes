@@ -45,7 +45,7 @@ const mutations = {
     DEL_TOKEN: (state) => {
         state.token = ''
         state.userInfo = {}
-        state.avatar = '../../assets/defaultAvatar.png',
+        state.avatar = 'user/Mikasa',
         localStorage.removeItem('Authorization')
         localStorage.removeItem('userInfo')
     },
