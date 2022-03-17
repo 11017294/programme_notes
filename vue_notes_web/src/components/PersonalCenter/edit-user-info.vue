@@ -8,9 +8,8 @@
                         class="avatar-uploader"
                         action="h"
                         :show-file-list="false"
-                        :on-success="handleAvatarSuccess"
                         :before-upload="beforeAvatarUpload">
-                        <img v-if="userInfo.avatar" :src="this.global.file_path + userInfo.avatar" class="avatar">
+                        <img v-if="avatar" :src="this.global.file_path + avatar" class="avatar">
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                     </el-tooltip>
@@ -85,6 +84,11 @@ export default {
             disabled: true
         }
     },
+    computed: {
+        avatar() {    // 用户头像
+            return this.$store.state.avatar
+        }
+    },
     methods: {
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
@@ -101,11 +105,12 @@ export default {
             uploadAvatar(param)
                 .then(res => {
                     let userInfo = JSON.parse(localStorage.getItem('userInfo'));
-                    userInfo.setItem("avatar", res.data.fileUrl);
+                    userInfo.avatar = res.data.fileUrl
                     localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                    this.$store.commit("SET_AVATAR", userInfo.avatar)
                     this.$message.success('更换成功');
                 }).catch(err => {
-                this.$message(err)
+                    this.$message.error(err)
             })
             return isJPG && isLt2M;
         },

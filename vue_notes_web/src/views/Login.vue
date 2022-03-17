@@ -107,6 +107,7 @@ export default {
                         let userUid = res.data.info.userUid;
                         getUserById(userUid).then(res => {  // 根据用户id获取用户个人信息
                             localStorage.setItem('userInfo', JSON.stringify(res.data.user));
+                            that.$store.commit("SET_AVATAR", res.data.user.avatar)
                         }).catch(err => {
                             that.$message.error(err);
                         })

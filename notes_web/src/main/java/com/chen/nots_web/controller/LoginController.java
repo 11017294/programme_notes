@@ -175,6 +175,7 @@ public class LoginController {
         user.setLastLoginIp(ip);
         user.setBrowser(map.get(SysConf.BROWSER));
         user.setOs(map.get(SysConf.OS));
+        user.setAvatar("user/Mikasa");
         user.insert();
         return ResultBase.ok();
     }

@@ -14,7 +14,8 @@ const state = {
     websiteInfo: '',
     isLogin: false,
     userInfo: {},
-    token: ''
+    token: '',
+    avatar: 'user/Mikasa',
 }
 const mutations = {
     SET_LOADING: (state, v) => {
@@ -44,11 +45,15 @@ const mutations = {
     DEL_TOKEN: (state) => {
         state.token = ''
         state.userInfo = {}
+        state.avatar = '../../assets/defaultAvatar.png',
         localStorage.removeItem('Authorization')
         localStorage.removeItem('userInfo')
     },
     SET_USERINFO: (state, v) => {
         state.userInfo = v
+    },
+    SET_AVATAR: (state, v) => {
+        state.avatar = v
     }
 }
 const actions = {
