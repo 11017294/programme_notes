@@ -113,7 +113,8 @@ export function deleteNote(params) {
     return request({
         url: '/test/note/delete',
         method: 'post',
-        data: params
+        params: params,
+        handler: {ContentType: 'application/json'}
     })
 }
 

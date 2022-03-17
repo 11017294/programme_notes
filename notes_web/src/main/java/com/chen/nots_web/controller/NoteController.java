@@ -56,7 +56,7 @@ public class NoteController {
 
     @ApiOperation(value = "删除笔记", notes = "删除笔记")
     @PostMapping("/delete")
-    public ResultBase delete(@ApiParam(name = "uid", value = "笔记UID") @RequestBody String uid) {
+    public ResultBase delete(@ApiParam(name = "uid", value = "笔记UID") String uid) {
         if(StringUtils.isBlank(uid)){
             return ResultBase.error("修改失败，没有传入uid");
         }

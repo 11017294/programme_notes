@@ -2,7 +2,7 @@
     <!--文章列表-->
     <main class="site-main">
         <el-card class="box-card" v-for="item in noteData">
-            <el-col :span="23">
+            <el-col :span="21">
                 <h1 class="entry-title">
                     <router-link :to="`/article/${item.uid}`">{{ item.title }}</router-link>
                 </h1>
@@ -11,8 +11,11 @@
                     分类：<a href="javascript:void(0);">{{ item.noteSortName }}</a>
                 </div>
             </el-col>
-            <el-col :span="1">
+            <el-col :span="2">
                 <el-button type="primary" @click="editNote(item.uid)">编辑</el-button>
+            </el-col>
+            <el-col :span="1">
+                <el-button type="warning" @click="deleteNote(item.uid)">删除</el-button>
             </el-col>
         </el-card>
 
@@ -27,7 +30,7 @@
 </template>
 
 <script>
-import {getNotesById} from "@/api";
+import {deleteNote, getNotesById} from "@/api";
 
 export default {
     name: "noteManagement",
@@ -48,6 +51,16 @@ export default {
                 path: '/takeNotes',         // 待跳转的页面URL
                 query: {uid: id},              // 跳转时传入的参数
             });
+        },
+        deleteNote(id) {
+            deleteNote({uid: id})
+                .then(res => {
+                    this.$message.success("删除成功")
+                    this.$router.go(0)
+                })
+                .catch(err => {
+                    this.$message.error(err)
+                })
         },
         loadMore() {
             let that = this;
