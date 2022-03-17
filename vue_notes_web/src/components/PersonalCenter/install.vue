@@ -14,10 +14,10 @@
                     <i class="el-icon-unlock"></i>
                     <span slot="title">修改密码</span>
                 </el-menu-item>
-                <el-menu-item index="3" @click="menuClick('/')">
+<!--                <el-menu-item index="3" @click="menuClick('/')">
                     <i class="el-icon-setting"></i>
                     <span slot="title">我的随记</span>
-                </el-menu-item>
+                </el-menu-item>-->
             </el-menu>
         </el-aside>
         <el-main>

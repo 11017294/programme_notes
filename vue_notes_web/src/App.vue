@@ -27,7 +27,6 @@
                 if(token == undefined){
                     return;
                 }
-                console.log(111)
                 let that = this;
                 authVerify(token).then(res => {     // 根据token获取用户登录信息
                     that.$store.commit("SET_IS_LOGIN", true)

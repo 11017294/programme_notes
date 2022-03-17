@@ -7,8 +7,6 @@ j
 :notes_web/src/main/java/com/chen/nots_web/entity/Note.java,3\4\34e8fde0ed5ee6e8c3c7851b0dd44f1ec3940b58
 h
 8notes_web/src/main/java/com/chen/nots_web/vo/NoteVO.java,9\c\9c9aad4f82cccd0f3e9b092c53d7510ebfff475f
-m
-=vue_notes_web/src/components/PersonalCenter/edit-password.vue,8\d\8d263644e0f49002059f332cfe55ca4bc14f8ba4
 R
 "vue_notes_web/src/views/Friend.vue,e\a\eaf37d00d5918017e212630a6daec290e0a6c65d
 Z
@@ -45,11 +43,7 @@ V
 &vue_notes_web/src/views/Pigeonhole.vue,b\3\b3962778f05dc8f0aeedc24aac5f96ba459979c1
 {
 Knotes_web/src/main/java/com/chen/nots_web/controller/CollectController.java,4\4\4482c91f1c12556402735b435c6410428c933554
-x
-Hnotes_web/src/main/java/com/chen/nots_web/controller/UserController.java,c\f\cfedfd1fe71453067e00cab2413c944f73406326
 A
 notes_web/pom.xml,5\f\5f2c4ef523e8212b8cf8474eb9aa6caeb6f130ee
 R
 "vue_notes_web/src/utils/request.js,d\4\d4d36ad608fe111b9e4cbcdd080a94e69a8516fc
-Q
-!vue_notes_web/src/views/Login.vue,b\1\b14a01533eed31873bdd2f40a94df31ed9d27e5a

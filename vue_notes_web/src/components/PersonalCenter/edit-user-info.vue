@@ -130,6 +130,7 @@ export default {
             editUser(JSON.stringify(userInfo)).then(res => {
                 localStorage.setItem('userInfo', JSON.stringify(userInfo));
                 this.disabled = true;
+                this.$message.success("修改成功");
             }).catch(err => {
                 this.$message.error(err);
             })

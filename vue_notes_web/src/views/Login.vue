@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import {authVerify, login, register} from "@/api"
+import {authVerify, getUserById, login, register} from "@/api"
 
 export default {
     name: "login",
@@ -104,6 +104,12 @@ export default {
                         that.$store.commit("SET_IS_LOGIN", true)
                         that.$store.commit("SET_TOKEN", token)
                         that.$store.commit("SET_USERINFO", res.data.info)
+                        let userUid = res.data.info.userUid;
+                        getUserById(userUid).then(res => {  // 根据用户id获取用户个人信息
+                            localStorage.setItem('userInfo', JSON.stringify(res.data.user));
+                        }).catch(err => {
+                            that.$message.error(err);
+                        })
                         that.$message({
                             message: '登录成功！',
                             type: 'success'
