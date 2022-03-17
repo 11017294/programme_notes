@@ -2,13 +2,18 @@
     <!--文章列表-->
     <main class="site-main">
         <el-card class="box-card" v-for="item in noteData">
-            <h1 class="entry-title">
-                <router-link :to="`/article/${item.uid}`">{{ item.title }}</router-link>
-            </h1>
-            <p class="summary">{{ item.summary }}</p>
-            <div class="item-float-left" v-if="item.noteSortUid">
-                分类：<a href="javascript:void(0);">{{ item.noteSortName }}</a>
-            </div>
+            <el-col :span="23">
+                <h1 class="entry-title">
+                    <router-link :to="`/article/${item.uid}`">{{ item.title }}</router-link>
+                </h1>
+                <p class="summary">{{ item.summary }}</p>
+                <div class="item-float-left" v-if="item.noteSortUid">
+                    分类：<a href="javascript:void(0);">{{ item.noteSortName }}</a>
+                </div>
+            </el-col>
+            <el-col :span="1">
+                <el-button type="primary" @click="editNote">编辑</el-button>
+            </el-col>
         </el-card>
 
         <!--加载更多-->
@@ -38,6 +43,9 @@ export default {
         }
     },
     methods: {
+        editNote() {
+
+        },
         loadMore() {
             let that = this;
             var params = new URLSearchParams();
