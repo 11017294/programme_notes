@@ -92,6 +92,32 @@ export function addNote(params) {
 }
 
 /**
+ * 修改笔记
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function updateNote(params) {
+    return request({
+        url: '/test/note/update',
+        method: 'post',
+        data: params
+    })
+}
+
+/**
+ * 删除笔记
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function deleteNote(params) {
+    return request({
+        url: '/test/note/delete',
+        method: 'post',
+        data: params
+    })
+}
+
+/**
  * 获取分类
  * @param params
  * @returns {AxiosPromise}

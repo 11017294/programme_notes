@@ -11,8 +11,6 @@ m
 =vue_notes_web/src/components/PersonalCenter/edit-password.vue,8\d\8d263644e0f49002059f332cfe55ca4bc14f8ba4
 R
 "vue_notes_web/src/views/Friend.vue,e\a\eaf37d00d5918017e212630a6daec290e0a6c65d
-U
-%vue_notes_web/src/components/post.vue,3\0\303ef4b8af39d9a81f4696c8ab6613140f6b56d3
 Z
 *vue_notes_web/src/views/PersonalCenter.vue,8\4\849d10c9e8f7fa78dcba5cd9ab513275c10475d3
 l
@@ -21,12 +19,6 @@ q
 Anotes_web/src/main/java/com/chen/nots_web/service/TagService.java,b\e\bea312465c11611b621ce67d9d0a78775550bfad
 e
 5vue_notes_web/src/components/layout/layout-footer.vue,3\5\3527b8ae6f3d40cf819834ec5427626910ed4f4e
-x
-Hnotes_web/src/main/java/com/chen/nots_web/controller/NoteController.java,8\6\86ac03828e9c3875548a52245c8c8e23af2c7bac
-r
-Bnotes_web/src/main/java/com/chen/nots_web/service/NoteService.java,a\8\a8f6c95e17af08f5657c0ff7f20cedb8e64c854d
-{
-Knotes_web/src/main/java/com/chen/nots_web/service/impl/NoteServiceImpl.java,2\a\2a7c46d08fdb300a2e76da4e82424d26c530e129
 m
 =notes_web/src/main/java/com/chen/nots_web/global/SQLConf.java,5\4\54816970badedf34c88e304096ef03a5253ca6db
 `
@@ -57,13 +49,9 @@ V
 Knotes_web/src/main/java/com/chen/nots_web/controller/CollectController.java,4\4\4482c91f1c12556402735b435c6410428c933554
 x
 Hnotes_web/src/main/java/com/chen/nots_web/controller/UserController.java,c\f\cfedfd1fe71453067e00cab2413c944f73406326
-e
-5vue_notes_web/src/components/layout/layout-header.vue,b\b\bb2f5eb2cdd1b6cc5b569bb18e129d14149eba57
 A
 notes_web/pom.xml,5\f\5f2c4ef523e8212b8cf8474eb9aa6caeb6f130ee
 R
 "vue_notes_web/src/utils/request.js,d\4\d4d36ad608fe111b9e4cbcdd080a94e69a8516fc
 Q
 !vue_notes_web/src/views/Login.vue,b\1\b14a01533eed31873bdd2f40a94df31ed9d27e5a
-P
- vue_notes_web/src/views/Home.vue,a\8\a8df25ce687973e5b773b75130bdffe3078c6a0f

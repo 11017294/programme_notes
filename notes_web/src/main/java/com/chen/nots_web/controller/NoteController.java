@@ -69,7 +69,7 @@ public class NoteController {
 
     @ApiOperation(value = "修改笔记", notes = "修改笔记")
     @PostMapping("/update")
-    public ResultBase update(@RequestBody NoteVO noteVO) {
+    public ResultBase update(NoteVO noteVO) {
         if(StringUtils.isNotBlank(noteVO.getUid())){
             return ResultBase.ok().data("id",noteService.editNote(noteVO));
         }

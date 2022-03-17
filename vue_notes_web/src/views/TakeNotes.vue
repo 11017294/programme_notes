@@ -16,6 +16,7 @@
                             :multiple-limit=3
                             multiple
                             filterable
+                            @change="$forceUpdate()"
                             placeholder="请选择"
                             style="width:80%" >
                             <el-option
@@ -74,7 +75,7 @@
 
 <script>
 
-import {addNote, getNoteSort, getTag} from "@/api";
+import {addNote, fetchContent, getNoteSort, getTag, getUserCollectNote, updateNote} from "@/api";
 
 export default {
 
@@ -139,7 +140,7 @@ export default {
             rules: {
                 title: [
                     { required: true, message: '请输入标题', trigger: 'blur' },
-                    { min: 4, max: 100, message: '长度在 4 到 100 个字符', trigger: 'blur' }
+                    { min: 3, max: 100, message: '长度在 3 到 100 个字符', trigger: 'blur' }
                 ],
                 summary: [
                     { required: true, message: '请输入简介', trigger: 'blur' },
@@ -184,12 +185,21 @@ export default {
                     let userInfo = that.$store.state.userInfo;
                     params.append("author", userInfo.userName)
                     params.append("userUid", userInfo.userUid)
-                    addNote(params).then(res => {
-                        that.$message.success("成功")
-                        that.$router.push('/')
-                    }).catch(err => {
-                        this.$message.error(err)
-                    })
+                    if(this.$route.query.uid){
+                        updateNote(params).then(res => {
+                            that.$message.success("修改成功")
+                            that.$router.push('/')
+                        }).catch(err => {
+                            this.$message.error(err)
+                        })
+                    } else{
+                        addNote(params).then(res => {
+                            that.$message.success("添加成功")
+                            that.$router.push('/')
+                        }).catch(err => {
+                            this.$message.error(err)
+                        })
+                    }
                 }
                 else {
                     this.$message.warning("必填项不能为空");
@@ -224,11 +234,37 @@ export default {
             }).catch(err => {
                 this.$message.error(err)
             })
+        },
+        backfillData() {    //回填数据
+            let uid = this.$route.query.uid;
+            if(uid != undefined) {
+                let that = this;
+                fetchContent({uid: uid})
+                    .then(res => {
+                        that.noteForm.uid = uid;
+                        that.noteForm.title =  res.data.note.title;
+                        that.noteForm.summary = res.data.note.summary;
+                        that.noteForm.noteSortUid = res.data.note.noteSortUid;
+                        that.noteForm.tagUid = res.data.note.tagUid;
+                        that.noteForm.isOriginal = res.data.note.isOriginal;
+                        that.noteForm.content = res.data.note.content;
+                        that.noteForm.tagValue = res.data.note.tagUid.split(",")
+                        getUserCollectNote({"noteUid": uid})
+                            .then(res => {
+                                if(res.data.collect){
+                                    that.isCollect = true;
+                                } else {
+                                    that.isCollect = false;
+                                }
+                            })
+                    })
+            }
         }
     },
     mounted() {
         this.getNoteSort()
         this.getTag()
+        this.backfillData()
     }
 }
 </script>

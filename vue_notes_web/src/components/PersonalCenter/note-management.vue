@@ -12,7 +12,7 @@
                 </div>
             </el-col>
             <el-col :span="1">
-                <el-button type="primary" @click="editNote">编辑</el-button>
+                <el-button type="primary" @click="editNote(item.uid)">编辑</el-button>
             </el-col>
         </el-card>
 
@@ -43,8 +43,11 @@ export default {
         }
     },
     methods: {
-        editNote() {
-
+        editNote(id) {
+            this.$router.push({
+                path: '/takeNotes',         // 待跳转的页面URL
+                query: {uid: id},              // 跳转时传入的参数
+            });
         },
         loadMore() {
             let that = this;
