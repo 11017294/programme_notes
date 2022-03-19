@@ -41,3 +41,11 @@ export function getVisitByWeek() {
     method: 'get'
   })
 }
+
+export function getOperateLog(params) {
+  return request({
+    url: '/webVisit/getList',
+    method: 'get',
+    params: params
+  })
+}
