@@ -58,4 +58,10 @@ public class SQLConf {
     // 字典类型
     public final static String DICT_TYPE = "dict_type";
 
+    /**
+     * t_web_visit表
+     */
+    public final static String IP = "ip";
+    public final static String BEHAVIOR = "behavior";
+
 }

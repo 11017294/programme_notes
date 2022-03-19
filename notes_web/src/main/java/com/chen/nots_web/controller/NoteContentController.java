@@ -1,8 +1,10 @@
 package com.chen.nots_web.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.chen.nots_web.annotion.log.BussinessLog;
 import com.chen.nots_web.entity.Note;
 import com.chen.nots_web.global.RedisConf;
+import com.chen.nots_web.global.enums.EBehavior;
 import com.chen.nots_web.global.holder.RequestHolder;
 import com.chen.nots_web.service.NoteService;
 import com.chen.nots_web.utils.IpUtils;
@@ -35,6 +37,7 @@ public class NoteContentController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+    @BussinessLog(value = "点击笔记", behavior = EBehavior.NOTE_CONTENT)
     @ApiOperation(value = "通过uid获取笔记", notes = "通过uid获取笔记")
     @GetMapping("/getNoteById")
     public ResultBase getNoteById(@ApiParam(name = "uid", value = "笔记UID")

@@ -7,6 +7,7 @@ import com.chen.nots_web.vo.CollectVO;
 import com.chen.nots_web.vo.NoteVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -87,4 +88,10 @@ public interface NoteService extends SuperService<Note> {
      * @return
      */
     IPage getNoteList(NoteVO noteVO);
+
+    /**
+     * 获取系统一年内文章贡献数
+     * @return
+     */
+    Map<String, Object> getNoteContributeCount();
 }

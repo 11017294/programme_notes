@@ -41,8 +41,8 @@ public class UserController {
     private RedisUtil redisUtil;
 
     @ApiOperation(value = "获取用户列表", notes = "获取用户列表")
-    @PostMapping("/getList")
-    public ResultBase getList(@RequestBody UserVO userVO) {
+    @GetMapping("/getList")
+    public ResultBase getList(UserVO userVO) {
         log.info("获取用户列表: {}", userVO);
         return ResultBase.ok().data("list", userService.getPageList(userVO));
     }

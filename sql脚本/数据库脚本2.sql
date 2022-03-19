@@ -191,3 +191,21 @@ CREATE TABLE `t_message` (
                              `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
                              PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='留言表';
+
+DROP TABLE IF EXISTS `t_web_visit`;
+
+CREATE TABLE `t_web_visit` (
+                               `uid` varchar(32) NOT NULL COMMENT '主键',
+                               `user_uid` varchar(255) DEFAULT NULL COMMENT '用户uid',
+                               `ip` varchar(255) DEFAULT NULL COMMENT '访问ip地址',
+                               `behavior` varchar(255) DEFAULT NULL COMMENT '用户行为',
+                               `module_uid` varchar(255) DEFAULT NULL COMMENT '模块uid（文章uid，标签uid，分类uid）',
+                               `other_data` varchar(255) DEFAULT NULL COMMENT '附加数据(比如搜索内容)',
+                               `is_delete` tinyint(1) UNSIGNED ZEROFILL NOT NULL DEFAULT 0 COMMENT '是否删除，1表示已删除',
+                               `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+                               `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+                               `os` varchar(255) DEFAULT NULL COMMENT '操作系统',
+                               `browser` varchar(255) DEFAULT NULL COMMENT '浏览器',
+                               `ip_source` varchar(255) DEFAULT NULL COMMENT 'ip来源',
+                               PRIMARY KEY (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Web访问记录表';

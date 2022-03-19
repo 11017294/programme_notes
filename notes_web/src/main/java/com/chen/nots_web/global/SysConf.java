@@ -27,16 +27,31 @@ public class SysConf {
     public final static String TOKEN = "token";
     public final static String SYMBOL_COLON = ":";
     public final static String EQUAL_TO = "=";
-    public final static String IP = "ip";
     public final static String OS = "OS";
     public final static String BROWSER = "BROWSER";
+    public final static String CONTRIBUTE_DATE = "contributeDate";
+    public final static String NOTE_CONTRIBUTE_COUNT = "noteContributeCount";
 
     // 上传七牛云相关
     public final static String FILE_PATH_USER = "user/";
     public final static String FILE_PATH_NOTES = "notes/";
 
+    /**
+     * t_web_visit表
+     */
+    public final static String IP = "ip";
+    public final static String BEHAVIOR = "behavior";
 
+    /**
+     * 文件分割符
+     */
+    public final static String FILE_SEGMENTATION = ",";
 
+    /**
+     * AOP相关
+     */
+    public static final String MODULE_UID = "moduleUid";
+    public static final String OTHER_DATA = "otherData";
 
 
 }

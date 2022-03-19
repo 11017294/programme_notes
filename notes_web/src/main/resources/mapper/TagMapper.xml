@@ -3,7 +3,7 @@
 <mapper namespace="com.chen.nots_web.mapper.TagMapper">
 
     <select id="getAll" resultType="com.chen.nots_web.entity.Tag">
-        select * from t_tag
+        select * from t_tag where is_delete = 0
     </select>
 
 
