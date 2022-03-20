@@ -65,3 +65,45 @@ export function getTag(params) {
     params: params
   })
 }
+
+/**
+ * 删除笔记
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function deleteNote(params) {
+  return request({
+    url: '/note/delete',
+    method: 'post',
+    params: params,
+    handler: {ContentType: 'application/json'}
+  })
+}
+
+/**
+ * 删除分类
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function deleteSort(params) {
+  return request({
+    url: '/noteSort/delete',
+    method: 'post',
+    params: params,
+    handler: {ContentType: 'application/json'}
+  })
+}
+
+/**
+ * 删除标签
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function deleteTag(params) {
+  return request({
+    url: '/tag/delete',
+    method: 'post',
+    params: params,
+    handler: {ContentType: 'application/json'}
+  })
+}

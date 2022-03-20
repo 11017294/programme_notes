@@ -180,7 +180,7 @@
 </template>
 
 <script>
-import { getNoteList, getNoteSort, getTag } from '@/api/table'
+import {deleteNote, getNoteList, getNoteSort, getTag} from '@/api/table'
 
 export default {
   name: 'ArticleManagement',
@@ -270,6 +270,25 @@ export default {
     resetForm() {       // 重置
       this.queryParams = {}
       this.fetchData()
+    },
+    handleDelete(row) {
+      var that = this;
+      this.$confirm("此操作将把笔记删除, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          var params = {};
+          params.uid = row.uid;
+          deleteNote(params).then(response => {
+            that.$message.success("删除成功")
+            that.fetchData();
+          });
+        })
+        .catch(() => {
+          that.$message.info("已取消删除")
+        });
     },
   }
 }

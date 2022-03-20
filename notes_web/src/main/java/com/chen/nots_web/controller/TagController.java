@@ -1,13 +1,16 @@
 package com.chen.nots_web.controller;
 
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.chen.nots_web.service.TagService;
 import com.chen.nots_web.vo.ResultBase;
 import com.chen.nots_web.vo.TagVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,4 +42,16 @@ public class TagController {
         return ResultBase.ok().data("list", tagService.getTagList(tagVO));
     }
 
+    @ApiOperation(value = "删除标签", notes = "删除标签")
+    @PostMapping("/delete")
+    public ResultBase delete(@ApiParam(name = "uid", value = "标签UID") String uid) {
+        if(StringUtils.isBlank(uid)){
+            return ResultBase.error("修改失败，没有传入uid");
+        }
+        boolean note = tagService.removeById(uid);
+        if(note){
+            return ResultBase.ok().data("id",uid);
+        }
+        return ResultBase.error("修改失败，没有ID:" + uid + "的标签");
+    }
 }

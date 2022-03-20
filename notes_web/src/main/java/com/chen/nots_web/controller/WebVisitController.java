@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author MaybeBin
  * @since 2022-03-19
  */
-@Api(value = "编程笔记系统相关接口", tags = {"编程笔记系统相关接口"})
+@Api(value = "用户访问记录相关接口", tags = {"用户访问记录相关接口"})
 @RestController
 @RequestMapping("/webVisit")
 public class WebVisitController {
