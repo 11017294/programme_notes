@@ -1,7 +1,9 @@
 package com.chen.nots_web.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.chen.nots_web.entity.Tag;
 import com.chen.nots_web.global.service.SuperService;
+import com.chen.nots_web.vo.TagVO;
 
 import java.util.List;
 
@@ -15,9 +17,10 @@ import java.util.List;
  */
 public interface TagService extends SuperService<Tag> {
 
-    List<Tag> getPageList();
+    List<Tag> getAll();
 
     List<String> getTagContentList(String[] tagUids);
 
 
+    IPage<Tag> getTagList(TagVO tagVO);
 }

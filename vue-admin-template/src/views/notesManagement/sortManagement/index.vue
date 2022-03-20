@@ -1,5 +1,6 @@
 <template>
-  <el-table :data="tableData"  style="width: 100%">
+  <div class="app-container">
+    <el-table :data="tableData"  style="width: 100%">
     <el-table-column type="selection"></el-table-column>
 
     <el-table-column label="序号" width="60" align="center">
@@ -48,8 +49,20 @@
         <el-button type="primary" size="small">编辑</el-button>
         <el-button type="danger" size="small">删除</el-button>
       </template>
-    </el-table-column>
-  </el-table>
+      </el-table-column>
+    </el-table>
+
+    <!--分页-->
+    <div class="block">
+      <el-pagination
+        @current-change="getSortList"
+        :current-page.sync="currentPage"
+        :page-size="pageSize"
+        layout="total, prev, pager, next, jumper"
+        :total="total"
+      ></el-pagination>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -63,7 +76,7 @@ export default {
       keyword: '',
       currentPage: 1,
       totalPages: 0,
-      pageSize: 15,
+      pageSize: 10,
       total: 0,
     }
   },
@@ -72,10 +85,18 @@ export default {
   },
   methods: {
     getSortList() {
-      let params = {}
+      let that = this
+      this.listLoading = true
+      let params = new URLSearchParams()
+      params.append("pageSize", that.pageSize)
+      params.append("currentPage", that.currentPage)
       getSortList(params).then(response => {
         let data = response.data.list
-        this.tableData = data
+        this.tableData = data.records
+        this.total = data.total
+        this.pageSize = data.size
+        this.currentPage = data.current
+        this.listLoading = false
       })
     }
   }

@@ -26,11 +26,16 @@ public class NoteSortController {
 
     @Autowired
     private NoteSortService noteSortService;
-    
-    @ApiOperation(value = "获取笔记分类列表", notes = "获取笔记分类列表", response = String.class)
+
+    @ApiOperation(value = "获取全部笔记分类列表", notes = "获取全部笔记分类列表", response = String.class)
     @GetMapping("/getList")
     public ResultBase getList(NoteSortVO noteSortVO) {
-        return ResultBase.ok().data("list", noteSortService.getPageList(noteSortVO));
+        return ResultBase.ok().data("list", noteSortService.getAllSort(noteSortVO));
     }
 
+    @ApiOperation(value = "获取笔记分类列表", notes = "获取笔记分类列表", response = String.class)
+    @GetMapping("/getSortList")
+    public ResultBase getSortList(NoteSortVO noteSortVO) {
+        return ResultBase.ok().data("list", noteSortService.getPageList(noteSortVO));
+    }
 }

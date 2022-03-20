@@ -1,5 +1,8 @@
 package com.chen.nots_web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chen.nots_web.entity.NoteSort;
 import com.chen.nots_web.global.service.serviceImpl.SuperServiceImpl;
 import com.chen.nots_web.mapper.NoteSortMapper;
@@ -25,7 +28,16 @@ public class NoteSortServiceImpl extends SuperServiceImpl<NoteSortMapper, NoteSo
     private NoteSortMapper noteSortMapper;
 
     @Override
-    public List<NoteSort> getPageList(NoteSortVO noteSortVO) {
+    public List<NoteSort> getAllSort(NoteSortVO noteSortVO) {
         return noteSortMapper.getAll();
+    }
+
+    @Override
+    public IPage<NoteSort> getPageList(NoteSortVO noteSortVO) {
+        QueryWrapper<NoteSort> wrapper = new QueryWrapper<>();
+        Page<NoteSort> page = new Page<>();
+        page.setSize(noteSortVO.getPageSize());
+        page.setCurrent(noteSortVO.getCurrentPage());
+        return noteSortMapper.selectPage(page, wrapper);
     }
 }

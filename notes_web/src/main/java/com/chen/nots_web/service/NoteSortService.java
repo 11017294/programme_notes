@@ -1,5 +1,6 @@
 package com.chen.nots_web.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.chen.nots_web.entity.NoteSort;
 import com.chen.nots_web.global.service.SuperService;
 import com.chen.nots_web.vo.NoteSortVO;
@@ -16,5 +17,7 @@ import java.util.List;
  */
 public interface NoteSortService extends SuperService<NoteSort> {
 
-    List<NoteSort> getPageList(NoteSortVO noteSortVO);
+    List<NoteSort> getAllSort(NoteSortVO noteSortVO);
+
+    IPage<NoteSort> getPageList(NoteSortVO noteSortVO);
 }

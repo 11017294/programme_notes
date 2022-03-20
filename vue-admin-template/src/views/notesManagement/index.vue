@@ -241,7 +241,6 @@ export default {
         params.append("isOriginal", this.queryParams.originalKeyword)
       }
       getNoteList(params).then(response => {
-        console.log(response.data.list)
         let data = response.data.list
         this.noteData = data.records
         this.total = data.total

@@ -1,9 +1,13 @@
 package com.chen.nots_web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chen.nots_web.entity.Tag;
 import com.chen.nots_web.global.service.serviceImpl.SuperServiceImpl;
 import com.chen.nots_web.mapper.TagMapper;
 import com.chen.nots_web.service.TagService;
+import com.chen.nots_web.vo.TagVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,7 +28,7 @@ public class TagServiceImpl extends SuperServiceImpl<TagMapper, Tag> implements 
     private TagMapper tagMapper;
 
     @Override
-    public List<Tag> getPageList() {
+    public List<Tag> getAll() {
         return tagMapper.getAll();
     }
 
@@ -34,5 +38,14 @@ public class TagServiceImpl extends SuperServiceImpl<TagMapper, Tag> implements 
             return null;
         }
         return tagMapper.getTagContentList(tagUids);
+    }
+
+    @Override
+    public IPage<Tag> getTagList(TagVO tagVO) {
+        QueryWrapper<Tag> wrapper = new QueryWrapper<>();
+        Page<Tag> page = new Page<>();
+        page.setSize(tagVO.getPageSize());
+        page.setCurrent(tagVO.getCurrentPage());
+        return tagMapper.selectPage(page, wrapper);
     }
 }

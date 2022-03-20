@@ -26,7 +26,7 @@ export function getNoteList(params) {
 
 export function getSortList(params) {
   return request({
-    url: '/noteSort/getList',
+    url: '/noteSort/getSortList',
     method: 'get',
     params: params
   })
@@ -34,7 +34,7 @@ export function getSortList(params) {
 
 export function getTagList(params) {
   return request({
-    url: '/tag/getList',
+    url: '/tag/getTagList',
     method: 'get',
     params: params
   })
