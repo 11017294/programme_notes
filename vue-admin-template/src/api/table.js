@@ -121,3 +121,31 @@ export function deleteTag(params) {
     handler: {ContentType: 'application/json'}
   })
 }
+
+/**
+ * 添加黑名单
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function addBlacklist(params) {
+  return request({
+    url: '/user/addBlacklist',
+    method: 'post',
+    params: params,
+    handler: {ContentType: 'application/json'}
+  })
+}
+
+/**
+ * 移除黑名单
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function deleteBlacklist(params) {
+  return request({
+    url: '/user/deleteBlacklist',
+    method: 'post',
+    params: params,
+    handler: {ContentType: 'application/json'}
+  })
+}

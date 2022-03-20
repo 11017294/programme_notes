@@ -85,6 +85,10 @@ public class LoginController {
         wrapper.last(SysConf.LIMIT_ONE);
         User user = userService.getOne(wrapper);
 
+        if(ObjectUtil.isNotNull(user) && user.getStatus() == 2){
+            return ResultBase.error("您的账号已被拉黑，如有疑问请联系站长");
+        }
+
         String inPassword = SecureUtil.md5(passWord);
         if(ObjectUtil.isNull(user) || !inPassword.equals(user.getPassWord())){
             return ResultBase.error("账号或密码错误");

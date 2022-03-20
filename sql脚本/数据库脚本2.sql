@@ -209,3 +209,5 @@ CREATE TABLE `t_web_visit` (
                                `ip_source` varchar(255) DEFAULT NULL COMMENT 'ip来源',
                                PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Web访问记录表';
+
+ALTER TABLE  t_user ADD status tinyint(1)  unsigned NOT NULL DEFAULT '1' COMMENT '状态，2表示被拉黑';

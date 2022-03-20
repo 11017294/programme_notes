@@ -67,13 +67,13 @@ public class NoteController {
     @PostMapping("/delete")
     public ResultBase delete(@ApiParam(name = "uid", value = "笔记UID") String uid) {
         if(StringUtils.isBlank(uid)){
-            return ResultBase.error("修改失败，没有传入uid");
+            return ResultBase.error("删除失败，没有传入uid");
         }
         boolean note = noteService.removeById(uid);
         if(note){
             return ResultBase.ok().data("id",uid);
         }
-        return ResultBase.error("修改失败，没有ID:" + uid + "的笔记");
+        return ResultBase.error("删除失败，没有ID:" + uid + "的笔记");
     }
 
     @BussinessLog(value = "修改笔记", behavior = EBehavior.EDIT_NOTE)

@@ -22,11 +22,11 @@
         type="info"
         @click="resetForm">重置</el-button>
 
-      <el-button
+<!--      <el-button
         class="filter-item"
         @click="handleAdd"
         type="primary"
-        icon="el-icon-edit">添加用户</el-button>
+        icon="el-icon-edit">添加用户</el-button>-->
 
     </div>
 
@@ -54,7 +54,7 @@
         width="180">
       </el-table-column>
       <el-table-column
-        align="center" label="性别" width="80">
+        align="center" label="性别" width="70">
         <template slot-scope="scope">
           <el-tag v-if="scope.row.sex==1" type="success">男</el-tag>
           <el-tag v-if="scope.row.sex==0" type="warning">女</el-tag>
@@ -70,7 +70,7 @@
         align="center"
         prop="mobile"
         label="电话"
-        width="130">
+        width="120">
       </el-table-column>
       <el-table-column
         align="center"
@@ -82,25 +82,28 @@
         align="center"
         prop="lastLoginTime"
         label="最后登录时间"
-        width="180">
+        width="160">
       </el-table-column>
       <el-table-column
         align="center"
         prop="lastLoginIp"
         label="最后登录IP"
-        width="120">
+        width="100">
       </el-table-column>
       <el-table-column
         align="center"
-        prop="ipSource"
-        label="ip来源"
-        width="100">
+        label="状态"
+        width="80">
+        <template slot-scope="scope">
+          <el-tag v-if="scope.row.status==2" type="danger">黑名单</el-tag>
+          <el-tag v-if="scope.row.status==1" type="success">正常</el-tag>
+        </template>
       </el-table-column>
       <el-table-column
         align="center"
         prop="browser"
         label="浏览器"
-        width="200">
+        width="180">
       </el-table-column>
       <el-table-column
         align="center"
@@ -121,15 +124,29 @@
           <el-tag v-if="scope.row.userTag==2" type="danger">站长</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="150" align="center" fixed="right">
+      <el-table-column label="操作" width="300" align="center" fixed="right">
         <template slot-scope="scope">
           <el-button
             size="mini"
             @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+
+          <el-button
+            size="mini"
+            type="info"
+            v-show="scope.row.status != 2"
+            @click="addBlacklist(scope.row)">添加至黑名单</el-button>
+
+          <el-button
+            size="mini"
+            type="success"
+            v-show="scope.row.status == 2"
+            @click="deleteBlacklist(scope.row)">移除黑名单</el-button>
+
           <el-button
             size="mini"
             type="danger"
             @click="handleDelete(scope.row)">删除</el-button>
+
         </template>
       </el-table-column>
     </el-table>
@@ -147,7 +164,7 @@
 </template>
 
 <script>
-import {deleteNote, deleteUser, getUserList} from '@/api/table'
+import {addBlacklist, deleteUser, getUserList, deleteBlacklist} from '@/api/table'
 
 export default {
   name: 'UserManagement',
@@ -220,6 +237,49 @@ export default {
           that.$message.info("已取消删除")
         });
     },
+    addBlacklist(row) {
+      var that = this;
+      if(row.status == 2) {
+        that.$message.warning("已经是黑名单用户")
+        return
+      }
+      this.$confirm("此操作将用户添加为黑名单, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          var params = {};
+          params.uid = row.uid;
+          addBlacklist(params).then(response => {
+            that.$message.success("添加黑名单成功")
+            that.fetchData();
+          });
+        })
+        .catch(() => {
+          that.$message.info("已取消添加黑名单")
+        });
+    },
+    deleteBlacklist(row) {
+      var that = this;
+      this.$confirm("此操作将用户移出黑名单, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          var params = {};
+          params.uid = row.uid;
+
+          deleteBlacklist(params).then(response => {
+            that.$message.success("移除黑名单成功")
+            that.fetchData();
+          });
+        })
+        .catch(() => {
+          that.$message.info("已取消移除黑名单")
+        });
+    }
   }
 }
 </script>

@@ -75,7 +75,7 @@ public class UserController {
 
     @ApiOperation(value = "删除用户", notes = "删除用户")
     @PostMapping("/delete")
-    public ResultBase delete(@ApiParam(name = "uid", value = "笔记UID") String uid) {
+    public ResultBase delete(@ApiParam(name = "uid", value = "用户UID") String uid) {
         log.info("删除用户: {}", uid);
         if(StringUtils.isBlank(uid)){
             return ResultBase.error("修改失败，没有传入uid");
@@ -117,6 +117,42 @@ public class UserController {
             Map<String, Object> map = JsonUtils.jsonToMap(userInfo);
             return ResultBase.ok().data("info", map);
         }
+    }
+
+    @ApiOperation(value = "添加黑名单", notes = "添加黑名单")
+    @PostMapping("/addBlacklist")
+    public ResultBase addBlacklist(@ApiParam(name = "uid", value = "用户UID") String uid) {
+        log.info("添加黑名单用户: {}", uid);
+        if(StringUtils.isBlank(uid)){
+            return ResultBase.error("拉黑失败，没有传入uid");
+        }
+        User user = userService.getById(uid);
+        if(ObjectUtil.isNotEmpty(user)){
+            if(user.getStatus() != 2) {
+                user.setStatus(2);
+                user.updateById();
+            }
+            return ResultBase.ok().data("id", user.getUid());
+        }
+        return ResultBase.error("拉黑失败，没有ID:" + uid + "的用户");
+    }
+
+    @ApiOperation(value = "移除黑名单", notes = "添加黑名单")
+    @PostMapping("/deleteBlacklist")
+    public ResultBase deleteBlacklist(@ApiParam(name = "uid", value = "用户UID") String uid) {
+        log.info("移除黑名单用户: {}", uid);
+        if(StringUtils.isBlank(uid)){
+            return ResultBase.error("移除失败，没有传入uid");
+        }
+        User user = userService.getById(uid);
+        if(ObjectUtil.isNotEmpty(user)){
+            if(user.getStatus() == 2) {
+                user.setStatus(1);
+                user.updateById();
+            }
+            return ResultBase.ok().data("id", user.getUid());
+        }
+        return ResultBase.error("移除失败，没有ID:" + uid + "的用户");
     }
 
 }

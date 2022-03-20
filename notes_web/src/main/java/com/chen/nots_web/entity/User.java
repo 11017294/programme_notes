@@ -110,6 +110,10 @@ public class User extends SuperEntity<User> {
     @TableField("loading_valid")
     private Integer loadingValid;
 
+    @ApiModelProperty("状态，2表示被拉黑")
+    @TableField("status")
+    private int status;
+
     // 不存入数据库
     /**
      * 验证码

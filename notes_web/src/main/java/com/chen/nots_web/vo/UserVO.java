@@ -55,6 +55,9 @@ public class UserVO extends BaseVO<UserVO> {
     @ApiModelProperty("用户标签：0：普通用户，1：管理员，2：博主 等")
     private Integer userTag;
 
+    @ApiModelProperty("状态，2表示被拉黑")
+    private int status;
+
     /**
      * OrderBy排序字段（desc: 降序）
      */

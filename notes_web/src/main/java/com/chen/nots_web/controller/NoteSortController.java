@@ -46,12 +46,12 @@ public class NoteSortController {
     @PostMapping("/delete")
     public ResultBase delete(@ApiParam(name = "uid", value = "分类UID") String uid) {
         if(StringUtils.isBlank(uid)){
-            return ResultBase.error("修改失败，没有传入uid");
+            return ResultBase.error("删除失败，没有传入uid");
         }
-        boolean note = noteSortService.removeById(uid);
-        if(note){
+        boolean noteSort = noteSortService.removeById(uid);
+        if(noteSort){
             return ResultBase.ok().data("id",uid);
         }
-        return ResultBase.error("修改失败，没有ID:" + uid + "的分类");
+        return ResultBase.error("删除失败，没有ID:" + uid + "的分类");
     }
 }

@@ -46,12 +46,12 @@ public class TagController {
     @PostMapping("/delete")
     public ResultBase delete(@ApiParam(name = "uid", value = "标签UID") String uid) {
         if(StringUtils.isBlank(uid)){
-            return ResultBase.error("修改失败，没有传入uid");
+            return ResultBase.error("删除失败，没有传入uid");
         }
-        boolean note = tagService.removeById(uid);
-        if(note){
+        boolean tag = tagService.removeById(uid);
+        if(tag){
             return ResultBase.ok().data("id",uid);
         }
-        return ResultBase.error("修改失败，没有ID:" + uid + "的标签");
+        return ResultBase.error("删除失败，没有ID:" + uid + "的标签");
     }
 }
