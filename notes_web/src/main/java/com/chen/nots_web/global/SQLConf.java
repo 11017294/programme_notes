@@ -64,4 +64,6 @@ public class SQLConf {
     public final static String IP = "ip";
     public final static String BEHAVIOR = "behavior";
 
+    public final static String SORT_NAME = "sort_name";
+
 }

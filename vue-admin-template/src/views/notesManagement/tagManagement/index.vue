@@ -1,5 +1,27 @@
 <template>
   <div class="app-container">
+    <!-- 查询和其他操作 -->
+    <div class="filter-container" style="margin: 10px 0 10px 0;">
+      <el-input
+        clearable
+        @keyup.enter.native="handleFind"
+        class="filter-item"
+        style="width: 200px;"
+        v-model="keyword"
+        placeholder="请输入分类名"
+      ></el-input>
+      <el-button
+        class="filter-item"
+        type="primary"
+        icon="el-icon-search"
+        @click="handleFind">查找</el-button>
+
+      <el-button
+        class="filter-item"
+        type="info"
+        @click="resetForm">重置</el-button>
+    </div>
+
     <el-table :data="tableData"
               style="width: 100%"
               :default-sort="{prop: 'sort', order: 'descending'}">
@@ -81,6 +103,7 @@ export default {
   data() {
     return {
       tableData: [],
+      keyword: '',
       currentPage: 1,
       totalPages: 0,
       pageSize: 10,
@@ -91,12 +114,19 @@ export default {
     this.getTagList()
   },
   methods: {
+    handleFind: function() {
+      this.currentPage = 1
+      this.getTagList();
+    },
     getTagList() {
       let that = this
       this.listLoading = true
       let params = new URLSearchParams()
       params.append("pageSize", that.pageSize)
       params.append("currentPage", that.currentPage)
+      if(this.keyword){
+        params.append("keyword", this.keyword)
+      }
       getTagList(params).then(response => {
         let data = response.data.list
         this.tableData = data.records
@@ -105,6 +135,10 @@ export default {
         this.currentPage = data.current
         this.listLoading = false
       })
+    },
+    resetForm() {       // 重置
+      this.keyword = ''
+      this.getTagList()
     }
   }
 }
@@ -112,4 +146,8 @@ export default {
 
 <style scoped>
 
+.filter-item {
+  margin: 10px;
+  width: 150px
+}
 </style>
