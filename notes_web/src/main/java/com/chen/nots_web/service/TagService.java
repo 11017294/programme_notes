@@ -19,7 +19,7 @@ public interface TagService extends SuperService<Tag> {
 
     List<Tag> getAll();
 
-    List<String> getTagContentList(String[] tagUids);
+    List<Tag> getTagContentList(String[] tagUids);
 
 
     IPage<Tag> getTagList(TagVO tagVO);

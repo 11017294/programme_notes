@@ -35,7 +35,7 @@ public class TagServiceImpl extends SuperServiceImpl<TagMapper, Tag> implements 
     }
 
     @Override
-    public List<String> getTagContentList(String[] tagUids) {
+    public List<Tag> getTagContentList(String[] tagUids) {
         if(tagUids.length < 1){
             return null;
         }

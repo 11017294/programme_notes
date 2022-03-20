@@ -17,5 +17,5 @@ public interface TagMapper extends SuperMapper<Tag> {
 
     List<Tag> getAll();
 
-    List<String> getTagContentList(String[] tagUids);
+    List<Tag> getTagContentList(String[] tagUids);
 }

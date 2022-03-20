@@ -109,7 +109,7 @@
         </template>
       </el-table-column>
 
-<!--      <el-table-column label="标签" width="200" align="center" >
+      <el-table-column label="标签" width="200" align="center" >
         <template slot-scope="scope">
           <template>
             <el-tag
@@ -121,7 +121,7 @@
             >{{item.content}}</el-tag>
           </template>
         </template>
-      </el-table-column>-->
+      </el-table-column>
 
       <el-table-column label="点击数" width="100" align="center" prop="clickCount" sortable="custom" :sort-by="['clickCount']">
         <template slot-scope="scope">

@@ -8,7 +8,7 @@
         class="filter-item"
         style="width: 200px;"
         v-model="keyword"
-        placeholder="请输入分类名"
+        placeholder="请输入标签名"
       ></el-input>
       <el-button
         class="filter-item"

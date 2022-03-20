@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * 笔记表(TNote)表实体类
  *
@@ -90,6 +92,11 @@ public class Note extends SuperEntity<Note> {
 
 
     // 以下字段不存入数据库，封装为了方便使用
+    /**
+     * 标签,一篇博客对应多个标签
+     */
+    @TableField(exist = false)
+    private List<Tag> tagList;
 
     /**
      * 标签

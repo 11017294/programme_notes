@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chen.nots_web.entity.Collect;
 import com.chen.nots_web.entity.Note;
 import com.chen.nots_web.entity.NoteSort;
+import com.chen.nots_web.entity.Tag;
 import com.chen.nots_web.global.RedisConf;
 import com.chen.nots_web.global.SQLConf;
 import com.chen.nots_web.global.SysConf;
@@ -151,8 +152,8 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
     public Note setTagByNote(Note note) {
         if(StrUtil.isNotBlank(note.getTagUid())){
             String[] tagUids = note.getTagUid().split(",");
-            String tagContents = String.join(",", tagService.getTagContentList(tagUids));
-            note.setTagsName(tagContents);
+            List<Tag> tagList = tagService.getTagContentList(tagUids);
+            note.setTagList(tagList);
         }
         return note;
     }

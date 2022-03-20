@@ -94,14 +94,7 @@ export const constantRoutes = [
         meta: { title: '标签管理', icon: 'el-icon-collection-tag' }
       }
     ]
-  }
-]
-
-/**
- * asyncRoutes
- * the routes that need to be dynamically loaded based on user roles
- */
-export const asyncRoutes = [
+  },
   {
     path: '/operateLog',
     component: Layout,
@@ -115,7 +108,18 @@ export const asyncRoutes = [
       }
     ]
   },
-
+/*  {
+    path: '/operateLog',
+    component: Layout,
+    children: [
+      {
+        path: 'operateLog',
+        name: 'OperateLog',
+        component: () => import('@/views/operateLog/index'),
+        meta: { title: '反馈管理', icon: 'link' }
+      }
+    ]
+  },*/
   {
     path: 'external-link',
     component: Layout,
@@ -126,6 +130,14 @@ export const asyncRoutes = [
       }
     ]
   },
+]
+
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+export const asyncRoutes = [
+
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

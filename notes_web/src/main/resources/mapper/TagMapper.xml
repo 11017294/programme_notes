@@ -7,8 +7,8 @@
     </select>
 
 
-    <select id="getTagContentList" resultType="java.lang.String">
-        select content from t_tag where is_delete = 0 and uid in
+    <select id="getTagContentList" resultType="com.chen.nots_web.entity.Tag">
+        select * from t_tag where is_delete = 0 and uid in
         <foreach collection="array" item="id" index="index" open="(" close=")" separator=",">
             #{id}
         </foreach>
