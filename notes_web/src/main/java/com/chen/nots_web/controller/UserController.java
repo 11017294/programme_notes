@@ -4,6 +4,7 @@ package com.chen.nots_web.controller;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.chen.nots_web.entity.User;
 import com.chen.nots_web.global.RedisConf;
 import com.chen.nots_web.global.SysConf;
@@ -14,6 +15,7 @@ import com.chen.nots_web.vo.ResultBase;
 import com.chen.nots_web.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -73,9 +75,16 @@ public class UserController {
 
     @ApiOperation(value = "删除用户", notes = "删除用户")
     @PostMapping("/delete")
-    public ResultBase delete(@RequestBody UserVO userVO) {
-        log.info("删除用户: {}", userVO);
-        return ResultBase.ok().data("id", userService.removeById(userVO.getUid()));
+    public ResultBase delete(@ApiParam(name = "uid", value = "笔记UID") String uid) {
+        log.info("删除用户: {}", uid);
+        if(StringUtils.isBlank(uid)){
+            return ResultBase.error("修改失败，没有传入uid");
+        }
+        boolean user = userService.removeById(uid);
+        if(user){
+            return ResultBase.ok().data("id",uid);
+        }
+        return ResultBase.error("修改失败，没有ID:" + uid + "的用户");
     }
 
     @ApiOperation(value = "重置用户密码", notes = "重置用户密码")

@@ -67,6 +67,20 @@ export function getTag(params) {
 }
 
 /**
+ * 删除用户
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function deleteUser(params) {
+  return request({
+    url: '/user/delete',
+    method: 'post',
+    params: params,
+    handler: {ContentType: 'application/json'}
+  })
+}
+
+/**
  * 删除笔记
  * @param params
  * @returns {AxiosPromise}

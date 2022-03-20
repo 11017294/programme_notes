@@ -1,5 +1,35 @@
 <template>
   <div class="app-container">
+    <!-- 查询和其他操作 -->
+    <div class="filter-container" style="margin: 10px 0 10px 0;">
+      <el-input
+        class="filter-item"
+        @keyup.enter.native="handleFind"
+        clearable
+        placeholder="请输入用户名"
+        style="width: 200px;"
+        v-model="keyword"
+      ></el-input>
+
+      <el-button
+        class="filter-item"
+        @click="handleFind"
+        icon="el-icon-search"
+        type="primary">查找</el-button>
+
+      <el-button
+        class="filter-item"
+        type="info"
+        @click="resetForm">重置</el-button>
+
+      <el-button
+        class="filter-item"
+        @click="handleAdd"
+        type="primary"
+        icon="el-icon-edit">添加用户</el-button>
+
+    </div>
+
     <el-table
       v-loading="listLoading"
       :data="userData"
@@ -99,14 +129,9 @@
           <el-button
             size="mini"
             type="danger"
-            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
-      <!--      <el-table-column class-name="status-col" label="Status" width="110" align="center">
-              <template slot-scope="scope">
-                <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
-              </template>
-            </el-table-column>-->
     </el-table>
     <!--分页-->
     <div class="block">
@@ -122,7 +147,7 @@
 </template>
 
 <script>
-import { getUserList } from '@/api/table'
+import {deleteNote, deleteUser, getUserList} from '@/api/table'
 
 export default {
   name: 'UserManagement',
@@ -143,7 +168,7 @@ export default {
       keyword: "",
       currentPage: 1,
       totalPages: 0,
-      pageSize: 18,
+      pageSize: 10,
       total: 0, //总数量
       listLoading: true
     }
@@ -152,7 +177,15 @@ export default {
     this.fetchData()
   },
   methods: {
-    fetchData() {
+    handleFind() {    // 按钮查询
+      this.currentPage = 1
+      this.fetchData();
+    },
+    resetForm() {       // 重置
+      this.keyword = ''
+      this.fetchData()
+    },
+    fetchData() {   // 查询用户列表
       let that = this
       this.listLoading = true
       let params = new URLSearchParams()
@@ -167,7 +200,33 @@ export default {
         this.total = data.total
         this.listLoading = false
       })
-    }
+    },
+    handleDelete(row) {
+      var that = this;
+      this.$confirm("此操作将把用户删除, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          var params = {};
+          params.uid = row.uid;
+          deleteUser(params).then(response => {
+            that.$message.success("删除成功")
+            that.fetchData();
+          });
+        })
+        .catch(() => {
+          that.$message.info("已取消删除")
+        });
+    },
   }
 }
 </script>
+
+<style scoped>
+.filter-item {
+  margin: 10px;
+  width: 150px
+}
+</style>
