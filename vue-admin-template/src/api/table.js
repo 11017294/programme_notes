@@ -40,3 +40,28 @@ export function getTagList(params) {
   })
 }
 
+/**
+ * 获取分类
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function getNoteSort(params) {
+  return request({
+    url: '/noteSort/getList',
+    method: 'get',
+    params: params
+  })
+}
+
+/**
+ * 获取标签
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function getTag(params) {
+  return request({
+    url: '/tag/getList',
+    method: 'get',
+    params: params
+  })
+}

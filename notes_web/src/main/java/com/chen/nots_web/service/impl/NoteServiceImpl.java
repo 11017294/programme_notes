@@ -58,9 +58,20 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
                     .or().like(SQLConf.CONTENT, keyword)
                     .or().like(SQLConf.TAG_UID, keyword)
                     .or().like(SQLConf.AUTHOR, keyword);
-        } else{
-            wrapper.select(Note.class, i -> !i.getProperty().equals(SQLConf.CONTENT));
         }
+        if(StrUtil.isNotBlank(noteVO.getNoteSortUid())){
+            wrapper.eq(SQLConf.NOTE_SORT_UID, noteVO.getNoteSortUid());
+        }
+        if(StrUtil.isNotBlank(noteVO.getTagUid())){
+            wrapper.like(SQLConf.TAG_UID, noteVO.getTagUid());
+        }
+        if(StrUtil.isNotBlank(noteVO.getIsPublish())){
+            wrapper.eq(SQLConf.IS_PUBLISH, noteVO.getIsPublish());
+        }
+        if(StrUtil.isNotBlank(noteVO.getIsOriginal())){
+            wrapper.eq(SQLConf.IS_ORIGINAL, noteVO.getIsOriginal());
+        }
+        wrapper.select(Note.class, i -> !i.getProperty().equals(SQLConf.CONTENT));
         Page page = new Page(noteVO.getCurrentPage(), noteVO.getPageSize());
         IPage<Note> noteList = noteMapper.selectPage(page, wrapper);
         for (Note note : noteList.getRecords()) {

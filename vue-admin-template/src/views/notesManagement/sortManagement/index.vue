@@ -45,8 +45,8 @@
 
     <el-table-column label="操作" fixed="right" min-width="220">
       <template slot-scope="scope" >
-        <el-button type="primary" size="small" v-permission="'/resourceSort/edit'">编辑</el-button>
-        <el-button type="danger" size="small" v-permission="'/resourceSort/delete'">删除</el-button>
+        <el-button type="primary" size="small">编辑</el-button>
+        <el-button type="danger" size="small">删除</el-button>
       </template>
     </el-table-column>
   </el-table>

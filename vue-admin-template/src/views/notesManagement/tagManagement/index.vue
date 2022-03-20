@@ -53,8 +53,8 @@
 
     <el-table-column label="操作" fixed="right" min-width="230">
       <template slot-scope="scope">
-        <el-button @click="handleEdit(scope.row)" type="primary" size="small" v-permission="'/tag/edit'">编辑</el-button>
-        <el-button @click="handleDelete(scope.row)" type="danger" size="small" v-permission="'/tag/delete'">删除</el-button>
+        <el-button @click="handleEdit(scope.row)" type="primary" size="small">编辑</el-button>
+        <el-button @click="handleDelete(scope.row)" type="danger" size="small">删除</el-button>
       </template>
     </el-table-column>
   </el-table>

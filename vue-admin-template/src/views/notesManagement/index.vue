@@ -1,5 +1,78 @@
 <template>
   <div class="app-container">
+    <!-- 查询和其他操作 -->
+    <div class="filter-container" style="margin: 10px 0 10px 0;">
+
+      <el-form :inline="true" label-width="68px" style="margin-bottom: 8px;">
+        <el-input
+          clearable
+          class="filter-item"
+          v-model="queryParams.keyword"
+          placeholder="请输入关键字"
+          @keyup.enter.native="handleFind"
+        ></el-input>
+
+        <el-select
+          class="filter-item"
+          v-model="queryParams.sortKeyword"
+          @keyup.enter.native="handleFind"
+          clearable
+          placeholder="请选择分类">
+          <el-option
+            v-for="item in noteSortData"
+            :key="item.uid"
+            :label="item.sortName"
+            :value="item.uid"
+          ></el-option>
+        </el-select>
+
+        <el-select
+          class="filter-item"
+          v-model="queryParams.tagKeyword"
+          filterable
+          clearable
+          @change="$forceUpdate()"
+          placeholder="请选择标签">
+          <el-option
+            v-for="item in tagData"
+            :key="item.uid"
+            :label="item.content"
+            :value="item.uid"
+          ></el-option>
+        </el-select>
+
+        <el-select
+          class="filter-item"
+          v-model="queryParams.publishKeyword"
+          clearable
+          placeholder="是否发布">
+          <el-option value="1" label="是"></el-option>
+          <el-option value="0" label="否"></el-option>
+        </el-select>
+
+        <el-select
+          class="filter-item"
+          v-model="queryParams.originalKeyword"
+          clearable
+          placeholder="是否原创">
+          <el-option value="1" label="原创"></el-option>
+          <el-option value="0" label="转载"></el-option>
+        </el-select>
+
+        <el-button
+          class="filter-item"
+          type="primary"
+          icon="el-icon-search"
+          @click="handleFind">查找</el-button>
+
+        <el-button
+          class="filter-item"
+          type="info"
+          @click="resetForm">重置</el-button>
+
+      </el-form>
+    </div>
+
     <el-table
       v-loading="listLoading"
       :data="noteData"
@@ -88,8 +161,8 @@
 
       <el-table-column label="操作" min-width="150" fixed="right">
         <template slot-scope="scope">
-          <el-button @click="handleEdit(scope.row)" type="primary" size="small" v-permission="'/blog/edit'">编辑</el-button>
-          <el-button @click="handleDelete(scope.row)" type="danger" size="small" v-permission="'/blog/delete'">删除</el-button>
+          <el-button @click="handleEdit(scope.row)" type="primary" size="small">编辑</el-button>
+          <el-button @click="handleDelete(scope.row)" type="danger" size="small">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -107,7 +180,7 @@
 </template>
 
 <script>
-import { getNoteList } from '@/api/table'
+import { getNoteList, getNoteSort, getTag } from '@/api/table'
 
 export default {
   name: 'ArticleManagement',
@@ -124,16 +197,26 @@ export default {
   data() {
     return {
       noteData: [],
-      keyword: "",
       currentPage: 1,
       totalPages: 0,
-      pageSize: 15,
+      pageSize: 10,
       total: 0, //总数量
-      listLoading: true
+      listLoading: true,
+      queryParams:{
+        keyword: "",
+        tagKeyword: "", //标签搜索
+        sortKeyword: "", //分类搜索
+        publishKeyword: "", // 发布 搜索
+        originalKeyword: "", // 原创 搜索
+      }, // 搜索条件
+      noteSortData: [],
+      tagData: [],
     }
   },
   created() {
     this.fetchData()
+    this.getTag()
+    this.getNoteSort()
   },
   methods: {
     fetchData() {
@@ -142,18 +225,60 @@ export default {
       let params = new URLSearchParams()
       params.append("pageSize", that.pageSize)
       params.append("currentPage", that.currentPage)
-      if(that.keyword){
-        params.append("keyword", that.keyword)
+      if(this.queryParams.keyword){
+        params.append("keyword", this.queryParams.keyword)
+      }
+      if(this.queryParams.sortKeyword){
+        params.append("noteSortUid", this.queryParams.sortKeyword)
+      }
+      if(this.queryParams.tagKeyword){
+        params.append("tagUid", this.queryParams.tagKeyword)
+      }
+      if(this.queryParams.publishKeyword){
+        params.append("isPublish", this.queryParams.publishKeyword)
+      }
+      if(this.queryParams.originalKeyword){
+        params.append("isOriginal", this.queryParams.originalKeyword)
       }
       getNoteList(params).then(response => {
+        console.log(response.data.list)
         let data = response.data.list
         this.noteData = data.records
         this.total = data.total
-        this.pageSize = data.pageSize
-        this.currentPage = data.currentPage
+        this.pageSize = data.size
+        this.currentPage = data.current
         this.listLoading = false
       })
-    }
+    },
+    handleFind: function() {
+      this.currentPage = 1
+      this.fetchData();
+    },
+    getNoteSort() {     // 获取分类
+      getNoteSort().then(res => {
+        this.noteSortData = res.data.list;
+      }).catch(err => {
+        this.$message.error(err)
+      })
+    },
+    getTag() {      // 获取标签
+      getTag().then(res => {
+        this.tagData = res.data.list;
+      }).catch(err => {
+        this.$message.error(err)
+      })
+    },
+    resetForm() {       // 重置
+      this.queryParams = {}
+      this.fetchData()
+    },
   }
 }
 </script>
+
+<style scoped>
+.filter-item {
+  margin: 10px;
+  width: 150px
+}
+</style>
