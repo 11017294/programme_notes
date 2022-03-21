@@ -68,14 +68,7 @@ public class UserController {
 
     @ApiOperation(value = "编辑用户", notes = "编辑用户")
     @PostMapping("/edit")
-    public ResultBase edit(@RequestBody UserVO userVO) {
-        log.info("编辑用户: {}", userVO);
-        return ResultBase.ok().data("id", userService.editUser(userVO));
-    }
-
-    @ApiOperation(value = "编辑用户", notes = "编辑用户")
-    @PostMapping("/update")
-    public ResultBase update(UserVO userVO) {
+    public ResultBase edit(UserVO userVO) {
         log.info("编辑用户: {}", userVO);
         return ResultBase.ok().data("id", userService.editUser(userVO));
     }

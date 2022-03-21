@@ -132,7 +132,14 @@ export default {
         },
         saveUser() {
             let userInfo = this.userInfo;
-            editUser(JSON.stringify(userInfo)).then(res => {
+            let params = new URLSearchParams();
+            params.append("uid", userInfo.uid)
+            params.append("sex", userInfo.sex)
+            params.append("email", userInfo.email)
+            params.append("birthday", userInfo.birthday)
+            params.append("summary", userInfo.summary)
+            params.append("nickName", userInfo.nickName)
+            editUser(params).then(res => {
                 localStorage.setItem('userInfo', JSON.stringify(userInfo));
                 this.disabled = true;
                 this.$message.success("修改成功");

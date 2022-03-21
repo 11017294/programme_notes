@@ -3,8 +3,7 @@ package com.chen.nots_web.vo;
 import com.chen.nots_web.global.vo.BaseVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * @author：MaybeBin
@@ -29,7 +28,7 @@ public class UserVO extends BaseVO<UserVO> {
     private String email;
 
     @ApiModelProperty("出生年月日")
-    private LocalDate birthday;
+    private Date birthday;
 
     @ApiModelProperty("手机")
     private String mobile;

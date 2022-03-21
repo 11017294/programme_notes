@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class User extends SuperEntity<User> {
 
     @ApiModelProperty("出生年月日")
     @TableField("birthday")
-    private LocalDate birthday;
+    private Date birthday;
 
     @ApiModelProperty("手机")
     @TableField("mobile")

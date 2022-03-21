@@ -197,10 +197,7 @@ export function editUser(params) {
     return request({
         url: 'test/user/edit',
         method: 'post',
-        data: params,
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        data: params
     })
 }
 
