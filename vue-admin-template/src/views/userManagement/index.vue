@@ -22,11 +22,11 @@
         type="info"
         @click="resetForm">重置</el-button>
 
-<!--      <el-button
+      <el-button
         class="filter-item"
         @click="handleAdd"
         type="primary"
-        icon="el-icon-edit">添加用户</el-button>-->
+        icon="el-icon-edit">添加用户</el-button>
 
     </div>
 
@@ -46,6 +46,14 @@
         prop="userName"
         label="用户名"
         width="150">
+      </el-table-column>
+      <el-table-column align="center" label="头像" width="120">
+        <template slot-scope="scope">
+          <img
+            :src=" 'http://r8icnk0yx.hn-bkt.clouddn.com/' +  scope.row.avatar"
+            style="width: 100px;height: 100px;"
+          >
+        </template>
       </el-table-column>
       <el-table-column
         align="center"
@@ -178,7 +186,7 @@
         <el-row :gutter="24">
           <el-col :span="9">
             <el-form-item :label-width="formLabelWidth" label="用户名">
-              <el-input v-model="form.userName" disabled></el-input>
+              <el-input v-model="form.userName" :disabled="disabled"></el-input>
             </el-form-item>
           </el-col>
 
@@ -208,7 +216,11 @@
           <el-col :span="10">
             <el-form-item label="生日" :label-width="formLabelWidth" prop="birthday">
               <el-col :span="9">
-                <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday"></el-date-picker>
+                <el-date-picker
+                  value-format=" yyyy-MM-dd HH:mm:SS"
+                  type="date"
+                  placeholder="选择日期"
+                  v-model="form.birthday"></el-date-picker>
               </el-col>
             </el-form-item>
           </el-col>
@@ -252,7 +264,8 @@ export default {
     return {
       list: null,
       userData: [],
-      keyword: "",
+      keyword: '',
+      disabled: true,
       currentPage: 1,
       totalPages: 0,
       pageSize: 10,
@@ -378,29 +391,24 @@ export default {
     },
     handleAdd() {
       this.dialogFormVisible = true;
-      //this.form = this.getFormObject();
+      this.form = {};
       this.isEditForm = false;
+      this.disabled = false;
     },
     handleEdit(row) {
       this.title = "编辑用户";
       this.dialogFormVisible = true;
       this.isEditForm = true;
       this.form = row;
+      this.disabled = true;
     },
     submitForm() {
       this.$refs.form.validate((valid) => {
         if (!valid) {
           console.log("校验出错")
         } else {
-          let params = new URLSearchParams();
-          params.append("uid", this.form.uid)
-          params.append("sex", this.form.sex)
-          params.append("email", this.form.email)
-          params.append("birthday", this.form.birthday)
-          params.append("summary", this.form.summary)
-          params.append("nickName", this.form.nickName)
           if(this.isEditForm) {
-            editUser(params)
+            editUser(this.form)
               .then(res => {
                 this.$message.success('修改成功')
                 this.dialogFormVisible = false
@@ -409,7 +417,7 @@ export default {
                 this.$message.error(err)
             })
           } else {
-            addUser(params)
+            addUser(this.form)
               .then(res => {
                 this.$message.success('添加成功')
                 this.dialogFormVisible = false

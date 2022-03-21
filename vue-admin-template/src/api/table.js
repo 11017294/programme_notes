@@ -185,10 +185,7 @@ export function addUser(params) {
   return request({
     url: '/user/add',
     method: 'post',
-    data: params,
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    data: params
   })
 }
 
@@ -199,7 +196,7 @@ export function addUser(params) {
  */
 export function editUser(params) {
   return request({
-    url: '/user/update',
+    url: '/user/edit',
     method: 'post',
     data: params
   })
