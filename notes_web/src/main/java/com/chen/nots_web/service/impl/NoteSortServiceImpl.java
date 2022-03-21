@@ -13,6 +13,7 @@ import com.chen.nots_web.vo.NoteSortVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,5 +45,26 @@ public class NoteSortServiceImpl extends SuperServiceImpl<NoteSortMapper, NoteSo
         page.setSize(noteSortVO.getPageSize());
         page.setCurrent(noteSortVO.getCurrentPage());
         return noteSortMapper.selectPage(page, wrapper);
+    }
+
+    @Override
+    public String addNoteSort(NoteSortVO noteSortVO) {
+        NoteSort noteSort = new NoteSort();
+        noteSort.setContent(noteSortVO.getContent());
+        noteSort.setSortName(noteSortVO.getSortName());
+        noteSort.setSort(noteSortVO.getSort());
+        noteSort.insert();
+        return noteSort.getUid();
+    }
+
+    @Override
+    public String editNoteSort(NoteSortVO noteSortVO) {
+        NoteSort noteSort = this.getById(noteSortVO.getUid());
+        noteSort.setContent(noteSortVO.getContent());
+        noteSort.setSortName(noteSortVO.getSortName());
+        noteSort.setSort(noteSortVO.getSort());
+        noteSort.setUpdateTime(new Date());
+        noteSort.updateById();
+        return noteSort.getUid();
     }
 }

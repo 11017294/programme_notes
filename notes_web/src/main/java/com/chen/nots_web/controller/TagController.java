@@ -14,7 +14,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -61,26 +60,26 @@ public class TagController {
 
     @ApiOperation(value = "增加标签", notes = "增加标签", response = String.class)
     @PostMapping("/add")
-    public ResultBase add(@RequestBody TagVO tagVO) {
+    public ResultBase add(TagVO tagVO) {
         log.info("增加标签");
         QueryWrapper<Tag> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(SQLConf.CONTENT, tagVO.getContent());
         Tag tempTag = tagService.getOne(queryWrapper);
         if(ObjectUtil.isNotEmpty(tempTag)){
-            return ResultBase.error("已存在" + tagVO.getContent() + "标签");
+            return ResultBase.error("已存在《" + tagVO.getContent() + "》标签");
         }
         return ResultBase.ok().data("id", tagService.addTag(tagVO));
     }
 
     @ApiOperation(value = "编辑标签", notes = "编辑标签", response = String.class)
     @PostMapping("/edit")
-    public ResultBase edit(@RequestBody TagVO tagVO) {
+    public ResultBase edit(TagVO tagVO) {
         log.info("编辑标签");
         QueryWrapper<Tag> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(SQLConf.CONTENT, tagVO.getContent());
-        Tag tempTag = tagService.getOne(queryWrapper);
-        if(ObjectUtil.isNotEmpty(tempTag)){
-            return ResultBase.error("已存在" + tagVO.getContent() + "标签");
+        Tag tag = tagService.getOne(queryWrapper);
+        if(ObjectUtil.isNotEmpty(tag) && !tag.getUid().equals(tagVO.getUid())){
+            return ResultBase.error("已存在《" + tagVO.getContent() + "》标签");
         }
         return ResultBase.ok().data("id", tagService.editTag(tagVO));
     }

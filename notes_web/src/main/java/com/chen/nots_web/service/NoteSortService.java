@@ -20,4 +20,8 @@ public interface NoteSortService extends SuperService<NoteSort> {
     List<NoteSort> getAllSort(NoteSortVO noteSortVO);
 
     IPage<NoteSort> getPageList(NoteSortVO noteSortVO);
+
+    String addNoteSort(NoteSortVO noteSortVO);
+
+    String editNoteSort(NoteSortVO noteSortVO);
 }

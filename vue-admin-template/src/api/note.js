@@ -9,7 +9,7 @@ export function addNoteSort(params) {
   return request({
     url: '/noteSort/add',
     method: 'post',
-    data: params
+    params: params
   })
 }
 
@@ -22,7 +22,7 @@ export function editNoteSort(params) {
   return request({
     url: '/noteSort/edit',
     method: 'post',
-    data: params
+    params: params
   })
 }
 
@@ -35,7 +35,7 @@ export function addTag(params) {
   return request({
     url: '/tag/add',
     method: 'post',
-    data: params
+    params: params
   })
 }
 
@@ -48,6 +48,6 @@ export function editTag(params) {
   return request({
     url: '/tag/edit',
     method: 'post',
-    data: params
+    params: params
   })
 }

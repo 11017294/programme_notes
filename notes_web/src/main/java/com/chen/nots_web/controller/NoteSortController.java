@@ -1,7 +1,11 @@
 package com.chen.nots_web.controller;
 
 
+import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.chen.nots_web.entity.NoteSort;
+import com.chen.nots_web.global.SQLConf;
 import com.chen.nots_web.service.NoteSortService;
 import com.chen.nots_web.vo.NoteSortVO;
 import com.chen.nots_web.vo.ResultBase;
@@ -10,7 +14,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -52,5 +59,32 @@ public class NoteSortController {
             return ResultBase.ok().data("id",uid);
         }
         return ResultBase.error("删除失败，没有ID:" + uid + "的分类");
+    }
+
+
+    @ApiOperation(value = "增加笔记分类", notes = "增加笔记分类", response = String.class)
+    @PostMapping("/add")
+    public ResultBase add(NoteSortVO noteSortVO) {
+        log.info("增加笔记分类");
+        QueryWrapper<NoteSort> wrapper = new QueryWrapper<>();
+        wrapper.eq(SQLConf.SORT_NAME, noteSortVO.getSortName());
+        NoteSort noteSort = noteSortService.getOne(wrapper);
+        if(ObjectUtil.isNotEmpty(noteSort)){
+            return ResultBase.error("已存在《" + noteSortVO.getSortName() + "》分类");
+        }
+        return ResultBase.ok().data("id", noteSortService.addNoteSort(noteSortVO));
+    }
+
+    @ApiOperation(value = "编辑笔记分类", notes = "编辑笔记分类", response = String.class)
+    @PostMapping("/edit")
+    public ResultBase edit(NoteSortVO noteSortVO) {
+        log.info("编辑笔记分类");
+        QueryWrapper<NoteSort> wrapper = new QueryWrapper<>();
+        wrapper.eq(SQLConf.SORT_NAME, noteSortVO.getSortName());
+        NoteSort noteSort = noteSortService.getOne(wrapper);
+        if(ObjectUtil.isNotEmpty(noteSort) && !noteSort.getUid().equals(noteSortVO.getUid())){
+            return ResultBase.error("已存在《" + noteSortVO.getSortName() + "》分类");
+        }
+        return ResultBase.ok().data("id", noteSortService.editNoteSort(noteSortVO));
     }
 }

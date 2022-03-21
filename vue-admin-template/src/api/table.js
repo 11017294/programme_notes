@@ -196,9 +196,9 @@ export function addUser(params) {
  */
 export function editUser(params) {
   return request({
-    url: '/user/edit',
+    url: '/user/update',
     method: 'post',
-    data: params
+    params: params,
   })
 }
 
