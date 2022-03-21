@@ -8,6 +8,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.chen.nots_web.entity.Note;
 import com.chen.nots_web.entity.OnlineUser;
 import com.chen.nots_web.entity.User;
 import com.chen.nots_web.global.RedisConf;
@@ -103,8 +104,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         } else {
             wrapper.orderByDesc(SQLConf.CREATE_TIME);
         }
-
-        wrapper.select(User.class, i -> !i.getProperty().equals(SQLConf.PASS_WORD));
+        wrapper.select(User.class, i -> !i.getColumn().equals(SQLConf.PASS_WORD));
         Page<User> page = new Page<>();
         page.setCurrent(userVO.getCurrentPage());
         page.setSize(userVO.getPageSize());

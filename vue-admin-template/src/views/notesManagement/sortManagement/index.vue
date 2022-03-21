@@ -18,6 +18,12 @@
 
       <el-button
         class="filter-item"
+        type="primary"
+        @click="handleAdd"
+        icon="el-icon-edit">添加分类</el-button>
+
+      <el-button
+        class="filter-item"
         type="info"
         @click="resetForm">重置</el-button>
     </div>
@@ -68,7 +74,7 @@
 
       <el-table-column label="操作" fixed="right" min-width="220">
         <template slot-scope="scope" >
-          <el-button type="primary" size="small">编辑</el-button>
+          <el-button @click="handleEdit(scope.row)" type="primary" size="small">编辑</el-button>
           <el-button @click="handleDelete(scope.row)" type="danger" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -84,6 +90,28 @@
         :total="total"
       ></el-pagination>
     </div>
+
+    <!-- 添加或修改对话框 -->
+    <el-dialog :title="title" :visible.sync="dialogFormVisible">
+      <el-form :model="form" :rules="rules" ref="form">
+        <el-form-item label="分类名" :label-width="formLabelWidth" prop="sortName">
+          <el-input v-model="form.sortName" auto-complete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="分类介绍" :label-width="formLabelWidth" prop="content">
+          <el-input v-model="form.content" auto-complete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="排序" :label-width="formLabelWidth" prop="sort">
+          <el-input v-model="form.sort" auto-complete="off"></el-input>
+        </el-form-item>
+
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submitForm">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -100,6 +128,24 @@ export default {
       totalPages: 0,
       pageSize: 10,
       total: 0,
+      dialogFormVisible: false, //控制弹出框
+      formLabelWidth: "120px",
+      isEditForm: false,
+      form: {
+        uid: null,
+        content: "",
+        sortName: ""
+      },
+      rules: {
+        sortName: [
+          {required: true, message: '分类名称不能为空', trigger: 'blur'},
+          {min: 1, max: 10, message: '长度在1到10个字符'},
+        ],
+        sort: [
+          {required: true, message: '排序字段不能为空', trigger: 'blur'},
+          {pattern: /^[0-9]\d*$/, message: '排序字段只能为自然数'},
+        ]
+      }
     }
   },
   created() {
@@ -108,7 +154,19 @@ export default {
   methods: {
     handleFind: function() {
       this.currentPage = 1
-      this.getSortList();
+      this.getSortList()
+    },
+    handleEdit: function(row) {
+      this.title = "编辑分类"
+      this.dialogFormVisible = true
+      this.isEditForm = true
+      this.form = row
+    },
+    handleAdd: function() {
+      this.title = "增加分类"
+      this.dialogFormVisible = true
+      this.form = {}
+      this.isEditForm = false
     },
     getSortList() {
       let that = this
@@ -144,12 +202,38 @@ export default {
           params.uid = row.uid
           deleteSort(params).then(response => {
             that.$message.success("删除成功")
-            that.getSortList();
+            that.getSortList()
           });
         })
         .catch(() => {
           that.$message.info("已取消删除")
         });
+    },
+    submitForm() {
+      this.$refs.form.validate((valid) => {
+        if(!valid) {
+          console.log('校验失败')
+          return;
+        } else {
+          if (this.isEditForm) {
+            /* editBlogSort(this.form).then(response => {
+               this.$message.success("修改分类成功")
+               this.dialogFormVisible = false
+               this.getSortList()
+             }).catch(err => {
+               this.$message.error(err)
+             })*/
+          } else {
+            /*addBlogSort(this.form).then(response => {
+              this.$message.success("添加分类成功")
+              this.dialogFormVisible = false
+              this.getSortList()
+            }).catch(err => {
+              this.$message.error(err)
+            })*/
+          }
+        }
+      })
     },
   }
 }
