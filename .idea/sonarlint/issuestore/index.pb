@@ -13,8 +13,6 @@ Z
 *vue_notes_web/src/views/PersonalCenter.vue,8\4\849d10c9e8f7fa78dcba5cd9ab513275c10475d3
 l
 <notes_web/src/main/java/com/chen/nots_web/vo/NoteSortVO.java,f\a\fa99186197bb875120a3562a26f21017fd0f9e84
-q
-Anotes_web/src/main/java/com/chen/nots_web/service/TagService.java,b\e\bea312465c11611b621ce67d9d0a78775550bfad
 e
 5vue_notes_web/src/components/layout/layout-footer.vue,3\5\3527b8ae6f3d40cf819834ec5427626910ed4f4e
 `
@@ -23,8 +21,6 @@ b
 2vue_notes_web/src/components/Pigeonhole/custom.vue,5\1\511421404cd9395d9957e389b72aef53ab11192c
 i
 9notes_web/src/main/java/com/chen/nots_web/entity/Tag.java,b\6\b6b61e63df5bc0f725ad019beca812c651e22c28
-w
-Gnotes_web/src/main/java/com/chen/nots_web/controller/TagController.java,b\2\b2afcc76757ed428018e366053f5ed4aa222b273
 K
 vue_notes_web/.editorconfig,f\2\f25bdf97235394b461acef8059fe49932338c79d
 M
@@ -56,8 +52,6 @@ T
 $vue_notes_web/src/views/Articles.vue,8\6\86b91a0276167868abe3284c2cfdf9ae23e14740
 r
 Bnotes_web/src/main/java/com/chen/nots_web/service/NoteService.java,a\8\a8f6c95e17af08f5657c0ff7f20cedb8e64c854d
-|
-Lnotes_web/src/main/java/com/chen/nots_web/controller/NoteSortController.java,a\2\a29b4ec03d7728ca2d350bfb617e91197e642aeb
 I
 vue_notes_web/src/App.vue,f\b\fb126b4787f8d10045409f2bc76007c78fe20c42
 @

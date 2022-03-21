@@ -122,6 +122,7 @@
 
 <script>
 import {deleteTag, getTagList} from '@/api/table'
+import {editTag, addTag} from '@/api/note'
 
 export default {
   name: 'TagManagement',
@@ -221,21 +222,21 @@ export default {
           return;
         } else {
           if (this.isEditForm) {
-            /*editTag(this.form).then(response => {
+            editTag(this.form).then(response => {
               this.$message.success("修改标签成功")
               this.dialogFormVisible = false
               this.getTagList()
             }).catch(err => {
               this.$message.error(err)
-            })*/
+            })
           } else {
-           /* addTag(this.form).then(response => {
+            addTag(this.form).then(response => {
               this.$message.success("添加标签成功")
               this.dialogFormVisible = false
               this.getTagList()
             }).catch(err => {
               this.$message.error(err)
-            })*/
+            })
           }
         }
       })

@@ -13,6 +13,7 @@ import com.chen.nots_web.vo.TagVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,5 +53,25 @@ public class TagServiceImpl extends SuperServiceImpl<TagMapper, Tag> implements 
         page.setSize(tagVO.getPageSize());
         page.setCurrent(tagVO.getCurrentPage());
         return tagMapper.selectPage(page, wrapper);
+    }
+
+    @Override
+    public String addTag(TagVO tagVO) {
+        Tag tag = new Tag();
+        tag.setContent(tagVO.getContent());
+        tag.setClickCount(0);
+        tag.setSort(tagVO.getSort());
+        tag.insert();
+        return tag.getUid();
+    }
+
+    @Override
+    public String editTag(TagVO tagVO) {
+        Tag tag = this.getById(tagVO.getUid());
+        tag.setContent(tagVO.getContent());
+        tag.setSort(tagVO.getSort());
+        tag.setUpdateTime(new Date());
+        tag.updateById();
+        return tag.getUid();
     }
 }

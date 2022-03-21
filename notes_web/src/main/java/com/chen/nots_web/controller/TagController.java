@@ -1,18 +1,21 @@
 package com.chen.nots_web.controller;
 
 
+import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.chen.nots_web.entity.Tag;
+import com.chen.nots_web.global.SQLConf;
 import com.chen.nots_web.service.TagService;
 import com.chen.nots_web.vo.ResultBase;
 import com.chen.nots_web.vo.TagVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -25,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "标签相关接口", tags = {"标签相关接口"})
 @RestController
 @RequestMapping("/tag")
+@Slf4j
 public class TagController {
 
     @Autowired
@@ -53,5 +57,31 @@ public class TagController {
             return ResultBase.ok().data("id",uid);
         }
         return ResultBase.error("删除失败，没有ID:" + uid + "的标签");
+    }
+
+    @ApiOperation(value = "增加标签", notes = "增加标签", response = String.class)
+    @PostMapping("/add")
+    public ResultBase add(@RequestBody TagVO tagVO) {
+        log.info("增加标签");
+        QueryWrapper<Tag> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(SQLConf.CONTENT, tagVO.getContent());
+        Tag tempTag = tagService.getOne(queryWrapper);
+        if(ObjectUtil.isNotEmpty(tempTag)){
+            return ResultBase.error("已存在" + tagVO.getContent() + "标签");
+        }
+        return ResultBase.ok().data("id", tagService.addTag(tagVO));
+    }
+
+    @ApiOperation(value = "编辑标签", notes = "编辑标签", response = String.class)
+    @PostMapping("/edit")
+    public ResultBase edit(@RequestBody TagVO tagVO) {
+        log.info("编辑标签");
+        QueryWrapper<Tag> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(SQLConf.CONTENT, tagVO.getContent());
+        Tag tempTag = tagService.getOne(queryWrapper);
+        if(ObjectUtil.isNotEmpty(tempTag)){
+            return ResultBase.error("已存在" + tagVO.getContent() + "标签");
+        }
+        return ResultBase.ok().data("id", tagService.editTag(tagVO));
     }
 }

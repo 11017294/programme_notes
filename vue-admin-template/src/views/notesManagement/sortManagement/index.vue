@@ -117,6 +117,7 @@
 
 <script>
 import {deleteSort, getSortList} from '@/api/table'
+import {addNoteSort, editNoteSort} from "@/api/note";
 
 export default {
   name: 'SortManagement',
@@ -216,21 +217,21 @@ export default {
           return;
         } else {
           if (this.isEditForm) {
-            /* editBlogSort(this.form).then(response => {
+            editNoteSort(this.form).then(response => {
                this.$message.success("修改分类成功")
                this.dialogFormVisible = false
                this.getSortList()
              }).catch(err => {
                this.$message.error(err)
-             })*/
+             })
           } else {
-            /*addBlogSort(this.form).then(response => {
+            addNoteSort(this.form).then(response => {
               this.$message.success("添加分类成功")
               this.dialogFormVisible = false
               this.getSortList()
             }).catch(err => {
               this.$message.error(err)
-            })*/
+            })
           }
         }
       })
