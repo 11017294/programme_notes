@@ -149,3 +149,60 @@ export function deleteBlacklist(params) {
     handler: {ContentType: 'application/json'}
   })
 }
+
+/**
+ * 添加笔记
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function addNote(params) {
+  return request({
+    url: '/note/add',
+    method: 'post',
+    data: params
+  })
+}
+
+/**
+ * 修改笔记
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function updateNote(params) {
+  return request({
+    url: '/note/update',
+    method: 'post',
+    data: params
+  })
+}
+
+/**
+ * 添加用户
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function addUser(params) {
+  return request({
+    url: '/user/add',
+    method: 'post',
+    data: params,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+}
+
+/**
+ * 通过id修改用户信息
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function editUser(params) {
+  return request({
+    url: '/user/update',
+    method: 'post',
+    data: params
+  })
+}
+
+

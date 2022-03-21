@@ -73,6 +73,13 @@ public class UserController {
         return ResultBase.ok().data("id", userService.editUser(userVO));
     }
 
+    @ApiOperation(value = "编辑用户", notes = "编辑用户")
+    @PostMapping("/update")
+    public ResultBase update(UserVO userVO) {
+        log.info("编辑用户: {}", userVO);
+        return ResultBase.ok().data("id", userService.editUser(userVO));
+    }
+
     @ApiOperation(value = "删除用户", notes = "删除用户")
     @PostMapping("/delete")
     public ResultBase delete(@ApiParam(name = "uid", value = "用户UID") String uid) {

@@ -128,7 +128,7 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            @click="handleEdit(scope.row)">编辑</el-button>
 
           <el-button
             size="mini"
@@ -160,11 +160,81 @@
         :total="total"
       ></el-pagination>
     </div>
+
+    <!-- 添加或修改对话框 -->
+    <el-dialog :title="title" :visible.sync="dialogFormVisible">
+      <el-form :model="form" :rules="rules" ref="form">
+<!--        <el-form-item :label-width="formLabelWidth" label="用户头像">
+          <div class="imgBody" v-if="form.photoUrl">
+            <i @click="deletePhoto()" @mouseover="icon = true" class="el-icon-error inputClass" v-show="icon"></i>
+            <img @mouseout="icon = false" @mouseover="icon = true" v-bind:src="form.photoUrl"/>
+          </div>
+
+          <div @click="checkPhoto" class="uploadImgBody" v-else>
+            <i class="el-icon-plus avatar-uploader-icon"></i>
+          </div>
+        </el-form-item>-->
+
+        <el-row :gutter="24">
+          <el-col :span="9">
+            <el-form-item :label-width="formLabelWidth" label="用户名">
+              <el-input v-model="form.userName" disabled></el-input>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="9">
+            <el-form-item :label-width="formLabelWidth" label="昵称" prop="nickName">
+              <el-input v-model="form.nickName"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="24">
+          <el-col :span="9">
+            <el-form-item :label-width="formLabelWidth" label="邮箱" prop="email">
+              <el-input auto-complete="off" v-model="form.email"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="9">
+            <el-form-item :label-width="formLabelWidth" label="性别" prop="sex">
+              <el-select v-model="form.sex">
+                <el-option label="男" :value=1></el-option>
+                <el-option label="女" :value=0></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="24">
+          <el-col :span="10">
+            <el-form-item label="生日" :label-width="formLabelWidth" prop="birthday">
+              <el-col :span="9">
+                <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday"></el-date-picker>
+              </el-col>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-form-item :label-width="formLabelWidth" label="简介">
+          <el-input
+            :autosize="{ minRows: 3, maxRows: 10}"
+            placeholder="请输入内容"
+            style="width: 70%"
+            type="textarea"
+            v-model="form.summary">
+          </el-input>
+        </el-form-item>
+
+      </el-form>
+      <div class="dialog-footer" slot="footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button @click="submitForm" type="primary">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import {addBlacklist, deleteUser, getUserList, deleteBlacklist} from '@/api/table'
+import {addBlacklist, deleteUser, getUserList, deleteBlacklist, editUser, addUser} from '@/api/table'
 
 export default {
   name: 'UserManagement',
@@ -187,7 +257,34 @@ export default {
       totalPages: 0,
       pageSize: 10,
       total: 0, //总数量
-      listLoading: true
+      listLoading: true,
+      formLabelWidth: "120px",
+      dialogFormVisible: false, //控制弹出框
+      form: {
+        uid: '',
+        userName: '',
+        sex: 0,
+        email: '',
+        birthday: '',
+        mobile: '',
+        summary: '',
+        nickName: '',
+      },
+      rules: {
+        nickName: [
+          {required: true, message: '昵称不能为空', trigger: 'blur'},
+          {min: 1, max: 30, message: '长度在1到30个字符'},
+        ],
+        sex: [
+          {required: true, message: '性别不能为空', trigger: 'blur'},
+        ],
+        email: [
+          {pattern: /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/, message: '请输入正确的邮箱'},
+        ],
+        birthday: [
+          {required: true, message: '生日不能为空', trigger: 'blur'}
+        ]
+      }
     }
   },
   created() {
@@ -218,7 +315,7 @@ export default {
         this.listLoading = false
       })
     },
-    handleDelete(row) {
+    handleDelete(row) {   // 删除用户
       var that = this;
       this.$confirm("此操作将把用户删除, 是否继续?", "提示", {
         confirmButtonText: "确定",
@@ -237,7 +334,7 @@ export default {
           that.$message.info("已取消删除")
         });
     },
-    addBlacklist(row) {
+    addBlacklist(row) {   // 添加黑名单
       var that = this;
       if(row.status == 2) {
         that.$message.warning("已经是黑名单用户")
@@ -260,7 +357,7 @@ export default {
           that.$message.info("已取消添加黑名单")
         });
     },
-    deleteBlacklist(row) {
+    deleteBlacklist(row) {   // 移除黑名单
       var that = this;
       this.$confirm("此操作将用户移出黑名单, 是否继续?", "提示", {
         confirmButtonText: "确定",
@@ -270,7 +367,6 @@ export default {
         .then(() => {
           var params = {};
           params.uid = row.uid;
-
           deleteBlacklist(params).then(response => {
             that.$message.success("移除黑名单成功")
             that.fetchData();
@@ -279,6 +375,51 @@ export default {
         .catch(() => {
           that.$message.info("已取消移除黑名单")
         });
+    },
+    handleAdd() {
+      this.dialogFormVisible = true;
+      //this.form = this.getFormObject();
+      this.isEditForm = false;
+    },
+    handleEdit(row) {
+      this.title = "编辑用户";
+      this.dialogFormVisible = true;
+      this.isEditForm = true;
+      this.form = row;
+    },
+    submitForm() {
+      this.$refs.form.validate((valid) => {
+        if (!valid) {
+          console.log("校验出错")
+        } else {
+          let params = new URLSearchParams();
+          params.append("uid", this.form.uid)
+          params.append("sex", this.form.sex)
+          params.append("email", this.form.email)
+          params.append("birthday", this.form.birthday)
+          params.append("summary", this.form.summary)
+          params.append("nickName", this.form.nickName)
+          if(this.isEditForm) {
+            editUser(params)
+              .then(res => {
+                this.$message.success('修改成功')
+                this.dialogFormVisible = false
+                this.fetchData()
+              }).catch(err => {
+                this.$message.error(err)
+            })
+          } else {
+            addUser(params)
+              .then(res => {
+                this.$message.success('添加成功')
+                this.dialogFormVisible = false
+                this.fetchData()
+              }).catch(err => {
+                this.$message.error(err)
+            })
+          }
+        }
+      })
     }
   }
 }
