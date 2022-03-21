@@ -75,7 +75,7 @@
 
 <script>
 
-import {addNote, fetchContent, getNoteSort, getTag, getUserCollectNote, updateNote} from "@/api";
+import {addNote, fetchContent, getNoteSort, getTag, updateNote} from "@/api";
 
 export default {
 
@@ -249,14 +249,6 @@ export default {
                         that.noteForm.isOriginal = res.data.note.isOriginal;
                         that.noteForm.content = res.data.note.content;
                         that.noteForm.tagValue = res.data.note.tagUid.split(",")
-                        getUserCollectNote({"noteUid": uid})
-                            .then(res => {
-                                if(res.data.collect){
-                                    that.isCollect = true;
-                                } else {
-                                    that.isCollect = false;
-                                }
-                            })
                     })
             }
         }

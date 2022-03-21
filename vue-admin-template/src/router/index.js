@@ -92,6 +92,12 @@ export const constantRoutes = [
         component: () => import('@/views/notesManagement/tagManagement'),
         name: 'TagManagement',
         meta: { title: '标签管理', icon: 'el-icon-collection-tag' }
+      },
+      {
+        path: 'takeNotes',
+        component: () => import('@/views/TakeNotes/index'),
+        name: 'TakeNotes',
+        meta: { title: '记笔记', icon: 'link'}
       }
     ]
   },

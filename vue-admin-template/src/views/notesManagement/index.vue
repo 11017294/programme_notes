@@ -69,6 +69,11 @@
           type="info"
           @click="resetForm">重置</el-button>
 
+        <el-button
+          class="filter-item"
+          type="success"
+          @click="handleAdd">添加笔记</el-button>
+
       </el-form>
     </div>
 
@@ -160,7 +165,7 @@
 
       <el-table-column label="操作" min-width="150" fixed="right">
         <template slot-scope="scope">
-          <el-button @click="handleEdit(scope.row)" type="primary" size="small">编辑</el-button>
+          <el-button @click="handleEdit(scope.row)" type="warning" size="small">编辑</el-button>
           <el-button @click="handleDelete(scope.row)" type="danger" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -288,6 +293,15 @@ export default {
         .catch(() => {
           that.$message.info("已取消删除")
         });
+    },
+    handleEdit(row) {
+      this.$router.push({
+        path: '/notesManagement/takeNotes',         // 待跳转的页面URL
+        query: {row: row},              // 跳转时传入的参数
+      });
+    },
+    handleAdd() {
+      this.$router.push({ path: '/notesManagement/takeNotes' });
     },
   }
 }
