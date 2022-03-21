@@ -3,6 +3,8 @@ package com.chen.nots_web.vo;
 import com.chen.nots_web.global.vo.BaseVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -27,6 +29,7 @@ public class UserVO extends BaseVO<UserVO> {
     @ApiModelProperty("邮箱")
     private String email;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty("出生年月日")
     private Date birthday;
 

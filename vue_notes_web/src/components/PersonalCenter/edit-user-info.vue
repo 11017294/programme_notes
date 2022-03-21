@@ -39,7 +39,13 @@
                 <el-col :span="10">
                 <el-form-item label="生日:">
                         <el-col :span="11">
-                            <el-date-picker type="date" placeholder="选择日期" v-model="userInfo.birthday" style="width: 100%;" :disabled="disabled"></el-date-picker>
+                            <el-date-picker
+                                type="date"
+                                value-format=" yyyy-MM-dd HH:mm:SS"
+                                placeholder="选择日期"
+                                v-model="userInfo.birthday"
+                                style="width: 100%;"
+                                :disabled="disabled"></el-date-picker>
                         </el-col>
                     </el-form-item>
                 </el-col>
@@ -132,14 +138,7 @@ export default {
         },
         saveUser() {
             let userInfo = this.userInfo;
-            let params = new URLSearchParams();
-            params.append("uid", userInfo.uid)
-            params.append("sex", userInfo.sex)
-            params.append("email", userInfo.email)
-            params.append("birthday", userInfo.birthday)
-            params.append("summary", userInfo.summary)
-            params.append("nickName", userInfo.nickName)
-            editUser(params).then(res => {
+            editUser(userInfo).then(res => {
                 localStorage.setItem('userInfo', JSON.stringify(userInfo));
                 this.disabled = true;
                 this.$message.success("修改成功");

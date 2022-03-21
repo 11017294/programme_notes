@@ -35,8 +35,6 @@ E
 vue_notes_web/license,5\6\56a3f76f24e70ac2824d89073d89eb8aa53ecc4f
 J
 vue_notes_web/package.json,f\a\fa2ed79627cda155bae8225d9a7e5266db0081e5
-O
-vue_notes_web/package-lock.json,d\6\d6deaeb40544b1d494c7d9bb55987560291f9b93
 V
 &vue_notes_web/src/views/Pigeonhole.vue,b\3\b3962778f05dc8f0aeedc24aac5f96ba459979c1
 A
@@ -47,28 +45,6 @@ K
 0vue_notes_web/src/components/Pigeonhole/sort.vue,b\f\bf44f1bd68df7b68fcff6e2ae73b4fcaface05df
 _
 /vue_notes_web/src/components/Pigeonhole/tag.vue,1\c\1c7b1a8746192377230c4309d050d7c47af0f469
-[
-+vue_notes_admin/src/views/logs/adminLog.vue,b\7\b732db41c82ba9c1d0529b76929ba8250904dbfe
-X
-(vue_notes_admin/src/views/system/api.vue,a\2\a273e5d596fbefe2e272ae9618d6c48ace3305b0
-Y
-)vue_notes_admin/src/views/system/user.vue,9\6\96a823ac1f46a02326dc771b31ace3bea161672b
-T
-$vue_notes_admin/src/layout/index.vue,9\6\969eabd981fdaf8247269fe58011b85ac215956e
-K
-vue_notes_admin/src/main.js,c\5\c5341eb1b99bd6ca5f9ac4634f787f8100153b07
-O
-vue_notes_admin/src/api/home.js,1\a\1ad776a15bfde4df3a9ae113854a5937c77d959c
-`
-0vue_notes_admin/src/layout/components/Navbar.vue,7\3\7301d9b9e527dc0bf19f4aa25ed79b59802198d4
-K
-vue_notes_admin/src/App.vue,b\5\b515921ce64d20b8a13aff5bd7ce714996d1aac0
-c
-3vue_notes_admin/src/views/dashboard/admin/index.vue,a\5\a54c4f28579e0d9becb303f486fa05956d38f87f
-]
--vue_notes_admin/src/views/dashboard/index.vue,0\0\005d513618df002d2afca9faf8207a9a07672700
-S
-#vue_notes_admin/src/router/index.js,6\b\6b16cb59652d418e0775f22cfffea106e97e123e
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
