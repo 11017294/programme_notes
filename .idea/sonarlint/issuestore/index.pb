@@ -96,7 +96,5 @@ o
 ?vue_notes_web/src/components/PersonalCenter/note-management.vue,2\8\28e1408572d9a12c426cabf0058941746abd59f9
 x
 Hnotes_web/src/main/java/com/chen/nots_web/controller/FileController.java,5\1\51ce3f05b7f856ea07da9131a89b1dac30136241
-j
-:notes_web/src/main/java/com/chen/nots_web/entity/User.java,2\9\29b03d27a9b23d2d8f5dbc17e549b49c629cbccc
 y
 Inotes_web/src/main/java/com/chen/nots_web/controller/LoginController.java,c\c\cce3a9f9eaeb3747d2ed4cb950c2df5439194edc
