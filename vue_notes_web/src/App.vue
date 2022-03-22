@@ -36,6 +36,7 @@
                     let userUid = that.$store.state.userInfo.userUid;
                     getUserById(userUid).then(res => {  // 根据用户id获取用户个人信息
                         localStorage.setItem('userInfo', JSON.stringify(res.data.user));
+                        this.$store.commit("SET_AVATAR", res.data.user.avatar)
                     }).catch(err => {
                         that.$message.error(err);
                     })

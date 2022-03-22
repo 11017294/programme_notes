@@ -65,7 +65,6 @@ export default {
                 return this.$store.state.userInfo
             },
             avatar() {    // 用户头像
-               // return JSON.parse(localStorage.getItem('userInfo')).avatar
                 return this.$store.state.avatar
             }
         },
