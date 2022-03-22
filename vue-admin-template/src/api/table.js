@@ -231,3 +231,15 @@ export function deleteImage(params) {
   })
 }
 
+/**
+ * 上传头像
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function uploadAvatar(params) {
+  return request({
+    url: '/fileUpload/uploadAvatar',
+    method: 'post',
+    data: params
+  })
+}

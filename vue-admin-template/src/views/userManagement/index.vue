@@ -172,16 +172,24 @@
     <!-- 添加或修改对话框 -->
     <el-dialog :title="title" :visible.sync="dialogFormVisible">
       <el-form :model="form" :rules="rules" ref="form">
-<!--        <el-form-item :label-width="formLabelWidth" label="用户头像">
-          <div class="imgBody" v-if="form.photoUrl">
-            <i @click="deletePhoto()" @mouseover="icon = true" class="el-icon-error inputClass" v-show="icon"></i>
-            <img @mouseout="icon = false" @mouseover="icon = true" v-bind:src="form.photoUrl"/>
+        <el-form-item :label-width="formLabelWidth" label="用户头像">
+          <div class="block">
+            <el-tooltip class="item" effect="light" content="点击头像可更换" placement="right" >
+              <el-upload
+                class="avatar-uploader"
+                action="h"
+                :show-file-list="false"
+                :before-upload="beforeAvatarUpload">
+                <img v-if="form.avatar" :src="avatarPath + form.avatar" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+<!--            <el-image
+              style="width: 100px; height: 100px"
+              :src="avatarPath + form.avatar"
+              fit="cover"></el-image>-->
+            </el-tooltip>
           </div>
-
-          <div @click="checkPhoto" class="uploadImgBody" v-else>
-            <i class="el-icon-plus avatar-uploader-icon"></i>
-          </div>
-        </el-form-item>-->
+        </el-form-item>
 
         <el-row :gutter="24">
           <el-col :span="9">
@@ -247,6 +255,7 @@
 
 <script>
 import {addBlacklist, deleteUser, getUserList, deleteBlacklist, editUser, addUser} from '@/api/table'
+import {uploadAvatar} from "../../../../vue_notes_web/src/api";
 
 export default {
   name: 'UserManagement',
@@ -429,6 +438,30 @@ export default {
           }
         }
       })
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isPNG = file.type === 'image/png';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isJPG && !isPNG) {
+        this.$message.error('上传头像图片格式为 [JPG, PNG]');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      let param = new FormData();
+      param.append("file", file)
+      /*uploadAvatar(param)
+        .then(res => {
+          let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+          userInfo.avatar = res.data.fileUrl
+          localStorage.setItem('userInfo', JSON.stringify(userInfo));
+          this.$store.commit("SET_AVATAR", userInfo.avatar)
+          this.$message.success('更换成功');
+        }).catch(err => {
+        this.$message.error(err)
+      })*/
+      return isJPG && isLt2M;
     }
   }
 }
@@ -438,5 +471,19 @@ export default {
 .filter-item {
   margin: 10px;
   width: 150px
+}
+
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  display: block;
 }
 </style>

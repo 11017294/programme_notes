@@ -7,9 +7,7 @@ import com.chen.nots_web.entity.Picture;
 import com.chen.nots_web.global.service.serviceImpl.SuperServiceImpl;
 import com.chen.nots_web.mapper.PictureMapper;
 import com.chen.nots_web.service.PictureService;
-import com.chen.nots_web.utils.QiniuUtil;
 import com.chen.nots_web.vo.PictureVO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

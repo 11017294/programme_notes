@@ -90,17 +90,23 @@ export default {
         })
     },
     handleDelete(row) {
-      this.listLoading = true
-      let params = new URLSearchParams()
-      params.append("uid", row.uid)
-      params.append("picName", row.picName)
-      deleteImage(params).then(res => {
-        this.listLoading = false
-        this.$message.success("删除成功")
-        this.fetchData()
-      }).catch(err => {
-        this.$message.error(err)
-        this.listLoading = false
+      this.$confirm("此操作将把图片删除, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        this.listLoading = true
+        let params = new URLSearchParams()
+        params.append("uid", row.uid)
+        params.append("picName", row.picName)
+        deleteImage(params).then(res => {
+          this.listLoading = false
+          this.$message.success("删除成功")
+          this.fetchData()
+        }).catch(err => {
+          this.$message.error(err)
+          this.listLoading = false
+        })
       })
     }
 
