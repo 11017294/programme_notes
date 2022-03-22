@@ -251,6 +251,9 @@ export default {
         this.pageSize = data.size
         this.currentPage = data.current
         this.listLoading = false
+      }).catch(err => {
+        this.$message.error(err)
+        this.listLoading = false
       })
     },
     handleFind: function() {

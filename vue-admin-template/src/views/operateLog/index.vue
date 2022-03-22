@@ -149,7 +149,7 @@ export default {
     this.webVisitList();
   },
   methods: {
-    webVisitList: function() {
+    webVisitList() {
       var params = {};
       params.keyword = this.keyword;
       params.startTime = "";
@@ -167,11 +167,11 @@ export default {
         this.total = res.total;
       });
     },
-    handleFind: function() {
+    handleFind() {
       this.currentPage = 1
       this.webVisitList();
     },
-    handleCurrentChange: function(val) {
+    handleCurrentChange(val) {
       this.currentPage = val;
       this.webVisitList();
     }

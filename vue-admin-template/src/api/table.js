@@ -202,4 +202,16 @@ export function editUser(params) {
   })
 }
 
+/**
+ * 查询用户反馈信息列表
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function getMessageList(params) {
+  return request({
+    url: '/message/getMessageList',
+    method: 'get',
+    params: params,
+  })
+}
 

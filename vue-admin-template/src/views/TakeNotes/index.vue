@@ -66,7 +66,7 @@
           :toolbars="toolbars"
           :external-link="externalLink"
           :toolbarsBackground="'#f9f9f9'"
-          style="height: calc(100vh - 50px)"
+          style="height: calc(100vh - 300px)"
         />
       </el-form-item>
     </el-form>
@@ -160,7 +160,7 @@
     },
     methods: {
       $imgAdd (pos, $file) {
-        console.log(pos, $file);
+
       },
       $imgDel() {
 
@@ -238,20 +238,16 @@
       backfillData() {    //回填数据
         let row = this.$route.query.row;
         console.log(row)
-        /*if(uid != undefined) {
-          let that = this;
-          fetchContent({uid: uid})
-            .then(res => {
-              that.noteForm.uid = uid;
-              that.noteForm.title =  res.data.note.title;
-              that.noteForm.summary = res.data.note.summary;
-              that.noteForm.noteSortUid = res.data.note.noteSortUid;
-              that.noteForm.tagUid = res.data.note.tagUid;
-              that.noteForm.isOriginal = res.data.note.isOriginal;
-              that.noteForm.content = res.data.note.content;
-              that.noteForm.tagValue = res.data.note.tagUid.split(",")
-            })
-        }*/
+        if(row != undefined) {
+          this.noteForm.uid = row.uid;
+          this.noteForm.title =  row.title;
+          this.noteForm.summary = row.summary;
+          this.noteForm.noteSortUid = row.noteSortUid;
+          this.noteForm.tagUid = row.tagUid;
+          this.noteForm.isOriginal = row.isOriginal;
+          this.noteForm.content = row.content;
+          this.noteForm.tagValue = row.tagUid.split(",")
+        }
       }
     },
     mounted() {
@@ -265,8 +261,7 @@
 <style scoped>
 
   .notesInfo {
-    margin-top: 60px;
-    padding: 80px;
+    padding: 15px 80px;
   }
   .notesInfo .but {
     display: flex;

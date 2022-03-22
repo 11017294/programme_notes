@@ -97,7 +97,7 @@ export const constantRoutes = [
         path: 'takeNotes',
         component: () => import('@/views/TakeNotes/index'),
         name: 'TakeNotes',
-        meta: { title: '记笔记', icon: 'link'}
+        meta: { title: '记笔记', icon: 'el-icon-edit-outline'}
       }
     ]
   },
@@ -114,18 +114,18 @@ export const constantRoutes = [
       }
     ]
   },
-/*  {
-    path: '/operateLog',
+  {
+    path: '/feedback',
     component: Layout,
     children: [
       {
-        path: 'operateLog',
-        name: 'OperateLog',
-        component: () => import('@/views/operateLog/index'),
-        meta: { title: '反馈管理', icon: 'link' }
+        path: 'feedback',
+        name: 'Feedback',
+        component: () => import('@/views/feedback/index'),
+        meta: { title: '反馈管理', icon: 'el-icon-message' }
       }
     ]
-  },*/
+  },
   {
     path: 'external-link',
     component: Layout,
