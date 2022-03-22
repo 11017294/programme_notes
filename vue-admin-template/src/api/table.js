@@ -223,3 +223,11 @@ export function getPictureList(params) {
   })
 }
 
+export function deleteImage(params) {
+  return request({
+    url: '/picture/deleteImage',
+    method: 'post',
+    params: params,
+  })
+}
+

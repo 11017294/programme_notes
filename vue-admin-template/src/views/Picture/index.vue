@@ -29,6 +29,12 @@
           >
         </template>
       </el-table-column>
+
+      <el-table-column label="操作" fixed="right" min-width="230">
+        <template slot-scope="scope">
+          <el-button @click="handleDelete(scope.row)" type="danger" size="small">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
 
     <!--分页-->
@@ -45,7 +51,7 @@
 </template>
 
 <script>
-import {getPictureList} from "@/api/table";
+import {deleteImage, getPictureList} from "@/api/table";
 
 export default {
   name: "Picture",
@@ -82,6 +88,20 @@ export default {
           this.$message.error(err)
           this.listLoading = false
         })
+    },
+    handleDelete(row) {
+      this.listLoading = true
+      let params = new URLSearchParams()
+      params.append("uid", row.uid)
+      params.append("picName", row.picName)
+      deleteImage(params).then(res => {
+        this.listLoading = false
+        this.$message.success("删除成功")
+        this.fetchData()
+      }).catch(err => {
+        this.$message.error(err)
+        this.listLoading = false
+      })
     }
 
   }

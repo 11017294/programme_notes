@@ -16,4 +16,6 @@ import com.chen.nots_web.vo.PictureVO;
 public interface PictureService extends SuperService<Picture> {
 
     IPage getPictureList(PictureVO pictureVO);
+
+    String deleteImage(PictureVO pictureVO);
 }
