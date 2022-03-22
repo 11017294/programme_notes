@@ -215,3 +215,11 @@ export function getMessageList(params) {
   })
 }
 
+export function getPictureList(params) {
+  return request({
+    url: '/picture/getPictureList',
+    method: 'get',
+    params: params,
+  })
+}
+

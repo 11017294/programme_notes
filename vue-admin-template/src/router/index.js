@@ -127,6 +127,18 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/picture',
+    component: Layout,
+    children: [
+      {
+        path: 'picture',
+        name: 'Picture',
+        component: () => import('@/views/Picture/index'),
+        meta: { title: '图片管理', icon: 'el-icon-picture' }
+      }
+    ]
+  },
+  {
     path: 'external-link',
     component: Layout,
     children: [

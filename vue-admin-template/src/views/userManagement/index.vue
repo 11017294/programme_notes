@@ -50,7 +50,7 @@
       <el-table-column align="center" label="头像" width="120">
         <template slot-scope="scope">
           <img
-            :src=" 'http://r8icnk0yx.hn-bkt.clouddn.com/' +  scope.row.avatar"
+            :src=" avatarPath + scope.row.avatar"
             style="width: 100px;height: 100px;"
           >
         </template>
@@ -262,6 +262,7 @@ export default {
   },
   data() {
     return {
+      avatarPath : this.global.file_path,
       list: null,
       userData: [],
       keyword: '',

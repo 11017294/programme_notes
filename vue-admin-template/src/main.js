@@ -11,6 +11,7 @@ import '@/styles/index.scss' // global css
 import App from './App'
 import store from './store'
 import router from './router'
+import Global from './Global'
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -34,8 +35,9 @@ Vue.use(ElementUI, { locale })
 // Vue.use(ElementUI)
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
-Vue.use(mavonEditor)
 
+Vue.use(mavonEditor)
+Vue.prototype.global = Global
 Vue.config.productionTip = false
 
 new Vue({
