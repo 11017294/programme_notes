@@ -31,7 +31,8 @@ export default {
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      date: [],
     }
   },
   mounted() {
@@ -67,15 +68,16 @@ export default {
     chartData: {
       deep: true,
       handler(val) {
+        this.date = val.date
         this.setOptions(val)
       }
     }
   },
   methods: {
-    setOptions({ date, expectedData, actualData } = {}) {
+    setOptions({ expectedData, actualData } = {}) {
       this.chart.setOption({
         xAxis: {
-          data: date,
+          data: this.date,
           boundaryGap: false,
           axisTick: {
             show: false
