@@ -3,7 +3,7 @@
     <el-row :gutter="40" class="panel-group">
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
         <div class="card-panel">
-          <div class="card-panel-icon-wrapper icon-people">
+          <div class="card-panel-icon-wrapper icon-people" @click="btnClick('1')">
             <i class="el-icon-user-solid" style="font-size:45px" />
           </div>
           <div class="card-panel-description">
@@ -15,7 +15,7 @@
       </el-col>
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
         <div class="card-panel">
-          <div class="card-panel-icon-wrapper icon-message">
+          <div class="card-panel-icon-wrapper icon-message" @click="btnClick('2')">
             <i class="el-icon-tickets" style="font-size:45px" />
           </div>
           <div class="card-panel-description">
@@ -27,7 +27,7 @@
       </el-col>
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
         <div class="card-panel">
-          <div class="card-panel-icon-wrapper icon-money">
+          <div class="card-panel-icon-wrapper icon-money" @click="btnClick('3')">
             <i class="el-icon-chat-line-square" style="font-size:45px" />
           </div>
           <div class="card-panel-description">
@@ -39,7 +39,7 @@
       </el-col>
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
         <div class="card-panel">
-          <div class="card-panel-icon-wrapper icon-shopping">
+          <div class="card-panel-icon-wrapper icon-shopping" @click="btnClick('4')">
             <i class="el-icon-view" style="font-size:45px" />
           </div>
           <div class="card-panel-description">
@@ -85,16 +85,14 @@ export default {
     LineChart
   },
   created() {
-    this.fetchData()
+    this.getUserCount()
+    this.getTagCount()
+    this.getNoteCount()
+    this.getIpCount()
+    this.getVisitByWeek()
   },
   methods: {
-    fetchData() {
-      this.getUserCount()
-      this.getTagCount()
-      this.getNoteCount()
-      this.getIpCount()
-      this.getVisitByWeek()
-    },
+    // 获取用户数
     getUserCount() {
       getUserCount().then(response => {
         this.userCount = response.data.count
@@ -102,6 +100,7 @@ export default {
         this.$message.error(err)
       })
     },
+    // 获取标签数
     getTagCount() {
       getNotesCount().then(response => {
         this.noteCount = response.data.count
@@ -109,6 +108,7 @@ export default {
         this.$message.error(err)
       })
     },
+    // 获取笔记数
     getNoteCount() {
       getTagCount().then(response => {
         this.tagCount = response.data.count
@@ -116,6 +116,7 @@ export default {
         this.$message.error(err)
       })
     },
+    // 获取ip数
     getIpCount() {
       getViewingCount().then(response => {
         this.ipCount = response.data.count
@@ -123,9 +124,11 @@ export default {
         this.$message.error(err)
       })
     },
+    // 折线图
     handleSetLineChartData(type) {
       this.$emit('handleSetLineChartData', type)
     },
+    // 一周内文章贡献统计图
     getVisitByWeek() {
       getVisitByWeek().then(response => {
         var visitByWeek = response.data.res
@@ -137,6 +140,31 @@ export default {
         this.lineChartData = lineChartData
         this.showLineChart = true
       })
+    },
+    // 点击跳转
+    btnClick(type) {
+      switch (type) {
+        case "1":
+        {
+          this.$router.push({ path: "/user/userManagement" });
+        }
+          break;
+        case "2":
+        {
+          this.$router.push({ path: "/notesManagement/articleManagement" });
+        }
+          break;
+        case "3":
+        {
+          this.$router.push({ path: "/notesManagement/tagManagement" });
+        }
+          break;
+        case "4":
+        {
+          this.$router.push({ path: "/operateLog/operateLog" });
+        }
+          break;
+      }
     }
   }
 }
