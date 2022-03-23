@@ -82,9 +82,11 @@
     <div class="block">
       <el-pagination
         @current-change="handleCurrentChange"
+        @size-change="handleSizeChange"
         :current-page.sync="currentPage"
+        :page-sizes="[10, 20, 50]"
         :page-size="pageSize"
-        layout="total, prev, pager, next, jumper"
+        layout="total, sizes, prev, pager, next, jumper"
         :total="total">
       </el-pagination>
     </div>
@@ -149,6 +151,10 @@ export default {
     this.webVisitList();
   },
   methods: {
+    handleSizeChange(val) {
+      this.pageSize = val
+      this.webVisitList()
+    },
     webVisitList() {
       var params = {};
       params.keyword = this.keyword;

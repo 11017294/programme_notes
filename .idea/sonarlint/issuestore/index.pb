@@ -28,8 +28,6 @@ _
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-P
- vue_notes_web/src/views/Home.vue,a\8\a8df25ce687973e5b773b75130bdffe3078c6a0f
 y
 Inotes_web/src/main/java/com/chen/nots_web/controller/LoginController.java,c\c\cce3a9f9eaeb3747d2ed4cb950c2df5439194edc
 m
@@ -78,8 +76,6 @@ m
 =notes_web/src/main/java/com/chen/nots_web/entity/Picture.java,b\a\ba80e02a07c1bd8ffdf543debb4a62c286e394ef
 l
 <notes_web/src/main/java/com/chen/nots_web/vo/NoteSortVO.java,f\a\fa99186197bb875120a3562a26f21017fd0f9e84
-_
-/vue-admin-template/src/views/feedback/index.vue,8\9\89a4764ff25cad717250d30d785f1ad9ec4056d3
 U
 %vue-admin-template/src/store/index.js,3\4\3486db9bbf4b7fb42afbdb545aa53df41d8949ff
 T
@@ -88,10 +84,6 @@ W
 'vue-admin-template/src/store/getters.js,d\7\d7aea76f412d4ca2027076d916b6047a0839ac47
 \
 ,vue-admin-template/src/store/modules/user.js,1\2\12021c2baf4a4eaa30dd6632842d20769038953f
-a
-1vue-admin-template/src/views/operateLog/index.vue,d\2\d2bc1077b21d4ded73de4963d15b56d2a9a46c89
-Q
-!vue_notes_web/src/views/Login.vue,b\1\b14a01533eed31873bdd2f40a94df31ed9d27e5a
 x
 Hnotes_web/src/main/java/com/chen/nots_web/service/FileUploadService.java,8\2\82cd8d78292405dc4bb56d178fd3c75ac3fc1d7b
 
@@ -102,8 +94,6 @@ n
 0vue-admin-template/src/views/TakeNotes/index.vue,4\c\4c06778eb403cc45ab18939015f6aa38f46cd5d8
 k
 ;notes_web/src/main/java/com/chen/nots_web/vo/PictureVO.java,b\e\bed321b76183e2456b4211e5b0422af3e05a62b4
-t
-Dvue-admin-template/src/views/notesManagement/tagManagement/index.vue,3\6\366e383bc34cd7f704f4c02965a08ee657a87836
 u
 Enotes_web/src/main/java/com/chen/nots_web/service/PictureService.java,e\2\e233829eb8ed48d03bc171ecbb16a81b4a819555
 W
@@ -156,8 +146,6 @@ P
  vue_notes_web/src/store/index.js,3\e\3ee471281e954c0f80876ca1c2d7fcc76fc69a1d
 N
 vue_notes_web/src/Mock/post.js,4\f\4f8e8f9f79e2269683349dc1b879edaf99d1a9ce
-e
-5vue_notes_web/src/components/layout/layout-header.vue,b\b\bb2f5eb2cdd1b6cc5b569bb18e129d14149eba57
 n
 >notes_web/src/main/java/com/chen/nots_web/utils/RedisUtil.java,a\5\a5731c0c43bc7efbd430e6efbf0d7c91df7231d0
 G
@@ -168,11 +156,7 @@ O
 vue_notes_web/public/index.html,9\8\98f805f514596b4e99349733827b32bf61ea7b9a
 I
 vue_notes_web/src/App.vue,f\b\fb126b4787f8d10045409f2bc76007c78fe20c42
-f
-6vue-admin-template/src/views/notesManagement/index.vue,3\7\3756a29bcde443fefc306c3fbcdf03173d3db4ab
 {
 Knotes_web/src/main/java/com/chen/nots_web/controller/PictureController.java,c\8\c83eb97802bbe5bc721e7ed15305b54943ad9f96
-^
-.vue-admin-template/src/views/Picture/index.vue,3\d\3d0603daa156162d08718b42a9b81aafbc263c69
 ~
 Nnotes_web/src/main/java/com/chen/nots_web/service/impl/PictureServiceImpl.java,6\9\69df022fe44de3067c67405e5a3edf44834c2824

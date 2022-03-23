@@ -162,9 +162,11 @@
     <div class="block">
       <el-pagination
         @current-change="fetchData"
+        @size-change="handleSizeChange"
         :current-page.sync="currentPage"
+        :page-sizes="[5, 10, 20, 50]"
         :page-size="pageSize"
-        layout="total, prev, pager, next, jumper"
+        layout="total, sizes, prev, pager, next, jumper"
         :total="total"
       ></el-pagination>
     </div>
@@ -273,7 +275,7 @@ export default {
       disabled: true,
       currentPage: 1,
       totalPages: 0,
-      pageSize: 10,
+      pageSize: 5,
       total: 0, //总数量
       listLoading: true,
       formLabelWidth: "120px",
@@ -318,6 +320,11 @@ export default {
     // 重置
     resetForm() {
       this.keyword = ''
+      this.fetchData()
+    },
+    // 每页显示个数
+    handleSizeChange(val) {
+      this.pageSize = val
       this.fetchData()
     },
     // 查询用户列表

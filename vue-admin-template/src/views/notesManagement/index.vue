@@ -115,15 +115,13 @@
 
       <el-table-column label="标签" width="200" align="center" >
         <template slot-scope="scope">
-          <template>
-            <el-tag
-              style="margin-left: 3px"
-              type="warning"
-              v-if="item"
-              :key="index"
-              v-for="(item, index) in scope.row.tagList"
-            >{{item.content}}</el-tag>
-          </template>
+          <el-tag
+            style="margin-left: 3px"
+            type="warning"
+            v-if="item"
+            :key="index"
+            v-for="(item, index) in scope.row.tagList"
+          >{{item.content}}</el-tag>
         </template>
       </el-table-column>
 
@@ -174,9 +172,11 @@
     <div class="block">
       <el-pagination
         @current-change="fetchData"
+        @size-change="handleSizeChange"
         :current-page.sync="currentPage"
+        :page-sizes="[10, 20, 50]"
         :page-size="pageSize"
-        layout="total, prev, pager, next, jumper"
+        layout="total, sizes, prev, pager, next, jumper"
         :total="total"
       ></el-pagination>
     </div>
@@ -223,6 +223,10 @@ export default {
     this.getNoteSort()
   },
   methods: {
+    handleSizeChange(val) {
+      this.pageSize = val
+      this.fetchData()
+    },
     fetchData() {
       let that = this
       this.listLoading = true

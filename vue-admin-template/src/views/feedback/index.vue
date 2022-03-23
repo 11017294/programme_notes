@@ -42,9 +42,11 @@
     <div class="block">
       <el-pagination
         @current-change="fetchData"
+        @size-change="handleSizeChange"
         :current-page.sync="currentPage"
+        :page-sizes="[10, 20, 50]"
         :page-size="pageSize"
-        layout="total, prev, pager, next, jumper"
+        layout="total, sizes, prev, pager, next, jumper"
         :total="total">
       </el-pagination>
     </div>
@@ -70,6 +72,10 @@ export default {
     this.fetchData()
   },
   methods: {
+    handleSizeChange(val) {
+      this.pageSize = val
+      this.fetchData()
+    },
     fetchData() {
       this.listLoading = true
       let params = new URLSearchParams()

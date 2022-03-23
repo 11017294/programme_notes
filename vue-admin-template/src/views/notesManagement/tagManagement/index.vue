@@ -92,9 +92,11 @@
     <div class="block">
       <el-pagination
         @current-change="getTagList"
+        @size-change="handleSizeChange"
         :current-page.sync="currentPage"
+        :page-sizes="[10, 20, 50]"
         :page-size="pageSize"
-        layout="total, prev, pager, next, jumper"
+        layout="total, sizes, prev, pager, next, jumper"
         :total="total"
       ></el-pagination>
     </div>
@@ -163,6 +165,10 @@ export default {
       this.dialogFormVisible = true
       this.form = {}
       this.isEditForm = false
+    },
+    handleSizeChange(val) {
+      this.pageSize = val
+      this.getTagList()
     },
     handleFind() {
       this.currentPage = 1

@@ -84,9 +84,11 @@
     <div class="block">
       <el-pagination
         @current-change="getSortList"
+        @size-change="handleSizeChange"
         :current-page.sync="currentPage"
+        :page-sizes="[10, 20, 50]"
         :page-size="pageSize"
-        layout="total, prev, pager, next, jumper"
+        layout="total, sizes, prev, pager, next, jumper"
         :total="total"
       ></el-pagination>
     </div>
@@ -153,6 +155,10 @@ export default {
     this.getSortList()
   },
   methods: {
+    handleSizeChange(val) {
+      this.pageSize = val
+      this.getSortList()
+    },
     handleFind: function() {
       this.currentPage = 1
       this.getSortList()
