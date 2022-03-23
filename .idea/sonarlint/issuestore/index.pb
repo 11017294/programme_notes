@@ -5,8 +5,6 @@ h
 8notes_web/src/main/java/com/chen/nots_web/vo/NoteVO.java,9\c\9c9aad4f82cccd0f3e9b092c53d7510ebfff475f
 R
 "vue_notes_web/src/views/Friend.vue,e\a\eaf37d00d5918017e212630a6daec290e0a6c65d
-Z
-*vue_notes_web/src/views/PersonalCenter.vue,8\4\849d10c9e8f7fa78dcba5cd9ab513275c10475d3
 e
 5vue_notes_web/src/components/layout/layout-footer.vue,3\5\3527b8ae6f3d40cf819834ec5427626910ed4f4e
 `
@@ -30,14 +28,8 @@ _
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-U
-%vue_notes_web/src/components/post.vue,3\0\303ef4b8af39d9a81f4696c8ab6613140f6b56d3
 P
  vue_notes_web/src/views/Home.vue,a\8\a8df25ce687973e5b773b75130bdffe3078c6a0f
-g
-7vue_notes_web/src/components/PersonalCenter/install.vue,2\a\2a4c6a187742dd6dabb44782cbc04119c060bab1
-o
-?vue_notes_web/src/components/PersonalCenter/note-management.vue,2\8\28e1408572d9a12c426cabf0058941746abd59f9
 y
 Inotes_web/src/main/java/com/chen/nots_web/controller/LoginController.java,c\c\cce3a9f9eaeb3747d2ed4cb950c2df5439194edc
 m
@@ -88,10 +80,6 @@ i
 9notes_web/src/main/java/com/chen/nots_web/entity/Tag.java,b\6\b6b61e63df5bc0f725ad019beca812c651e22c28
 m
 =notes_web/src/main/java/com/chen/nots_web/entity/Message.java,3\1\316aa5d4f6ac9fe570b8ff4636b5826fe2b2ea1e
-x
-Hnotes_web/src/main/java/com/chen/nots_web/global/entity/SuperEntity.java,4\f\4f9f97195628c7dc21f387283018df9adfc8c6b9
-N
-sql脚本/数据库脚本2.sql,a\f\af652e00c2eee4f230aed265705d3c8db0c185b3
 m
 =notes_web/src/main/java/com/chen/nots_web/entity/Picture.java,b\a\ba80e02a07c1bd8ffdf543debb4a62c286e394ef
 l
@@ -194,8 +182,6 @@ f
 Knotes_web/src/main/java/com/chen/nots_web/controller/PictureController.java,c\8\c83eb97802bbe5bc721e7ed15305b54943ad9f96
 x
 Hnotes_web/src/main/java/com/chen/nots_web/controller/NoteController.java,8\6\86ac03828e9c3875548a52245c8c8e23af2c7bac
-@
-sql脚本/待办,4\0\4079d350a555694bb3cfa4d7eb346e5ed5ee6dce
 ^
 .vue-admin-template/src/views/Picture/index.vue,3\d\3d0603daa156162d08718b42a9b81aafbc263c69
 ~

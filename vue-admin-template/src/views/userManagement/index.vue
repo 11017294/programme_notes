@@ -310,15 +310,18 @@ export default {
     this.fetchData()
   },
   methods: {
-    handleFind() {    // 按钮查询
+    // 按钮查询
+    handleFind() {
       this.currentPage = 1
       this.fetchData();
     },
-    resetForm() {       // 重置
+    // 重置
+    resetForm() {
       this.keyword = ''
       this.fetchData()
     },
-    fetchData() {   // 查询用户列表
+    // 查询用户列表
+    fetchData() {
       let that = this
       this.listLoading = true
       let params = new URLSearchParams()
@@ -334,7 +337,8 @@ export default {
         this.listLoading = false
       })
     },
-    handleDelete(row) {   // 删除用户
+    // 删除用户
+    handleDelete(row) {
       var that = this;
       this.$confirm("此操作将把用户删除, 是否继续?", "提示", {
         confirmButtonText: "确定",
@@ -353,7 +357,8 @@ export default {
           that.$message.info("已取消删除")
         });
     },
-    addBlacklist(row) {   // 添加黑名单
+    // 添加黑名单
+    addBlacklist(row) {
       var that = this;
       if(row.status == 2) {
         that.$message.warning("已经是黑名单用户")
@@ -376,7 +381,8 @@ export default {
           that.$message.info("已取消添加黑名单")
         });
     },
-    deleteBlacklist(row) {   // 移除黑名单
+    // 移除黑名单
+    deleteBlacklist(row) {
       var that = this;
       this.$confirm("此操作将用户移出黑名单, 是否继续?", "提示", {
         confirmButtonText: "确定",
@@ -395,12 +401,14 @@ export default {
           that.$message.info("已取消移除黑名单")
         });
     },
+    // 添加用户
     handleAdd() {
       this.dialogFormVisible = true;
       this.form = {};
       this.isEditForm = false;
       this.disabled = false;
     },
+    // 编辑用户
     handleEdit(row) {
       this.title = "编辑用户";
       this.dialogFormVisible = true;
@@ -408,7 +416,8 @@ export default {
       this.form = row;
       this.disabled = true;
     },
-    submitForm() {  // 条提交用户编辑表单
+    // 条提交用户编辑表单
+    submitForm() {
       this.$refs.form.validate((valid) => {
         if (!valid) {
           console.log("校验出错")
@@ -435,7 +444,8 @@ export default {
         }
       })
     },
-    beforeAvatarUpload(file, form) {  // 上传头像
+    // 上传头像
+    beforeAvatarUpload(file, form) {
       const isJPG = file.type === 'image/jpeg';
       const isPNG = file.type === 'image/png';
       const isLt2M = file.size / 1024 / 1024 < 2;
@@ -456,7 +466,8 @@ export default {
       })
       return isJPG && isLt2M;
     },
-    cancelForm(form){ // 取消用户编辑
+    // 取消用户编辑
+    cancelForm(form){
       this.dialogFormVisible = false
       form.avatar = this.tempAvatarUrl
       this.tempAvatarUrl = ''
