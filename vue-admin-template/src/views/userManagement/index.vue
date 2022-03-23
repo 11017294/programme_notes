@@ -179,14 +179,10 @@
                 class="avatar-uploader"
                 action="h"
                 :show-file-list="false"
-                :before-upload="beforeAvatarUpload">
+                :before-upload="(file) =>  { return beforeAvatarUpload(file, form) }">
                 <img v-if="form.avatar" :src="avatarPath + form.avatar" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
-<!--            <el-image
-              style="width: 100px; height: 100px"
-              :src="avatarPath + form.avatar"
-              fit="cover"></el-image>-->
             </el-tooltip>
           </div>
         </el-form-item>
@@ -246,7 +242,7 @@
 
       </el-form>
       <div class="dialog-footer" slot="footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button @click="cancelForm(form)">取 消</el-button>
         <el-button @click="submitForm" type="primary">确 定</el-button>
       </div>
     </el-dialog>
@@ -282,6 +278,7 @@ export default {
       listLoading: true,
       formLabelWidth: "120px",
       dialogFormVisible: false, //控制弹出框
+      tempAvatarUrl: '',    // 保存临时的头像路径
       form: {
         uid: '',
         userName: '',
@@ -411,7 +408,7 @@ export default {
       this.form = row;
       this.disabled = true;
     },
-    submitForm() {
+    submitForm() {  // 条提交用户编辑表单
       this.$refs.form.validate((valid) => {
         if (!valid) {
           console.log("校验出错")
@@ -438,7 +435,7 @@ export default {
         }
       })
     },
-    beforeAvatarUpload(file) {
+    beforeAvatarUpload(file, form) {  // 上传头像
       const isJPG = file.type === 'image/jpeg';
       const isPNG = file.type === 'image/png';
       const isLt2M = file.size / 1024 / 1024 < 2;
@@ -452,13 +449,17 @@ export default {
       param.append("file", file)
       uploadAvatar(param)
         .then(res => {
-          // res.data.fileUrl
-
-          this.$message.success('更换成功');
+          this.tempAvatarUrl = form.avatar
+          form.avatar = res.data.fileUrl
         }).catch(err => {
         this.$message.error(err)
       })
       return isJPG && isLt2M;
+    },
+    cancelForm(form){ // 取消用户编辑
+      this.dialogFormVisible = false
+      form.avatar = this.tempAvatarUrl
+      this.tempAvatarUrl = ''
     }
   }
 }

@@ -9,7 +9,7 @@
                         action="h"
                         :show-file-list="false"
                         :before-upload="beforeAvatarUpload">
-                        <img v-if="avatar" :src="this.global.file_path + avatar" class="avatar">
+                        <img v-if="userInfo.avatar" :src="this.global.file_path + userInfo.avatar" class="avatar">
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                     </el-tooltip>
@@ -80,7 +80,7 @@ export default {
                 uid: '',
                 userName: '',
                 sex: 0,
-                avatar: '',
+                avatar: this.$store.state.avatar,
                 email: '',
                 birthday: '',
                 mobile: '',
@@ -110,11 +110,7 @@ export default {
             param.append("file", file)
             uploadAvatar(param)
                 .then(res => {
-                    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
-                    userInfo.avatar = res.data.fileUrl
-                    localStorage.setItem('userInfo', JSON.stringify(userInfo));
-                    this.$store.commit("SET_AVATAR", userInfo.avatar)
-                    this.$message.success('更换成功');
+                    this.userInfo.avatar = res.data.fileUrl
                 }).catch(err => {
                     this.$message.error(err)
             })
@@ -140,6 +136,7 @@ export default {
             let userInfo = this.userInfo;
             editUser(userInfo).then(res => {
                 localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                this.$store.commit("SET_AVATAR", userInfo.avatar)
                 this.disabled = true;
                 this.$message.success("修改成功");
             }).catch(err => {

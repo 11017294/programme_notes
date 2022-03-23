@@ -40,16 +40,10 @@ o
 ?vue_notes_web/src/components/PersonalCenter/note-management.vue,2\8\28e1408572d9a12c426cabf0058941746abd59f9
 y
 Inotes_web/src/main/java/com/chen/nots_web/controller/LoginController.java,c\c\cce3a9f9eaeb3747d2ed4cb950c2df5439194edc
-r
-Bnotes_web/src/main/java/com/chen/nots_web/service/UserService.java,5\d\5df83cd2727e13a4450634cf83268bc3956a47c9
 m
 =notes_web/src/main/java/com/chen/nots_web/global/SQLConf.java,5\4\54816970badedf34c88e304096ef03a5253ca6db
-{
-Knotes_web/src/main/java/com/chen/nots_web/service/impl/UserServiceImpl.java,d\2\d26ad2e945b7c0050de33d3f62701f293202a79b
 V
 &vue-admin-template/src/api/notesSys.js,7\8\78ebc042321781f2c7450ee24c98b4f63fab87eb
-u
-Evue-admin-template/src/views/notesManagement/sortManagement/index.vue,4\3\43590711e8389b5d6778f65fbc7d59d6c6ba7251
 q
 Anotes_web/src/main/java/com/chen/nots_web/service/TagService.java,b\e\bea312465c11611b621ce67d9d0a78775550bfad
 z
@@ -64,8 +58,6 @@ Lnotes_web/src/main/java/com/chen/nots_web/controller/NotesSysController.java,2
 Rnotes_web/src/main/java/com/chen/nots_web/filter/JwtAuthenticationTokenFilter.java,0\2\02f6d26ca2d6a49329e2b4c11dcbc96240fbebcd
 
 Onotes_web/src/main/java/com/chen/nots_web/filter/AuthenticationTokenFilter.java,b\e\be10baf1732a36f7bd66644844f851ef1d4f5a30
-x
-Hnotes_web/src/main/java/com/chen/nots_web/controller/UserController.java,c\f\cfedfd1fe71453067e00cab2413c944f73406326
 r
 Bnotes_web/src/main/java/com/chen/nots_web/service/NoteService.java,a\8\a8f6c95e17af08f5657c0ff7f20cedb8e64c854d
 s

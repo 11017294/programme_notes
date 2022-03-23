@@ -32,8 +32,6 @@ public class FileController {
 
     @Autowired
     private FileUploadService fileUploadService;
-    @Autowired
-    private UserService userService;
 
     @ApiOperation(value = "上传头像", notes = "上传头像")
     @PostMapping("/uploadAvatar")
@@ -46,11 +44,6 @@ public class FileController {
         Picture picture = new Picture();
         picture.setPicName(fileUrl);
         picture.insert();
-        // 修改用户头像
-        String userUid = request.getAttribute(SysConf.USER_UID).toString();
-        User user = userService.getById(userUid);
-        user.setAvatar(fileUrl);
-        user.updateById();
         return ResultBase.ok().data("fileUrl", fileUrl);
     }
 
