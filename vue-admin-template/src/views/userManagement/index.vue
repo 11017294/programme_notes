@@ -254,8 +254,7 @@
 </template>
 
 <script>
-import {addBlacklist, deleteUser, getUserList, deleteBlacklist, editUser, addUser} from '@/api/table'
-import {uploadAvatar} from "../../../../vue_notes_web/src/api";
+import {addBlacklist, deleteUser, getUserList, deleteBlacklist, editUser, addUser, uploadAvatar} from '@/api/table'
 
 export default {
   name: 'UserManagement',
@@ -451,16 +450,14 @@ export default {
       }
       let param = new FormData();
       param.append("file", file)
-      /*uploadAvatar(param)
+      uploadAvatar(param)
         .then(res => {
-          let userInfo = JSON.parse(localStorage.getItem('userInfo'));
-          userInfo.avatar = res.data.fileUrl
-          localStorage.setItem('userInfo', JSON.stringify(userInfo));
-          this.$store.commit("SET_AVATAR", userInfo.avatar)
+          // res.data.fileUrl
+
           this.$message.success('更换成功');
         }).catch(err => {
         this.$message.error(err)
-      })*/
+      })
       return isJPG && isLt2M;
     }
   }

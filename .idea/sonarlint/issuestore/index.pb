@@ -200,9 +200,11 @@ f
 6vue-admin-template/src/views/notesManagement/index.vue,3\7\3756a29bcde443fefc306c3fbcdf03173d3db4ab
 {
 Knotes_web/src/main/java/com/chen/nots_web/controller/PictureController.java,c\8\c83eb97802bbe5bc721e7ed15305b54943ad9f96
-n
->vue_notes_web/src/components/PersonalCenter/edit-user-info.vue,e\5\e5c7f8e7e1c4465f131c03d1761e6b82e59784f4
-N
-vue_notes_web/src/api/index.js,0\6\06707de35011404b548f93c8c3a148a75fd64b6b
 x
 Hnotes_web/src/main/java/com/chen/nots_web/controller/NoteController.java,8\6\86ac03828e9c3875548a52245c8c8e23af2c7bac
+@
+sql脚本/待办,4\0\4079d350a555694bb3cfa4d7eb346e5ed5ee6dce
+^
+.vue-admin-template/src/views/Picture/index.vue,3\d\3d0603daa156162d08718b42a9b81aafbc263c69
+~
+Nnotes_web/src/main/java/com/chen/nots_web/service/impl/PictureServiceImpl.java,6\9\69df022fe44de3067c67405e5a3edf44834c2824
