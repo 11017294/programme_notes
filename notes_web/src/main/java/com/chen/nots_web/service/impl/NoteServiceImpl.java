@@ -182,7 +182,11 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
         Page page = new Page<>();
         page.setCurrent(collectVO.getCurrentPage());
         page.setSize(collectVO.getPageSize());
-        return noteMapper.selectPage(page, wrapper);
+        IPage<Note> noteList = noteMapper.selectPage(page, wrapper);
+        for (Note note : noteList.getRecords()) {
+            this.setSortAndTagByNote(note);
+        }
+        return noteList;
     }
 
     @Override

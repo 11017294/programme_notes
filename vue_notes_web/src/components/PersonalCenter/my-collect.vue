@@ -100,6 +100,7 @@ export default {
     },
     mounted() {
         this.fetchList();
+        console.log(this.noteData)
     }
 }
 </script>
