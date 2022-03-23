@@ -2,7 +2,7 @@
     <el-card>
         <el-row>
             <el-col :span="4">
-                <div @click="activateEdit">
+                <div @click="editUser">
                     <el-avatar
                         v-if="userInfo.avatar"
                         shape="square"
@@ -21,7 +21,7 @@
         <el-row>
             <el-descriptions title="个人信息" column="1" :colon="false" :labelStyle="{'width': '100px', 'height': '16px'}">
                 <template slot="extra">
-                    <el-button size="small" icon="el-icon-edit" type="primary" plain @click="activateEdit">编辑</el-button>
+                    <el-button size="small" icon="el-icon-edit" type="primary" plain @click="editUser">编辑</el-button>
                 </template>
                 <el-descriptions-item label="用户名" >{{ userInfo.userName }}</el-descriptions-item>
                 <el-descriptions-item/>
@@ -50,8 +50,8 @@
         </el-row>
 
         <!-- 修改的对话框 -->
-        <el-dialog title="修改信息" :visible.sync="dialogFormVisible">
-            <el-form ref="form" :rules="rules" :model="userInfo" label-width="80px">
+        <el-dialog title="修改信息" @closed="closeEdit" :visible.sync="dialogFormVisible">
+            <el-form ref="form" :rules="rules" :model="tempUserInfo" label-width="80px">
                 <el-row>
                     <el-col :span="7">
                         <el-form-item>
@@ -61,7 +61,7 @@
                                     action="h"
                                     :show-file-list="false"
                                     :before-upload="beforeAvatarUpload">
-                                    <img v-if="userInfo.avatar" :src="this.global.file_path + userInfo.avatar" class="avatar">
+                                    <img v-if="tempUserInfo.avatar" :src="this.global.file_path + tempUserInfo.avatar" class="avatar">
                                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                                 </el-upload>
                             </el-tooltip>
@@ -69,26 +69,26 @@
                     </el-col>
                     <el-col :span="10">
                         <h1 class="ant-userName">
-                            {{ userInfo.nickName }}
+                            {{ tempUserInfo.nickName }}
                         </h1>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="10">
                         <el-form-item label="昵称:" prop="nickName">
-                            <el-input v-model="userInfo.nickName"></el-input>
+                            <el-input v-model="tempUserInfo.nickName"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="10">
                         <el-form-item label="邮箱:" prop="email">
-                            <el-input v-model="userInfo.email"></el-input>
+                            <el-input v-model="tempUserInfo.email"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="10">
                         <el-form-item label="性别:" prop="sex">
-                            <el-select v-model="userInfo.sex" style="width: 100%">
+                            <el-select v-model="tempUserInfo.sex" style="width: 100%">
                                 <el-option label="男" :value=1></el-option>
                                 <el-option label="女" :value=0></el-option>
                             </el-select>
@@ -101,7 +101,7 @@
                                     type="date"
                                     value-format=" yyyy-MM-dd HH:mm:SS"
                                     placeholder="选择日期"
-                                    v-model="userInfo.birthday"
+                                    v-model="tempUserInfo.birthday"
                                     style="width: 100%;"
                                    ></el-date-picker>
                             </el-col>
@@ -109,10 +109,10 @@
                     </el-col>
                 </el-row>
                 <el-form-item label="个人简介:" style="height: 150px">
-                    <el-input type="textarea" v-model="userInfo.summary" rows="5" resize="none"></el-input>
+                    <el-input type="textarea" v-model="tempUserInfo.summary" rows="5" resize="none"></el-input>
                 </el-form-item>
                 <el-form-item align="right">
-                    <el-button type="info" @click="cancel">取消</el-button>
+                    <el-button type="info" @click="closeEdit">取消</el-button>
                     <el-button type="primary" @click="saveUser">保存</el-button>
                 </el-form-item>
             </el-form>
@@ -139,6 +139,7 @@ export default {
                 nickName: '',
             },
             disabled: true,
+            tempUserInfo: {},
             dialogFormVisible: false, //控制弹出框
             rules: {
                 nickName: [
@@ -163,6 +164,7 @@ export default {
         }
     },
     methods: {
+        // 上传头像
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
             const isPNG = file.type === 'image/png';
@@ -177,35 +179,40 @@ export default {
             param.append("file", file)
             uploadAvatar(param)
                 .then(res => {
-                    this.userInfo.avatar = res.data.fileUrl
+                    this.tempUserInfo.avatar = res.data.fileUrl
                 }).catch(err => {
                     this.$message.error(err)
             })
             return isJPG && isLt2M;
         },
+        // 获取用户信息
         getUserInfo() {
             this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
         },
-        cancel() {
-            this.disabled = true;
-            this.dialogFormVisible = false
-            this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
-        },
-        activateEdit() {
+        // 编辑用户
+        editUser() {
+            this.tempUserInfo = JSON.parse(JSON.stringify(this.userInfo))
             this.dialogFormVisible = true
         },
+        // 提交用户信息修改
         saveUser() {
-            let userInfo = this.userInfo;
+            let userInfo = this.tempUserInfo;
             editUser(userInfo).then(res => {
                 localStorage.setItem('userInfo', JSON.stringify(userInfo));
                 this.$store.commit("SET_AVATAR", userInfo.avatar)
                 this.disabled = true;
+                this.userInfo = userInfo
                 this.$message.success("修改成功");
             }).catch(err => {
                 this.$message.error(err);
             })
             this.dialogFormVisible = false
         },
+        closeEdit() {
+            this.disabled = true;
+            this.dialogFormVisible = false
+            this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
+        }
     },
     mounted() {
         this.getUserInfo();
