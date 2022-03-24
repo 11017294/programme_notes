@@ -65,5 +65,7 @@ public class SQLConf {
     public final static String BEHAVIOR = "behavior";
 
     public final static String SORT_NAME = "sort_name";
+    // 状态
+    public final static String STATUS = "status";
 
 }

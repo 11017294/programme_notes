@@ -1,9 +1,19 @@
 <template>
   <div class="app-container">
-<!--    <div class="filter-container" style="margin: 10px 0 10px 0;">
-      <el-input clearable class="filter-item" style="width: 200px;" v-model="keyword" placeholder="用户行为"></el-input>
+    <div class="filter-container" style="margin: 10px 0 10px 0;">
+      <el-input clearable class="filter-item" style="width: 200px;" v-model="queryParams.keyword" placeholder="内容"></el-input>
+
+      <el-select
+        class="filter-item"
+        v-model="queryParams.status"
+        clearable
+        placeholder="反馈是否处理">
+        <el-option value="1" label="未处理"></el-option>
+        <el-option value="2" label="已处理"></el-option>
+      </el-select>
+
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFind">查找</el-button>
-    </div>-->
+    </div>
     <el-table  v-loading="listLoading" :data="tableData"  style="width: 100%">
       <el-table-column type="selection"></el-table-column>
       <el-table-column label="序号" width="60" align="center">
@@ -41,8 +51,8 @@
         label="状态"
         width="150">
         <template slot-scope="scope">
-          <el-tag v-if="scope.row.status==0" type="danger">未处理</el-tag>
-          <el-tag v-if="scope.row.status==1" type="success">已处理</el-tag>
+          <el-tag v-if="scope.row.status==1" type="danger">未处理</el-tag>
+          <el-tag v-if="scope.row.status==2" type="success">已处理</el-tag>
         </template>
       </el-table-column>
 
@@ -52,7 +62,7 @@
             size="mini"
             type="primary"
             plain
-            :disabled="scope.row.status==1"
+            :disabled="scope.row.status==2"
             @click="Completion(scope.row)">完成处理</el-button>
         </template>
       </el-table-column>
@@ -86,6 +96,10 @@ export default {
       pageSize: 10,
       total: 0, //总数量
       listLoading: false,
+      queryParams:{
+        keyword: '',
+        status: '',
+      }, // 搜索条件
     }
   },
   created() {
@@ -101,6 +115,12 @@ export default {
       let params = new URLSearchParams()
       params.append("pageSize", this.pageSize)
       params.append("currentPage", this.currentPage)
+      if(this.queryParams.keyword){
+        params.append("keyword", this.queryParams.keyword)
+      }
+      if(this.queryParams.status){
+        params.append("status", this.queryParams.status)
+      }
       getMessageList(params)
         .then(res => {
           let data = res.data.list
@@ -128,11 +148,18 @@ export default {
           this.$message.error("操作失败")
         })
       })
+    },
+    handleFind() {
+      this.currentPage = 1
+      this.fetchData()
     }
   }
 }
 </script>
 
 <style scoped>
-
+.filter-item {
+  margin: 10px;
+  width: 150px
+}
 </style>

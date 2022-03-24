@@ -34,7 +34,7 @@ public class Message extends SuperEntity<Message> {
     @TableField("user_uid")
     private String userUid;
 
-    @ApiModelProperty("状态，1表示已处理")
+    @ApiModelProperty("状态(默认1)，2表示已处理")
     @TableField("status")
     private int status;
 }

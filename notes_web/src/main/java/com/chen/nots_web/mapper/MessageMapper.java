@@ -15,6 +15,6 @@ import org.apache.ibatis.annotations.Update;
  */
 public interface MessageMapper extends SuperMapper<Message> {
 
-    @Update(" update t_message set status = 1 where uid = #{id} ")
+    @Update(" update t_message set status = 2 where uid = #{id} ")
     int completion(@Param("id") String id);
 }
