@@ -51,3 +51,16 @@ export function editTag(params) {
     params: params
   })
 }
+
+/**
+ * 根据id获取笔记详细信息
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function getNoteById(params) {
+  return request({
+    url: '/content/getNoteById',
+    method: 'get',
+    params: params
+  })
+}

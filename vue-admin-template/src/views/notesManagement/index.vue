@@ -304,7 +304,7 @@ export default {
     handleEdit(row) {
       this.$router.push({
         path: '/notesManagement/takeNotes',         // 待跳转的页面URL
-        query: {row: row},              // 跳转时传入的参数
+        query: {uid: row.uid},              // 跳转时传入的参数
       });
     },
     handleAdd() {

@@ -15,7 +15,17 @@ import com.chen.nots_web.vo.PictureVO;
  */
 public interface PictureService extends SuperService<Picture> {
 
+    /**
+     * 获取图片列表
+     * @param pictureVO
+     * @return
+     */
     IPage getPictureList(PictureVO pictureVO);
 
+    /**
+     * 删除图片
+     * @param pictureVO
+     * @return
+     */
     String deleteImage(PictureVO pictureVO);
 }

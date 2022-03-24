@@ -76,6 +76,7 @@
 <script>
 
   import {getNoteSort, getTag, addNote, updateNote} from "@/api/table";
+  import {getNoteById} from "@/api/note";
 
   export default {
 
@@ -236,17 +237,22 @@
         })
       },
       backfillData() {    //回填数据
-        let row = this.$route.query.row;
-        console.log(row)
-        if(row != undefined) {
-          this.noteForm.uid = row.uid;
-          this.noteForm.title =  row.title;
-          this.noteForm.summary = row.summary;
-          this.noteForm.noteSortUid = row.noteSortUid;
-          this.noteForm.tagUid = row.tagUid;
-          this.noteForm.isOriginal = row.isOriginal;
-          this.noteForm.content = row.content;
-          this.noteForm.tagValue = row.tagUid.split(",")
+        let uid = this.$route.query.uid;
+        if(uid != undefined) {
+          getNoteById({uid: uid})
+            .then(res => {
+              this.noteForm.uid = res.uid;
+              this.noteForm.title =  res.data.note.title;
+              this.noteForm.summary = res.data.note.summary;
+              this.noteForm.noteSortUid = res.data.note.noteSortUid;
+              this.noteForm.tagUid = res.data.note.tagUid;
+              this.noteForm.isOriginal = res.data.note.isOriginal;
+              this.noteForm.content = res.data.note.content;
+              this.noteForm.tagValue = res.data.note.tagUid.split(",")
+            })
+            .catch(err => {
+
+          })
         }
       }
     },
