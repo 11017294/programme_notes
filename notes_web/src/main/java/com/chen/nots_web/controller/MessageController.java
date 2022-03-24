@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,11 +38,19 @@ public class MessageController {
     }
 
     @ApiOperation(value = "添加留言", notes = "添加留言")
-    @GetMapping("/addMessage")
+    @PostMapping("/addMessage")
     public ResultBase addMessage(HttpServletRequest request,  MessageVO messageVO) {
         String userUid = request.getAttribute(SysConf.USER_UID).toString();
         messageVO.setUserUid(userUid);
         return ResultBase.ok().data("id", messageService.addMessage(messageVO));
+    }
+
+    @ApiOperation(value = "修改留言", notes = "修改留言")
+    @PostMapping("/editMessage")
+    public ResultBase editMessage(HttpServletRequest request,  MessageVO messageVO) {
+        String userUid = request.getAttribute(SysConf.USER_UID).toString();
+        messageVO.setUserUid(userUid);
+        return ResultBase.ok().data("id", messageService.editMessage(messageVO));
     }
 
 }

@@ -36,6 +36,16 @@
         </template>
       </el-table-column>
 
+      <el-table-column label="状态" width="150" align="center">
+        <template slot-scope="scope">
+          <el-tag
+            style="margin-left: 3px"
+            type="warning"
+            v-if="scope.row.status"
+          >{{scope.row.status}}</el-tag>
+        </template>
+      </el-table-column>
+
     </el-table>
 
     <!--分页-->

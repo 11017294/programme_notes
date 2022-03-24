@@ -29,4 +29,10 @@ public interface MessageService extends SuperService<Message> {
      */
     IPage getMessageList(MessageVO messageVO);
 
+    /**
+     * 修改留言
+     * @param messageVO
+     * @return
+     */
+    String editMessage(MessageVO messageVO);
 }

@@ -243,3 +243,16 @@ export function uploadAvatar(params) {
     data: params
   })
 }
+
+/**
+ * 修改留言反馈
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function editMessage(params) {
+  return request({
+    url: '/message/editMessage',
+    method: 'post',
+    params: params,
+  })
+}

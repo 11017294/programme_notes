@@ -200,3 +200,5 @@ CREATE TABLE `t_web_visit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Web访问记录表';
 
 ALTER TABLE  t_user ADD status tinyint(1)  unsigned NOT NULL DEFAULT '1' COMMENT '状态，2表示被拉黑';
+
+ALTER TABLE  t_message ADD status tinyint(1)  unsigned NOT NULL DEFAULT '0' COMMENT '状态，1表示已处理';

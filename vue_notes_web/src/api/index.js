@@ -261,7 +261,7 @@ export function getNoteList(params) {
 export function addMessage(params) {
     return request({
         url: '/test/message/addMessage',
-        method: 'get',
+        method: 'post',
         params: params
     })
 }

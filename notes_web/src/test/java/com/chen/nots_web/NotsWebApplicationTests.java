@@ -24,6 +24,10 @@ class NotsWebApplicationTests {
     }
 
     public static void main(String[] args) {
+
+    }
+
+    private void all(){
         List<String> tables = new ArrayList<>();
         tables.add("t_message");
         FastAutoGenerator.create("jdbc:mysql://localhost:3306/programme_Notes?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT&allowPublicKeyRetrieval=true",
@@ -72,5 +76,8 @@ class NotsWebApplicationTests {
                 //模板配置
                 .templateEngine(new FreemarkerTemplateEngine())           // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .execute();
+    }
+
+    private void addColumn() {
     }
 }

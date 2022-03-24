@@ -43,4 +43,12 @@ public class MessageServiceImpl extends SuperServiceImpl<MessageMapper, Message>
         page.setSize(messageVO.getPageSize());
         return messageMapper.selectPage(page, wrapper);
     }
+
+    @Override
+    public String editMessage(MessageVO messageVO) {
+        Message message = new Message();
+        BeanUtil.copyProperties(messageVO, message);
+        message.updateById();
+        return message.getUid();
+    }
 }

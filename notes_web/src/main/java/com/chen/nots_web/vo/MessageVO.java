@@ -23,4 +23,7 @@ public class MessageVO extends BaseVO<MessageVO> {
 
     @ApiModelProperty("留言人uid")
     private String userUid;
+
+    @ApiModelProperty("状态，1表示已处理")
+    private int status;
 }
