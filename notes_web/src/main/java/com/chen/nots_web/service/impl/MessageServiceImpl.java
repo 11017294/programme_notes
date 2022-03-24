@@ -51,4 +51,9 @@ public class MessageServiceImpl extends SuperServiceImpl<MessageMapper, Message>
         message.updateById();
         return message.getUid();
     }
+
+    @Override
+    public String completion(String id) {
+        return String.valueOf(messageMapper.completion(id));
+    }
 }

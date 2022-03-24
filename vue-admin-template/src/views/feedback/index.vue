@@ -36,16 +36,26 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="状态" width="150" align="center">
+      <el-table-column
+        align="center"
+        label="状态"
+        width="150">
         <template slot-scope="scope">
-          <el-tag
-            style="margin-left: 3px"
-            type="warning"
-            v-if="scope.row.status"
-          >{{scope.row.status}}</el-tag>
+          <el-tag v-if="scope.row.status==0" type="danger">未处理</el-tag>
+          <el-tag v-if="scope.row.status==1" type="success">已处理</el-tag>
         </template>
       </el-table-column>
 
+      <el-table-column label="操作" width="300" align="center" >
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            type="primary"
+            plain
+            :disabled="scope.row.status==1"
+            @click="Completion(scope.row)">完成处理</el-button>
+        </template>
+      </el-table-column>
     </el-table>
 
     <!--分页-->
@@ -64,7 +74,7 @@
 </template>
 
 <script>
-import {getMessageList} from "@/api/table";
+import {completion, getMessageList} from "@/api/table";
 
 export default {
   name: "Feedback",
@@ -104,6 +114,20 @@ export default {
             this.$message.error(err)
             this.listLoading = false
         })
+    },
+    Completion(row) {
+      this.$confirm("您确定要完成处理了吗?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        completion(row.uid).then(res => {
+          this.$message.success("操作成功")
+          this.fetchData()
+        }).catch(err => {
+          this.$message.error("操作失败")
+        })
+      })
     }
   }
 }

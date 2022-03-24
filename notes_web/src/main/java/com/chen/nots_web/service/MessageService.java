@@ -35,4 +35,11 @@ public interface MessageService extends SuperService<Message> {
      * @return
      */
     String editMessage(MessageVO messageVO);
+
+    /**
+     * 完成处理,将状态修改成已处理
+     * @param id
+     * @return
+     */
+    String completion(String id);
 }

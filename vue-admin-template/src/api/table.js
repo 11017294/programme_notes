@@ -244,7 +244,7 @@ export function uploadAvatar(params) {
   })
 }
 
-/**
+/**${id}
  * 修改留言反馈
  * @param params
  * @returns {AxiosPromise}
@@ -256,3 +256,16 @@ export function editMessage(params) {
     params: params,
   })
 }
+
+/**
+ * 完成用户反馈的处理
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function completion(id) {
+  return request({
+    url: `/message/completion/${id}`,
+    method: 'post',
+  })
+}
+

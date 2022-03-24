@@ -2,6 +2,8 @@ package com.chen.nots_web.mapper;
 
 import com.chen.nots_web.entity.Message;
 import com.chen.nots_web.global.mapper.SuperMapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * <p>
@@ -13,4 +15,6 @@ import com.chen.nots_web.global.mapper.SuperMapper;
  */
 public interface MessageMapper extends SuperMapper<Message> {
 
+    @Update(" update t_message set status = 1 where uid = #{id} ")
+    int completion(@Param("id") String id);
 }

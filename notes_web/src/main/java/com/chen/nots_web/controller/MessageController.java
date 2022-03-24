@@ -8,10 +8,7 @@ import com.chen.nots_web.vo.ResultBase;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,9 +45,13 @@ public class MessageController {
     @ApiOperation(value = "修改留言", notes = "修改留言")
     @PostMapping("/editMessage")
     public ResultBase editMessage(HttpServletRequest request,  MessageVO messageVO) {
-        String userUid = request.getAttribute(SysConf.USER_UID).toString();
-        messageVO.setUserUid(userUid);
         return ResultBase.ok().data("id", messageService.editMessage(messageVO));
+    }
+
+    @ApiOperation(value = "完成处理", notes = "将状态修改成已处理")
+    @PostMapping("/completion/{id}")
+    public ResultBase completion(@PathVariable("id") String id) {
+        return ResultBase.ok().data("count", messageService.completion(id));
     }
 
 }
