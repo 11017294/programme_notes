@@ -166,11 +166,13 @@
       $imgDel() {
 
       },
-      resetForm() {       // 重置
+      // 重置
+      resetForm() {
         this.$refs['noteForm'].resetFields();
         this.noteForm.isOriginal = '1'
       },
-      commitNote() {     // 提交笔记
+      // 提交笔记
+      commitNote() {
         this.$refs['noteForm'].validate((valid) => {
           if (valid) {
             if(this.noteForm.content.length <= 20){
@@ -183,20 +185,17 @@
             for(let key in that.noteForm){
               params.append(key, that.noteForm[key])
             }
-            let userInfo = that.$store.state.userInfo;
-            params.append("author", userInfo.userName)
-            params.append("userUid", userInfo.userUid)
             if(this.$route.query.uid){
-              updateNote(params).then(res => {
+              updateNote(this.noteForm).then(res => {
                 that.$message.success("修改成功")
                 that.$router.push('/')
               }).catch(err => {
                 this.$message.error(err)
               })
             } else{
-              addNote(params).then(res => {
+              addNote(this.noteForm).then(res => {
                 that.$message.success("添加成功")
-                that.$router.push('/')
+                // that.$router.push('/')
               }).catch(err => {
                 this.$message.error(err)
               })
@@ -208,7 +207,8 @@
           }
         });
       },
-      returnPage() {      // 取消事件
+      // 取消事件
+      returnPage() {
         this.$confirm('是否退出此次编辑', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -222,26 +222,29 @@
           }
         })
       },
-      getNoteSort() {     // 获取分类
+      // 获取分类
+      getNoteSort() {
         getNoteSort().then(res => {
           this.noteSortData = res.data.list;
         }).catch(err => {
           this.$message.error(err)
         })
       },
-      getTag() {      // 获取标签
+      // 获取标签
+      getTag() {
         getTag().then(res => {
           this.tagData = res.data.list;
         }).catch(err => {
           this.$message.error(err)
         })
       },
-      backfillData() {    //回填数据
+      // 回填数据
+      backfillData() {
         let uid = this.$route.query.uid;
         if(uid != undefined) {
           getNoteById({uid: uid})
             .then(res => {
-              this.noteForm.uid = res.uid;
+              this.noteForm.uid = res.data.note.uid;
               this.noteForm.title =  res.data.note.title;
               this.noteForm.summary = res.data.note.summary;
               this.noteForm.noteSortUid = res.data.note.noteSortUid;

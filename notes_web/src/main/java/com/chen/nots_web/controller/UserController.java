@@ -66,6 +66,13 @@ public class UserController {
         return ResultBase.ok().data("id", userService.addUser(userVO));
     }
 
+    @ApiOperation(value = "新增用户", notes = "新增用户")
+    @PostMapping("/addition")
+    public ResultBase addition(UserVO userVO) {
+        log.info("新增用户: {}", userVO);
+        return ResultBase.ok().data("id", userService.addUser(userVO));
+    }
+
     @ApiOperation(value = "编辑用户", notes = "编辑用户")
     @PostMapping("/edit")
     public ResultBase edit(@RequestBody UserVO userVO) {

@@ -159,7 +159,7 @@ export function addNote(params) {
   return request({
     url: '/note/add',
     method: 'post',
-    data: params
+    params: params
   })
 }
 
@@ -172,7 +172,7 @@ export function updateNote(params) {
   return request({
     url: '/note/update',
     method: 'post',
-    data: params
+    params: params
   })
 }
 
@@ -183,9 +183,9 @@ export function updateNote(params) {
  */
 export function addUser(params) {
   return request({
-    url: '/user/add',
+    url: '/user/addition',
     method: 'post',
-    data: params
+    params: params
   })
 }
 
@@ -244,7 +244,7 @@ export function uploadAvatar(params) {
   })
 }
 
-/**${id}
+/**
  * 修改留言反馈
  * @param params
  * @returns {AxiosPromise}
