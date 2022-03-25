@@ -21,10 +21,6 @@ V
 &vue_notes_web/src/views/Pigeonhole.vue,b\3\b3962778f05dc8f0aeedc24aac5f96ba459979c1
 A
 notes_web/pom.xml,5\f\5f2c4ef523e8212b8cf8474eb9aa6caeb6f130ee
-`
-0vue_notes_web/src/components/Pigeonhole/sort.vue,b\f\bf44f1bd68df7b68fcff6e2ae73b4fcaface05df
-_
-/vue_notes_web/src/components/Pigeonhole/tag.vue,1\c\1c7b1a8746192377230c4309d050d7c47af0f469
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
@@ -100,8 +96,6 @@ N
 vue_notes_web/src/Mock/site.js,f\5\f531625967afa027547511574be4e4c62b627bec
 P
  vue_notes_web/src/Mock/friend.js,6\9\693dec417b80651948fa47940df7692c7c696ec1
-O
-vue_notes_web/src/Mock/focus.js,a\1\a1e0b8471b05a2bfb99851096c26211f282e15d9
 Q
 !vue_notes_web/src/Mock/comment.js,0\a\0a2807183de0dda615fac3521272888d564003b9
 O
@@ -186,8 +180,6 @@ u
 Evue-admin-template/src/views/notesManagement/sortManagement/index.vue,4\3\43590711e8389b5d6778f65fbc7d59d6c6ba7251
 N
 sql脚本/数据库脚本2.sql,a\f\af652e00c2eee4f230aed265705d3c8db0c185b3
-N
-vue_notes_web/src/api/index.js,0\6\06707de35011404b548f93c8c3a148a75fd64b6b
 m
 =notes_web/src/main/java/com/chen/nots_web/entity/Message.java,3\1\316aa5d4f6ac9fe570b8ff4636b5826fe2b2ea1e
 {

@@ -6,7 +6,10 @@
                     <el-timeline-item
                         v-for="item in tagData"
                         :key="item.uid">
-                        <a @click="getTagList(item.uid)">{{item.content}}</a>
+                        <span
+                            @click="getTagList(item)"
+                            :class="[item.content == selectContent ? 'sortBoxSpan sortBoxSpanSelect' : 'sortBoxSpan']"
+                        >{{item.content}}</span>
                     </el-timeline-item>
                 </el-timeline>
             </ul>
@@ -15,7 +18,7 @@
             <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
                 <el-card class="box-card" v-for="item in noteData">
                     <h1 class="entry-title">
-                        <router-link :to="`/article/${item.uid}`">{{ item.title }}</router-link>
+                        <a href="javascript:void(0);" @click="goToInfo(item.uid)" v-html="item.title">{{item.title}}</a>
                     </h1>
                 </el-card>
             </ul>
@@ -23,7 +26,7 @@
             <div class="more" v-show="total&&!isEnd">
                 <div class="more-btn" @click="loadMore">查看更多</div>
             </div>
-            <div class="more" v-show="!total">
+            <div class="more" v-show="!total&&isEnd">
                 <div>该标签的笔记空空如也</div>
             </div>
         </el-main>
@@ -38,6 +41,7 @@ export default {
     name: "tag",
     data() {
         return {
+            selectContent: '',
             tagData: [],
             oldTagId: '',
             noteData: [],
@@ -54,15 +58,17 @@ export default {
         getTag() {
             getTag()
                 .then(res => {
-                    this.getTagList(res.data.list[0].uid)
+                    // 显示第一个标签的笔记
+                    this.getTagList(res.data.list[0])
                     this.tagData = res.data.list;
                 }).catch(err => {
                 this.$message.error(err);
             })
         },
-        getTagList(uid) {
+        getTagList(row) {
+            this.selectContent = row.content;
             // 点击不同标签
-            if(uid != this.oldTagId){
+            if(row.uid != this.oldTagId){
                 // 清除旧数据
                 this.noteData = [];
                 this.currentPage = 1;
@@ -71,9 +77,15 @@ export default {
                 this.total = 0;
                 this.searchNoteData = [];
                 this.isEnd = false;
-                this.fetchList(uid);
-                this.oldTagId = uid;
+                this.fetchList(row.uid);
+                this.oldTagId = row.uid;
             }
+        },
+        goToInfo(uid) {
+            this.$router.push({
+                path: "/article",
+                query: {uid: uid}
+            });
         },
         loadMore() {
             let that = this;
@@ -143,6 +155,16 @@ export default {
 </script>
 
 <style scoped>
+
+.sortBoxSpan {
+    cursor: pointer;
+}
+.sortBoxSpan:hover {
+    color: #409eff;
+}
+.sortBoxSpanSelect {
+    color: #409eff;
+}
 
 .tag {
     height: 600px;

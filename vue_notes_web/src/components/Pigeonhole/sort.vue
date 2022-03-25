@@ -5,7 +5,10 @@
                 <el-timeline-item
                     v-for="item in sortData"
                     :key="item.uid">
-                    <a @click="getSortList(item.uid)">{{item.sortName}}</a>
+                     <span
+                         @click="getSortList(item)"
+                         :class="[item.sortName == selectSortName ? 'sortBoxSpan sortBoxSpanSelect' : 'sortBoxSpan']"
+                     >{{item.sortName}}</span>
                 </el-timeline-item>
             </el-timeline>
         </el-aside>
@@ -13,7 +16,7 @@
             <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
                 <el-card class="box-card" v-for="item in noteData">
                     <h1 class="entry-title">
-                        <router-link :to="`/article/${item.uid}`">{{ item.title }}</router-link>
+                        <a href="javascript:void(0);" @click="goToInfo(item.uid)" v-html="item.title">{{item.title}}</a>
                     </h1>
                 </el-card>
             </ul>
@@ -21,7 +24,7 @@
             <div class="more" v-show="total&&!isEnd">
                 <div class="more-btn" @click="loadMore">查看更多</div>
             </div>
-            <div class="more" v-show="!total">
+            <div class="more" v-show="!total&&isEnd">
                 <div>该分类的笔记空空如也</div>
             </div>
         </el-main>
@@ -36,6 +39,7 @@ export default {
     name: "sort",
     data() {
         return {
+            selectSortName: '',
             sortData: [],
             oldSortId: '',
             noteData: [],
@@ -52,15 +56,16 @@ export default {
         getNoteSort() {
             getNoteSort()
                 .then(res => {
-                    this.getSortList(res.data.list[0].uid)
+                    this.getSortList(res.data.list[0])
                     this.sortData = res.data.list;
                 }).catch(err => {
                 this.$message.error(err);
             })
         },
-        getSortList(uid) {
+        getSortList(row) {
             // 点击不同分类
-            if(uid != this.oldSortId){
+            this.selectSortName = row.sortName
+            if(row.uid != this.oldSortId){
                 // 清除旧数据
                 this.noteData = [];
                 this.currentPage = 1;
@@ -69,9 +74,15 @@ export default {
                 this.total = 0;
                 this.searchNoteData = [];
                 this.isEnd = false;
-                this.fetchList(uid);
-                this.oldSortId = uid;
+                this.fetchList(row.uid);
+                this.oldSortId = row.uid;
             }
+        },
+        goToInfo(uid) {
+            this.$router.push({
+                path: "/article",
+                query: {uid: uid}
+            });
         },
         loadMore() {
             let that = this;
@@ -141,6 +152,16 @@ export default {
 </script>
 
 <style scoped>
+
+.sortBoxSpan {
+    cursor: pointer;
+}
+.sortBoxSpan:hover {
+    color: #409eff;
+}
+.sortBoxSpanSelect {
+    color: #409eff;
+}
 
 .el-main {
     margin: 1px;
