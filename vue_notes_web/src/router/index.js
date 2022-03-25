@@ -114,6 +114,8 @@ const router = new VueRouter({
     routes
 })
 
+const whiteList = ['/login', '/', '/search', '/article', '/pigeonhole']
+
 // 全局前置导航钩子 beforeEach
 // 会在路由即将改变前触发
 router.beforeEach((to, from, next) => {
@@ -126,7 +128,7 @@ router.beforeEach((to, from, next) => {
     document.title = title
     let isLogin = window.localStorage.getItem('Authorization')
     if (!isLogin) {
-        if (to.path == '/login' || to.path == '/' ) {
+        if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
             next()
         } else {
             Vue.prototype.$message('没有访问权限或登录已过期，请重新登录！')
