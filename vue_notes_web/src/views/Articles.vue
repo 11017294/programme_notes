@@ -105,7 +105,7 @@ import menuTree from '@/components/menu-tree'
 import {fetchComment, fetchContent, getUserCollectNote, userCollectNote} from '../api'
 
 export default {
-    name: 'articles',
+    name: 'Articles',
     data() {
         return {
             showDonate: false,
@@ -191,7 +191,7 @@ export default {
         this.fetchContent();
     },
     created() {
-        this.noteUid = this.$route.params.uid;
+        this.noteUid = this.$route.query.uid;
     }
 }
 </script>

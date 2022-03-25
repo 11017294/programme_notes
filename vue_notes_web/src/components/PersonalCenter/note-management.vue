@@ -4,7 +4,7 @@
         <el-card class="box-card" v-for="item in noteData">
             <el-col :span="21">
                 <h1 class="entry-title">
-                    <router-link :to="`/article/${item.uid}`">{{ item.title }}</router-link>
+                    <a href="javascript:void(0);" @click="goToInfo(item.uid)" v-html="item.title">{{item.title}}</a>
                 </h1>
                 <p class="summary">{{ item.summary }}</p>
                 <div class="item-float-left" v-if="item.noteSortUid">
@@ -46,6 +46,12 @@ export default {
         }
     },
     methods: {
+        goToInfo(uid) {
+            this.$router.push({
+                path: "/article",
+                query: {uid: uid}
+            });
+        },
         editNote(id) {
             this.$router.push({
                 path: '/takeNotes',         // 待跳转的页面URL

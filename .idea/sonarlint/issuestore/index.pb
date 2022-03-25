@@ -124,8 +124,6 @@ n
 >notes_web/src/main/java/com/chen/nots_web/utils/RedisUtil.java,a\5\a5731c0c43bc7efbd430e6efbf0d7c91df7231d0
 G
 vue_notes_web/README.md,8\2\828274785c0951fad5e595ec8e4bffbbc7d78d00
-T
-$vue_notes_web/src/views/Articles.vue,8\6\86b91a0276167868abe3284c2cfdf9ae23e14740
 O
 vue_notes_web/public/index.html,9\8\98f805f514596b4e99349733827b32bf61ea7b9a
 I
@@ -140,18 +138,12 @@ x
 Hnotes_web/src/main/java/com/chen/nots_web/global/entity/SuperEntity.java,4\f\4f9f97195628c7dc21f387283018df9adfc8c6b9
 m
 =vue_notes_web/src/components/PersonalCenter/edit-password.vue,8\d\8d263644e0f49002059f332cfe55ca4bc14f8ba4
-Z
-*vue_notes_web/src/views/PersonalCenter.vue,8\4\849d10c9e8f7fa78dcba5cd9ab513275c10475d3
-n
->vue_notes_web/src/components/PersonalCenter/edit-user-info.vue,e\5\e5c7f8e7e1c4465f131c03d1761e6b82e59784f4
 g
 7vue_notes_web/src/components/PersonalCenter/install.vue,2\a\2a4c6a187742dd6dabb44782cbc04119c060bab1
 j
 :notes_web/src/main/java/com/chen/nots_web/entity/Note.java,3\4\34e8fde0ed5ee6e8c3c7851b0dd44f1ec3940b58
 r
 Bnotes_web/src/main/java/com/chen/nots_web/service/NoteService.java,a\8\a8f6c95e17af08f5657c0ff7f20cedb8e64c854d
-j
-:vue_notes_web/src/components/PersonalCenter/my-collect.vue,5\4\54016e0d470bce77312586204aea46b2490eb67f
 {
 Knotes_web/src/main/java/com/chen/nots_web/service/impl/NoteServiceImpl.java,2\a\2a7c46d08fdb300a2e76da4e82424d26c530e129
 \
@@ -166,8 +158,6 @@ a
 1vue-admin-template/src/views/operateLog/index.vue,d\2\d2bc1077b21d4ded73de4963d15b56d2a9a46c89
 c
 3vue-admin-template/src/layout/components/Navbar.vue,2\9\29554b7e1aa263aacb4d4a8c90401ec1f793afb4
-U
-%vue_notes_web/src/components/post.vue,3\0\303ef4b8af39d9a81f4696c8ab6613140f6b56d3
 m
 =notes_web/src/main/java/com/chen/nots_web/entity/Picture.java,b\a\ba80e02a07c1bd8ffdf543debb4a62c286e394ef
 s
@@ -184,8 +174,6 @@ Hnotes_web/src/main/java/com/chen/nots_web/controller/FileController.java,5\1\5
 Lnotes_web/src/main/java/com/chen/nots_web/controller/NoteSortController.java,a\2\a29b4ec03d7728ca2d350bfb617e91197e642aeb
 e
 5vue_notes_web/src/components/PersonalCenter/notes.vue,b\f\bfff07b678325c2cc42fb6b631adc0e8b5c30e08
-o
-?vue_notes_web/src/components/PersonalCenter/note-management.vue,2\8\28e1408572d9a12c426cabf0058941746abd59f9
 D
 sql脚本/t_note.sql,e\8\e8a2904699ae3d8427c2fdb00eb86dc5879a603a
 ^

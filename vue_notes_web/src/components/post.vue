@@ -3,7 +3,7 @@
         <el-row>
             <el-col :min-span="6">
             <h1 class="entry-title">
-                <router-link :to="`/article/${post.uid}`">{{ post.title }}</router-link>
+                <a href="javascript:void(0);" @click="goToInfo(post.uid)" v-html="post.title">{{post.title}}</a>
             </h1>
             </el-col>
         </el-row>
@@ -87,6 +87,12 @@ export default {
             } else{
                 this.$message.warning("你未登录还不能收藏笔记")
             }
+        },
+        goToInfo(uid) {
+            this.$router.push({
+                path: "/article",
+                query: {uid: uid}
+            });
         }
     },
     mounted() {

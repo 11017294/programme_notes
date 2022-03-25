@@ -41,8 +41,8 @@ const routes = [
         meta: { title: '友链'}
     },
     {
-        path: '/article/:uid',
-        name: 'article',
+        path: '/article',
+        name: 'Articles',
         component: () => import('../views/Articles.vue'),
         meta: { title: '文章'}
     },
