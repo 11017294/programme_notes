@@ -6,7 +6,6 @@
             <div class="notify">
                 <div class="search-result" v-if="hideSlogan">
                     <span v-if="keyword">搜索结果："{{keyword}}" 相关文章</span>
-                    <span v-else-if="category">分类 "{{category}}" 相关文章</span>
                 </div>
             </div>
 
@@ -21,6 +20,10 @@
             <!--加载更多-->
             <div class="more" v-show="!isEnd">
                 <div class="more-btn" @click="loadMore">查看更多</div>
+            </div>
+
+            <div class="hint" v-show="!total&&isEnd">
+                <el-empty description="什么都没有~"/>
             </div>
         </div>
     </div>
@@ -72,11 +75,8 @@
             }
         },
         computed: {
-            category() {
-                return this.$route.params.cate
-            },
             hideSlogan() {
-                return this.category || this.searchWords
+                return this.keyword
             },
             notice() {
                 return this.$store.getters.notice
@@ -158,7 +158,7 @@
 
     .site-content {
         .notify {
-            margin: 60px 0;
+            margin: 100px 0 20px 0;
             border-radius: 3px;
             & > div {
                 padding: 20px;
@@ -199,6 +199,11 @@
         &.search {
             padding-top: 0;
         }
+    }
+
+    .hint{
+        text-align: center;
+        font-size: 30px;
     }
 
     .more{

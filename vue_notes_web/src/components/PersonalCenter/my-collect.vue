@@ -9,7 +9,7 @@
             <div class="more-btn" @click="loadMore">查看更多</div>
         </div>
         <div class="more" v-show="!total&&isEnd">
-            <div>你的收藏空空如也</div>
+            <el-empty description="什么都没有~"/>
         </div>
     </main>
 </template>
