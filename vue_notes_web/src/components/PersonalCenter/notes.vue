@@ -2,15 +2,15 @@
     <el-container>
         <el-aside>
             <el-menu
-                default-active="1"
+                :default-active="$route.name"
                 class="el-menu-vertical-demo">
 <!--                @open="handleOpen"
                 @close="handleClose">-->
-                <el-menu-item index="1" @click="menuClick('/noteManagement')">
+                <el-menu-item index="noteManagement" @click="menuClick('/noteManagement')">
                     <i class="el-icon-setting"></i>
                     <span slot="title">我的笔记</span>
                 </el-menu-item>
-                <el-menu-item index="2" @click="menuClick('/myCollect')">
+                <el-menu-item index="myCollect" @click="menuClick('/myCollect')">
                     <i class="el-icon-menu"></i>
                     <span slot="title">我的收藏</span>
                 </el-menu-item>

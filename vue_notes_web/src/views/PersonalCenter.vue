@@ -2,10 +2,9 @@
     <div class="personalCenter">
         <el-container>
             <el-header>
-                <el-menu default-active="1" class="el-menu-demo" mode="horizontal" @select="">
-                    <el-menu-item index="1" @click="menuClick('/noteManagement')">笔记</el-menu-item>
-                    <el-menu-item></el-menu-item>
-                    <el-menu-item index="2" @click="menuClick('/edit-user-info')">设置</el-menu-item>
+                <el-menu :default-active="navUrl" class="el-menu-demo" mode="horizontal" @select="">
+                    <el-menu-item index="myNotes" @click="menuClick('/noteManagement')">笔记</el-menu-item>
+                    <el-menu-item index="myInstall" @click="menuClick('/edit-user-info')">设置</el-menu-item>
                 </el-menu>
             </el-header>
             <router-view></router-view>
@@ -18,7 +17,7 @@ export default {
     name: "PersonalCenter",
     data() {
         return {
-
+            navUrl: ''
         }
     },
     methods: {
@@ -32,6 +31,14 @@ export default {
             console.log(index, row)
         },*/
     },
+    mounted() {
+        console.log(1)
+        if(this.$route.name == 'noteManagement' || this.$route.name == 'myCollect'){
+            this.navUrl = 'myNotes'
+        } else{
+            this.navUrl = 'myInstall'
+        }
+    }
 
 }
 </script>

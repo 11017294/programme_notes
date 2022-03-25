@@ -136,10 +136,6 @@ x
 Hnotes_web/src/main/java/com/chen/nots_web/controller/UserController.java,c\f\cfedfd1fe71453067e00cab2413c944f73406326
 x
 Hnotes_web/src/main/java/com/chen/nots_web/global/entity/SuperEntity.java,4\f\4f9f97195628c7dc21f387283018df9adfc8c6b9
-m
-=vue_notes_web/src/components/PersonalCenter/edit-password.vue,8\d\8d263644e0f49002059f332cfe55ca4bc14f8ba4
-g
-7vue_notes_web/src/components/PersonalCenter/install.vue,2\a\2a4c6a187742dd6dabb44782cbc04119c060bab1
 j
 :notes_web/src/main/java/com/chen/nots_web/entity/Note.java,3\4\34e8fde0ed5ee6e8c3c7851b0dd44f1ec3940b58
 r
@@ -172,8 +168,6 @@ x
 Hnotes_web/src/main/java/com/chen/nots_web/controller/FileController.java,5\1\51ce3f05b7f856ea07da9131a89b1dac30136241
 |
 Lnotes_web/src/main/java/com/chen/nots_web/controller/NoteSortController.java,a\2\a29b4ec03d7728ca2d350bfb617e91197e642aeb
-e
-5vue_notes_web/src/components/PersonalCenter/notes.vue,b\f\bfff07b678325c2cc42fb6b631adc0e8b5c30e08
 D
 sql脚本/t_note.sql,e\8\e8a2904699ae3d8427c2fdb00eb86dc5879a603a
 ^

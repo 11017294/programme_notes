@@ -23,7 +23,7 @@
         <div class="more" v-show="total&&!isEnd">
             <div class="more-btn" @click="loadMore">查看更多</div>
         </div>
-        <div class="more" v-show="!total">
+        <div class="more" v-show="!total&&isEnd">
             <div>你的笔记空空如也</div>
         </div>
     </main>

@@ -2,15 +2,15 @@
     <el-container>
         <el-aside>
             <el-menu
-                default-active="1"
+                :default-active="$route.name"
                 class="el-menu-vertical-demo">
 <!--                @open="handleOpen"
                 @close="handleClose">-->
-                <el-menu-item index="1" @click="menuClick('/edit-user-info')">
+                <el-menu-item index="edit-user-info" @click="menuClick('/edit-user-info')">
                     <i class="el-icon-setting"></i>
                     <span slot="title">修改资料</span>
                 </el-menu-item>
-                <el-menu-item index="2" @click="menuClick('/edit-password')">
+                <el-menu-item index="edit-password" @click="menuClick('/edit-password')">
                     <i class="el-icon-unlock"></i>
                     <span slot="title">修改密码</span>
                 </el-menu-item>
