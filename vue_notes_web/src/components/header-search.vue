@@ -34,7 +34,11 @@
                 if(!this.keyword || !this.keyword.trim()){
                     return
                 }
-                this.$router.push({name:'search', params:{keyword: this.keyword}});
+                //this.$router.push({name:'search', params:{keyword: this.keyword}});
+                this.$router.push({
+                    path: "/search",
+                    query: {keyword: this.keyword}
+                });
                 this.close()
             },
             click(){

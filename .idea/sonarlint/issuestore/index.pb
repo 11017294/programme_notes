@@ -108,8 +108,6 @@ I
 vue_notes_web/src/main.js,c\d\cdc93392ed8dfa5f81035a7c65b1de0a146dbd93
 P
  vue_notes_web/src/utils/index.js,e\4\e4da14f949e2894906c19740ee18bc5a6bc55ffb
-R
-"vue_notes_web/src/utils/request.js,d\4\d4d36ad608fe111b9e4cbcdd080a94e69a8516fc
 P
  vue_notes_web/src/store/index.js,3\e\3ee471281e954c0f80876ca1c2d7fcc76fc69a1d
 N
@@ -138,12 +136,8 @@ Bnotes_web/src/main/java/com/chen/nots_web/service/NoteService.java,a\8\a8f6c95
 Knotes_web/src/main/java/com/chen/nots_web/service/impl/NoteServiceImpl.java,2\a\2a7c46d08fdb300a2e76da4e82424d26c530e129
 \
 ,vue-admin-template/src/views/login/index.vue,3\8\382f164f6c071f0edd8cb3edfe8040d3fc7117cd
-V
-&vue-admin-template/src/router/index.js,7\4\745a2c715a46b36badd537c427446fe97f2a2de9
 Q
 !vue_notes_web/src/views/Login.vue,b\1\b14a01533eed31873bdd2f40a94df31ed9d27e5a
-P
- vue_notes_web/src/views/Home.vue,a\8\a8df25ce687973e5b773b75130bdffe3078c6a0f
 a
 1vue-admin-template/src/views/operateLog/index.vue,d\2\d2bc1077b21d4ded73de4963d15b56d2a9a46c89
 c

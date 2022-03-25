@@ -23,10 +23,10 @@ const routes = [
         meta: { title: '分类', params: 'cate'}
     },
     {
-        path: '/search/:keyword',
+        path: '/search',
         name: 'search',
         component: () => import('../views/Home.vue'),
-        meta: { title: '搜索', params: 'keyword'}
+        meta: { title: '搜索'}
     },
     {
         path: '/about',

@@ -63,7 +63,7 @@
         },
         watch:{
             $route(to,from) {
-                this.keyword = to.params.keyword
+                this.keyword = this.$route.query.keyword;
                 this.currentPage = 1
                 this.pageSize = 10
                 this.noteData = []
@@ -72,9 +72,6 @@
             }
         },
         computed: {
-            /*keywords() {
-                return this.$route.query.keyword
-            },*/
             category() {
                 return this.$route.params.cate
             },
