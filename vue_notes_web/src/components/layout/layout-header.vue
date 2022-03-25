@@ -107,7 +107,7 @@ export default {
                                 message: '您已退出登录！',
                                 type: 'success'
                             });
-                            this.$router.push('/')
+                            location.reload()
                         }).catch(err => {
                             this.$message.error(err)
                         })

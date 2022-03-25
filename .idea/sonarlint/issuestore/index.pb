@@ -96,8 +96,6 @@ N
 vue-admin-template/src/main.js,9\a\9aee1ac6340d0e6984d3d2c12f7e10c00f6f12ae
 L
 vue_notes_web/src/Global.vue,5\2\5255bd596f519d9f7f5e7ef57c2a56ad1634517e
-Q
-!vue_notes_web/src/router/index.js,8\8\883c03bc5870c4ceea9e94549a69fbb8da7d9912
 N
 vue_notes_web/src/Mock/site.js,f\5\f531625967afa027547511574be4e4c62b627bec
 P
@@ -152,14 +150,10 @@ j
 :notes_web/src/main/java/com/chen/nots_web/entity/Note.java,3\4\34e8fde0ed5ee6e8c3c7851b0dd44f1ec3940b58
 r
 Bnotes_web/src/main/java/com/chen/nots_web/service/NoteService.java,a\8\a8f6c95e17af08f5657c0ff7f20cedb8e64c854d
-x
-Hnotes_web/src/main/java/com/chen/nots_web/controller/NoteController.java,8\6\86ac03828e9c3875548a52245c8c8e23af2c7bac
 j
 :vue_notes_web/src/components/PersonalCenter/my-collect.vue,5\4\54016e0d470bce77312586204aea46b2490eb67f
 {
 Knotes_web/src/main/java/com/chen/nots_web/service/impl/NoteServiceImpl.java,2\a\2a7c46d08fdb300a2e76da4e82424d26c530e129
-`
-0vue-admin-template/src/views/dashboard/index.vue,8\1\81b66a7e6c41c16180ac747ee506b25c99559a83
 \
 ,vue-admin-template/src/views/login/index.vue,3\8\382f164f6c071f0edd8cb3edfe8040d3fc7117cd
 V
@@ -174,10 +168,6 @@ c
 3vue-admin-template/src/layout/components/Navbar.vue,2\9\29554b7e1aa263aacb4d4a8c90401ec1f793afb4
 U
 %vue_notes_web/src/components/post.vue,3\0\303ef4b8af39d9a81f4696c8ab6613140f6b56d3
-e
-5vue_notes_web/src/components/layout/layout-header.vue,b\b\bb2f5eb2cdd1b6cc5b569bb18e129d14149eba57
-e
-5vue-admin-template/src/views/userManagement/index.vue,c\b\cb87c5abfd5fc488d112ebadaeae5b6bae36d14f
 m
 =notes_web/src/main/java/com/chen/nots_web/entity/Picture.java,b\a\ba80e02a07c1bd8ffdf543debb4a62c286e394ef
 s
@@ -198,12 +188,8 @@ o
 ?vue_notes_web/src/components/PersonalCenter/note-management.vue,2\8\28e1408572d9a12c426cabf0058941746abd59f9
 D
 sql脚本/t_note.sql,e\8\e8a2904699ae3d8427c2fdb00eb86dc5879a603a
-U
-%vue_notes_web/src/views/TakeNotes.vue,9\9\99704440b152fd66d82e694f99e4552835a3d77c
 ^
 .vue-admin-template/src/views/Picture/index.vue,3\d\3d0603daa156162d08718b42a9b81aafbc263c69
-`
-0vue-admin-template/src/views/TakeNotes/index.vue,4\c\4c06778eb403cc45ab18939015f6aa38f46cd5d8
 u
 Enotes_web/src/main/java/com/chen/nots_web/service/PictureService.java,e\2\e233829eb8ed48d03bc171ecbb16a81b4a819555
 x
@@ -212,11 +198,21 @@ R
 "vue-admin-template/src/api/note.js,4\4\440e622fe4fabcc19f2f83e93df308fceec6a3aa
 Q
 !vue_notes_web/src/views/About.vue,2\b\2bfb59842b22d527ab417c321d00f89c067769ed
-f
-6vue-admin-template/src/views/notesManagement/index.vue,3\7\3756a29bcde443fefc306c3fbcdf03173d3db4ab
 j
 :notes_web/src/main/java/com/chen/nots_web/entity/User.java,2\9\29b03d27a9b23d2d8f5dbc17e549b49c629cbccc
 u
 Evue-admin-template/src/views/notesManagement/sortManagement/index.vue,4\3\43590711e8389b5d6778f65fbc7d59d6c6ba7251
-t
-Dvue-admin-template/src/views/notesManagement/tagManagement/index.vue,3\6\366e383bc34cd7f704f4c02965a08ee657a87836
+N
+sql脚本/数据库脚本2.sql,a\f\af652e00c2eee4f230aed265705d3c8db0c185b3
+N
+vue_notes_web/src/api/index.js,0\6\06707de35011404b548f93c8c3a148a75fd64b6b
+m
+=notes_web/src/main/java/com/chen/nots_web/entity/Message.java,3\1\316aa5d4f6ac9fe570b8ff4636b5826fe2b2ea1e
+{
+Knotes_web/src/main/java/com/chen/nots_web/controller/MessageController.java,3\c\3c686197b2626697bac4aaab550f5906bee11318
+u
+Enotes_web/src/main/java/com/chen/nots_web/service/MessageService.java,f\b\fb9b9b761daab55da0e69f489e084a9c0183ec9f
+~
+Nnotes_web/src/main/java/com/chen/nots_web/service/impl/MessageServiceImpl.java,6\c\6c3d5dbbde637f5501845d51580e0e59602a8bab
+v
+Fnotes_web/src/test/java/com/chen/nots_web/NotsWebApplicationTests.java,8\f\8f739aebac9ccf16ac50999e1ad8209d24d2070e
