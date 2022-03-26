@@ -198,7 +198,7 @@ public class WebVisitServiceImpl extends SuperServiceImpl<WebVisitMapper, WebVis
         List<String> linkUids = new ArrayList<>();
 
         list.forEach(item -> {
-            // 当点击博客或者点赞博客时
+            // 当点击笔记或者点赞笔记时
             if (item.getBehavior().equals(EBehavior.NOTE_CONTENT.getBehavior())
                     || item.getBehavior().equals(EBehavior.NOTE_PRAISE.getBehavior())) {
                 // 从日志中提取出oid和uid
@@ -278,7 +278,7 @@ public class WebVisitServiceImpl extends SuperServiceImpl<WebVisitMapper, WebVis
                 if (StrUtil.isNotBlank(item.getModuleUid())) {
                     item.setContent(contentMap.get(item.getModuleUid()));
                 } else {
-                    // 从otherData中获取博客oid
+                    // 从otherData中获取笔记oid
                     item.setContent(contentMap.get(item.getOtherData()));
                 }
             } else {

@@ -12,9 +12,9 @@
                     <el-tab-pane label="标签" name="tagModule">
                         <Tag/>
                     </el-tab-pane>
-<!--                    <el-tab-pane label="时间" name="timeModule">
+                    <el-tab-pane label="时间" name="timeModule">
                         <Time/>
-                    </el-tab-pane>-->
+                    </el-tab-pane>
                 </el-tabs>
             </el-header>
         </el-container>

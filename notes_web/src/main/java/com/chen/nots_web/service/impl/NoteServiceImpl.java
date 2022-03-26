@@ -25,6 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -209,7 +211,7 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
 
     @Override
     public Map<String, Object> getNoteContributeCount() {
-        // 从Redis中获取博客分类下包含的博客数量
+        // 从Redis中获取笔记分类下包含的笔记数量
         String jsonMap = redisUtil.get(RedisConf.DASHBOARD + RedisConf.SYMBOL_COLON + RedisConf.NOTE_CONTRIBUTE_COUNT);
         if (StrUtil.isNotBlank(jsonMap)) {
             Map<String, Object> resultMap = JsonUtils.jsonToMap(jsonMap);
@@ -246,9 +248,93 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
         contributeDateList.add(endTime);
         resultMap.put(SysConf.CONTRIBUTE_DATE, contributeDateList);
         resultMap.put(SysConf.NOTE_CONTRIBUTE_COUNT, resultList);
-        // 将 全年博客贡献度 存入到Redis【过期时间2小时】
+        // 将全年笔记贡献度 存入到Redis【过期时间2小时】
         redisUtil.setEx(RedisConf.DASHBOARD + RedisConf.SYMBOL_COLON + RedisConf.NOTE_CONTRIBUTE_COUNT, JsonUtils.objectToJson(resultMap), 2, TimeUnit.HOURS);
         return resultMap;
     }
 
+    @Override
+    public List<String> getNoteTimeSortList() {
+        // 从redis中获取月份
+        String monthResult = redisUtil.get(RedisConf.MONTH_SET);
+        if(StrUtil.isBlank(monthResult)){
+            // 启动时的归档
+            QueryWrapper<Note> wrapper = new QueryWrapper<>();
+            wrapper.orderByDesc(SQLConf.CREATE_TIME);
+            wrapper.select(Note.class, i -> !i.getProperty().equals(SQLConf.CONTENT));
+            List<Note> noteList = noteMapper.selectList(wrapper);
+            // 调用方法进行归档
+            this.noteTimeSort(noteList);
+            // 归档完重新获取
+            monthResult = redisUtil.get(RedisConf.MONTH_SET);
+        }
+        List list = JsonUtils.jsonArrayToArrayList(monthResult);
+        return list;
+    }
+
+    @Override
+    public List<Note> getArticleByMonth(String monthDate) {
+        // 从redis获取该月份的笔记
+        String contentResult = redisUtil.get(RedisConf.NOTE_SORT_BY_MONTH + RedisConf.SYMBOL_COLON + monthDate);
+        if(StrUtil.isBlank(contentResult)){
+            // 启动时的归档
+            QueryWrapper<Note> wrapper = new QueryWrapper<>();
+            wrapper.orderByDesc(SQLConf.CREATE_TIME);
+            wrapper.select(Note.class, i -> !i.getProperty().equals(SQLConf.CONTENT));
+            try {
+                Date month = new SimpleDateFormat("yyyy年MM月").parse(monthDate);
+                Map firstLastMap = DateUtils.getFirstday_Lastday_Month(month);
+                wrapper.between(SQLConf.CREATE_TIME,
+                        firstLastMap.get("first"),
+                        firstLastMap.get("last"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            List<Note> noteList = noteMapper.selectList(wrapper);
+            // 调用方法进行归档
+            this.noteTimeSort(noteList);
+            // 归档完重新获取
+            contentResult = redisUtil.get(RedisConf.NOTE_SORT_BY_MONTH + RedisConf.SYMBOL_COLON + monthDate);
+        }
+        List list = JsonUtils.jsonArrayToArrayList(contentResult);
+        return list;
+    }
+
+    /**
+     * 进行归档
+     * @param noteList
+     */
+    private void noteTimeSort(List<Note> noteList){
+        Iterator<Note> iterator = noteList.iterator();
+        Set<String> monthSet = new TreeSet<>();
+        HashMap<String, List<Note>> monthMap = new HashMap<>();
+        while(iterator.hasNext()){
+            Note note = iterator.next();
+            String month = new SimpleDateFormat("yyyy年MM月").format(note.getCreateTime());
+            monthSet.add(month);
+            if(ObjectUtil.isEmpty(monthMap.get(month))){
+                List<Note> list = new ArrayList<>(1);
+                list.add(note);
+                monthMap.put(month, list);
+            } else{
+                List<Note> list = monthMap.get(month);
+                list.add(note);
+                monthMap.put(month, list);
+            }
+        }
+        // 缓存该月份下所有文章
+        monthMap.forEach((key, value) -> {
+            String s = JsonUtils.objectToJson(value);
+            redisUtil.set(RedisConf.NOTE_SORT_BY_MONTH + RedisConf.SYMBOL_COLON + key, s);
+        });
+        String monthResult = redisUtil.get(RedisConf.MONTH_SET);
+        // 将以前的数据添加添加进来
+        if(StrUtil.isNotBlank(monthResult)){
+            List list = JsonUtils.jsonArrayToArrayList(monthResult);
+            monthSet.addAll(list);
+        }
+        // 将笔记归档月份缓存到redis
+        String s = JsonUtils.objectToJson(monthSet);
+        redisUtil.set(RedisConf.MONTH_SET, s);
+    }
 }

@@ -67,7 +67,7 @@ public class DateUtils {
 
     /**
      * @return
-     * @author 陌溪
+     * @author MaybeBin
      * @date 2018年6月14日
      */
     public static String getNowTimeFormat() {
@@ -160,7 +160,7 @@ public class DateUtils {
      * @return
      */
     public static String getOneDayEndTime(String oneDay) {
-        SimpleDateFormat formate = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+        SimpleDateFormat formate = new SimpleDateFormat("yyyy-MM-dd 23:59:59");
         Date date = new Date(oneDay);
         return formate.format(date);
     }
@@ -322,6 +322,36 @@ public class DateUtils {
         cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
         cal.set(Calendar.HOUR_OF_DAY, 24);
         return cal.getTime();
+    }
+
+    /**
+     * 某一个月第一天和最后一天
+     * @param date
+     * @return
+     */
+    public static Map getFirstday_Lastday_Month(Date date) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        Date theDate = calendar.getTime();
+        //上个月第一天
+        GregorianCalendar gcLast = (GregorianCalendar) Calendar.getInstance();
+        gcLast.setTime(theDate);
+        gcLast.set(Calendar.DAY_OF_MONTH, 1);
+        String day_first = df.format(gcLast.getTime());
+        StringBuffer str = new StringBuffer().append(day_first).append(" 00:00:00");
+        day_first = str.toString();
+        //上个月最后一天
+        calendar.add(Calendar.MONTH, 1);    //加一个月
+        calendar.set(Calendar.DATE, 1);        //设置为该月第一天
+        calendar.add(Calendar.DATE, -1);    //再减一天即为上个月最后一天
+        String day_last = df.format(calendar.getTime());
+        StringBuffer endStr = new StringBuffer().append(day_last).append(" 23:59:59");
+        day_last = endStr.toString();
+        Map map = new HashMap();
+        map.put("first", day_first);
+        map.put("last", day_last);
+        return map;
     }
 
     /**

@@ -57,7 +57,7 @@ public class WebVisit extends SuperEntity<WebVisit> {
     // 以下字段不存入数据库
 
     /**
-     * 内容(点击的博客名，点击的标签名，搜索的内容，点击的作者)
+     * 内容(点击的笔记名，点击的标签名，搜索的内容，点击的作者)
      */
     @TableField(exist = false)
     private String content;

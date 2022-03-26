@@ -17,7 +17,7 @@ import lombok.Data;
  */
 @Data
 @TableName("t_note_sort")
-@ApiModel(value = "NoteSort对象", description = "博客分类表")
+@ApiModel(value = "NoteSort对象", description = "笔记分类表")
 public class NoteSort extends SuperEntity<NoteSort> {
 
     private static final long serialVersionUID = 1L;

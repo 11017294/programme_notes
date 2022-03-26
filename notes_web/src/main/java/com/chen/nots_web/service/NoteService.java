@@ -94,4 +94,17 @@ public interface NoteService extends SuperService<Note> {
      * @return
      */
     Map<String, Object> getNoteContributeCount();
+
+    /**
+     * 获取归档日期
+     * @return
+     */
+    List<String> getNoteTimeSortList();
+
+    /**
+     * 按月份获取笔记
+     * @param monthDate
+     * @return
+     */
+    List<Note> getArticleByMonth(String monthDate);
 }

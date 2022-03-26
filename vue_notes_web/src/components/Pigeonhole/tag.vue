@@ -62,7 +62,7 @@ export default {
                     this.getTagList(res.data.list[0])
                     this.tagData = res.data.list;
                 }).catch(err => {
-                this.$message.error(err);
+                    this.$message.error(err);
             })
         },
         getTagList(row) {

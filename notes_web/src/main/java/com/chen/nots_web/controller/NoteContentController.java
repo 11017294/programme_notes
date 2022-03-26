@@ -53,7 +53,7 @@ public class NoteContentController {
             String jsonResult = stringRedisTemplate.opsForValue().get(
                     RedisConf.NOTE_CLICK + RedisConf.SYMBOL_COLON + ip + RedisConf.WELL_NUMBER + note.getUid());
             if (StrUtil.isBlank(jsonResult)) {
-                // 给博客点击数增加
+                // 给笔记点击数增加
                 Integer clickCount = note.getClickCount() + 1;
                 note.setClickCount(clickCount);
                 note.updateById();

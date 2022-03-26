@@ -93,7 +93,7 @@ public class Note extends SuperEntity<Note> {
 
     // 以下字段不存入数据库，封装为了方便使用
     /**
-     * 标签,一篇博客对应多个标签
+     * 标签,一篇笔记对应多个标签
      */
     @TableField(exist = false)
     private List<Tag> tagList;

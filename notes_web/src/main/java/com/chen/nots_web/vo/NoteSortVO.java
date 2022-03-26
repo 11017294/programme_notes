@@ -14,7 +14,7 @@ import lombok.Data;
  * @since 2022-03-07
  */
 @Data
-@ApiModel(value = "NoteSort对象", description = "博客分类表")
+@ApiModel(value = "NoteSort对象", description = "笔记分类表")
 public class NoteSortVO extends BaseVO<NoteSortVO> {
 
     @ApiModelProperty("分类内容")

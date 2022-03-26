@@ -266,6 +266,32 @@ export function addMessage(params) {
     })
 }
 
+/**
+ * 获取笔记归档的月份
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function getNoteByTime (params) {
+    return request({
+        url: '/test/sort/getSortList',
+        method: 'get',
+        params: params
+    })
+}
+
+/**
+ * 通过月份获取笔记
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function getArticleByMonth (params) {
+    return request({
+        url: '/test/sort/getArticleByMonth',
+        method: 'get',
+        params: params
+    })
+}
+
 export function fetchFocus() {
     return request({
         url: '/focus/list',
