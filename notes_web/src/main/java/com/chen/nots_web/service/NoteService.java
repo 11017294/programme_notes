@@ -107,4 +107,10 @@ public interface NoteService extends SuperService<Note> {
      * @return
      */
     List<Note> getArticleByMonth(String monthDate);
+
+    /**
+     * 根据数据库中所有笔记进行归档
+     * @param noteList
+     */
+    void noteTimeSort(List<Note> noteList);
 }

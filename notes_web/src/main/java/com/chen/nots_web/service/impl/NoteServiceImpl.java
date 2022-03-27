@@ -304,7 +304,8 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
      * 进行归档
      * @param noteList
      */
-    private void noteTimeSort(List<Note> noteList){
+    @Override
+    public void noteTimeSort(List<Note> noteList){
         Iterator<Note> iterator = noteList.iterator();
         Set<String> monthSet = new TreeSet<>();
         HashMap<String, List<Note>> monthMap = new HashMap<>();
@@ -328,7 +329,7 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
             redisUtil.set(RedisConf.NOTE_SORT_BY_MONTH + RedisConf.SYMBOL_COLON + key, s);
         });
         String monthResult = redisUtil.get(RedisConf.MONTH_SET);
-        // 将以前的数据添加添加进来
+        // 将缓存中的月份添加进来
         if(StrUtil.isNotBlank(monthResult)){
             List list = JsonUtils.jsonArrayToArrayList(monthResult);
             monthSet.addAll(list);

@@ -1,5 +1,7 @@
 package com.chen.nots_web.utils;
 
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -675,6 +677,28 @@ public class DateUtils {
         // 计算差多少秒//输出结果
         // long sec = diff % nd % nh % nm / ns;
         return day + "天" + hour + "小时" + min + "分钟";
+    }
+
+    /**
+     * 当前时间的前几分钟的时间
+     * @param date 时间
+     * @param number 分钟数
+     * @return
+     */
+    public static String getBeforeMinutes(Date date, int number) {
+        return getAfterMinutes(date, -number);
+    }
+
+    /**
+     * 当前时间的后几个分钟的时间
+     * @param date 时间
+     * @param number 分钟数
+     * @return
+     */
+    public static String getAfterMinutes(Date date, int number) {
+        Date newDate = DateUtil.offset(date, DateField.MINUTE, number);
+        String startTime = DateUtil.format(newDate, "yyyy-MM-dd HH:mm:ss");
+        return startTime;
     }
 
 }
