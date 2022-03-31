@@ -91,6 +91,7 @@ public class LoginController {
 
         String inPassword = SecureUtil.md5(passWord);
         if(ObjectUtil.isNull(user) || !inPassword.equals(user.getPassWord())){
+            setLoginCommit(request);
             return ResultBase.error("账号或密码错误");
         }
 

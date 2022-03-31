@@ -141,7 +141,7 @@ DROP TABLE IF EXISTS `t_tag`;
 CREATE TABLE `t_tag` (
                          `uid` varchar(32) NOT NULL COMMENT '唯一uid',
                          `content` varchar(1000) DEFAULT NULL COMMENT '标签内容',
-                         `click_count` int(11) DEFAULT '0' COMMENT '标签简介',
+                         `click_count` int(11) DEFAULT '0' COMMENT '点击数',
                          `is_delete` tinyint(1) UNSIGNED ZEROFILL NOT NULL DEFAULT 0 COMMENT '是否删除，1表示已删除',
                          `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
                          `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
