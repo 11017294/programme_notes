@@ -7,8 +7,6 @@ k
 ;notes_web/src/main/java/com/chen/nots_web/vo/MessageVO.java,2\4\24f8c20c7b899a87528a0b49b9a352190e2a03da
 f
 6vue-admin-template/src/views/notesManagement/index.vue,3\7\3756a29bcde443fefc306c3fbcdf03173d3db4ab
-`
-0vue-admin-template/src/views/dashboard/index.vue,8\1\81b66a7e6c41c16180ac747ee506b25c99559a83
 U
 %vue_notes_web/src/views/TakeNotes.vue,9\9\99704440b152fd66d82e694f99e4552835a3d77c
 D
@@ -23,8 +21,6 @@ Z
 *vue_notes_web/src/views/PersonalCenter.vue,8\4\849d10c9e8f7fa78dcba5cd9ab513275c10475d3
 O
 vue_notes_web/src/Mock/focus.js,a\1\a1e0b8471b05a2bfb99851096c26211f282e15d9
-t
-Dvue-admin-template/src/views/notesManagement/tagManagement/index.vue,3\6\366e383bc34cd7f704f4c02965a08ee657a87836
 S
 #vue-admin-template/src/api/table.js,e\9\e9970d7883fa2e0b36923e8196aa84d5dea72181
 `
@@ -65,10 +61,6 @@ C
 notes_web/README.md,7\3\734f9f3dba47fd6caf579af868cd62d363c694ae
 A
 notes_web/pom.xml,5\f\5f2c4ef523e8212b8cf8474eb9aa6caeb6f130ee
-{
-Knotes_web/src/main/java/com/chen/nots_web/service/impl/UserServiceImpl.java,d\2\d26ad2e945b7c0050de33d3f62701f293202a79b
-~
-Nnotes_web/src/main/java/com/chen/nots_web/service/impl/PictureServiceImpl.java,6\9\69df022fe44de3067c67405e5a3edf44834c2824
 
 Onotes_web/src/main/java/com/chen/nots_web/service/impl/NoteSortServiceImpl.java,3\b\3b48f57cf074c16b76cb955b9505f41c6635feae
 u
@@ -81,7 +73,17 @@ Cnotes_web/src/main/java/com/chen/nots_web/mapper/CollectMapper.java,8\b\8bc974
 Nnotes_web/src/main/java/com/chen/nots_web/service/impl/CollectServiceImpl.java,6\9\69805023b96f0b74dbb5e7e9aeed77bb4b01c06c
 n
 >vue_notes_web/src/components/PersonalCenter/edit-user-info.vue,e\5\e5c7f8e7e1c4465f131c03d1761e6b82e59784f4
-r
-Bnotes_web/src/main/java/com/chen/nots_web/service/NoteService.java,a\8\a8f6c95e17af08f5657c0ff7f20cedb8e64c854d
 n
 >notes_web/src/main/java/com/chen/nots_web/utils/DateUtils.java,f\e\fe8bacde97da9c553f098dd42bbce735648ce187
+O
+vue-admin-template/package.json,6\5\651a373d2f9c7f17035e4f3de258edc6ebb6058d
+I
+vue_notes_web/src/main.js,c\d\cdc93392ed8dfa5f81035a7c65b1de0a146dbd93
+I
+vue_notes_web/src/App.vue,f\b\fb126b4787f8d10045409f2bc76007c78fe20c42
+U
+%vue_notes_web/src/components/post.vue,3\0\303ef4b8af39d9a81f4696c8ab6613140f6b56d3
+y
+Inotes_web/src/main/java/com/chen/nots_web/controller/LoginController.java,c\c\cce3a9f9eaeb3747d2ed4cb950c2df5439194edc
+N
+sql脚本/数据库脚本2.sql,a\f\af652e00c2eee4f230aed265705d3c8db0c185b3

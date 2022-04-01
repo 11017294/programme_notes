@@ -8,7 +8,6 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.chen.nots_web.entity.Note;
 import com.chen.nots_web.entity.OnlineUser;
 import com.chen.nots_web.entity.User;
 import com.chen.nots_web.global.RedisConf;
@@ -166,5 +165,15 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         wrapper.last(SysConf.LIMIT_ONE);
         User user = userMapper.selectOne(wrapper);
         return user == null ? "" : user.getAvatar();
+    }
+
+    @Override
+    public String getUserByAvatar(String avatar) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select(SQLConf.AVATAR);
+        wrapper.eq(SQLConf.AVATAR, avatar);
+        wrapper.last(SysConf.LIMIT_ONE);
+        User user = userMapper.selectOne(wrapper);
+        return user == null ? null : user.getAvatar();
     }
 }

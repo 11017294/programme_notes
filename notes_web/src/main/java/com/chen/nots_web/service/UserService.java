@@ -61,4 +61,11 @@ public interface UserService extends SuperService<User> {
      * @param userUid
      */
     String getAvatar(String userUid);
+
+    /**
+     * 查询是否存在头像为avatar的数据
+     * @param avatar
+     * @return
+     */
+    public String getUserByAvatar(String avatar);
 }

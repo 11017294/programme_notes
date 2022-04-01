@@ -20,7 +20,7 @@
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
-              当前博客数: {{noteCount}}
+              当前笔记数: {{noteCount}}
             </div>
           </div>
         </div>

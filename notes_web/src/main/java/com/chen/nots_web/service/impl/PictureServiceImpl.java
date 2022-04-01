@@ -1,5 +1,6 @@
 package com.chen.nots_web.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -7,10 +8,13 @@ import com.chen.nots_web.entity.Picture;
 import com.chen.nots_web.global.service.serviceImpl.SuperServiceImpl;
 import com.chen.nots_web.mapper.PictureMapper;
 import com.chen.nots_web.service.PictureService;
+import com.chen.nots_web.service.UserService;
 import com.chen.nots_web.vo.PictureVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -25,6 +29,8 @@ public class PictureServiceImpl extends SuperServiceImpl<PictureMapper, Picture>
 
     @Resource
     private PictureMapper pictureMapper;
+    @Autowired
+    private UserService userService;
 
     @Override
     public IPage getPictureList(PictureVO pictureVO) {
@@ -32,7 +38,15 @@ public class PictureServiceImpl extends SuperServiceImpl<PictureMapper, Picture>
         Page<Picture> page = new Page<>();
         page.setSize(pictureVO.getPageSize());
         page.setCurrent(pictureVO.getCurrentPage());
-        return pictureMapper.selectPage(page, wrapper);
+        Page<Picture> res = pictureMapper.selectPage(page, wrapper);
+        List<Picture> list = res.getRecords();
+        if(ObjectUtil.isNotEmpty(list)){
+            for (Picture picture : list) {
+                String avatar = userService.getUserByAvatar(picture.getPicName());
+                picture.setIsUse(avatar != null ? "是": "否");
+            }
+        }
+        return res;
     }
 
     @Override

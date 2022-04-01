@@ -30,6 +30,12 @@
         </template>
       </el-table-column>
 
+      <el-table-column align="center" label="是否使用" width="120">
+        <template slot-scope="scope">
+          <span style="cursor:pointer;">{{ scope.row.isUse }}</span>
+        </template>
+      </el-table-column>
+
       <el-table-column label="操作" fixed="right" min-width="230">
         <template slot-scope="scope">
           <el-button @click="handleDelete(scope.row)" type="danger" size="small">删除</el-button>

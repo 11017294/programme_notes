@@ -34,4 +34,7 @@ public class Picture extends SuperEntity<Picture> {
     @TableField("picture_sort_uid")
     private String pictureSortUid;
 
+    @TableField(exist = false)
+    private String isUse;
+
 }
