@@ -7,7 +7,8 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img src="http://r8icnk0yx.hn-bkt.clouddn.com/user/Mikasa" class="user-avatar">
+          <!--TODO:七牛云地址-->
+          <img src="http://ra6kdl6b6.hn-bkt.clouddn.com/user/Mikasa" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">

@@ -2,8 +2,9 @@
 
 notes:
   qiNiuYun:
-    accessKey: "9az4bbUEnl-GtKjW6Ft2_csVTHiSqqSW6Q_6eni-"
-    secretKey: "s0RVUgtLWmKZNhtnuN_6EQ4EOCLHOMh4-CktbiC6"
-    bucket: "programme-notes"
-    domain: "http://r8icnk0yx.hn-bkt.clouddn.com/"
+    accessKey: "nWy38ywpukJcuBChHj51Nh780xo6NnJsnY48ig-g"
+    secretKey: "tZSTIwViHmoe4khSRDVX1Uqsa5l7VpU59Y6SXxNz"
+    bucket: "mybebin-notes"
+    domain: "http://ra6kdl6b6.hn-bkt.clouddn.com/"
+    # todo：七牛云地址
 
