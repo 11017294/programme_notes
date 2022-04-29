@@ -75,6 +75,7 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
             wrapper.eq(SQLConf.IS_ORIGINAL, noteVO.getIsOriginal());
         }
         wrapper.select(Note.class, i -> !i.getProperty().equals(SQLConf.CONTENT));
+        wrapper.orderByDesc(SQLConf.CREATE_TIME);
         Page page = new Page(noteVO.getCurrentPage(), noteVO.getPageSize());
         IPage<Note> noteList = noteMapper.selectPage(page, wrapper);
         for (Note note : noteList.getRecords()) {

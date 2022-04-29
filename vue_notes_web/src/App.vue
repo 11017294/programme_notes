@@ -41,6 +41,7 @@
                         that.$message.error(err);
                     })
                 }).catch(err => {
+                    localStorage.removeItem('Authorization');
                     this.$message.error(err);
                 })
             }
