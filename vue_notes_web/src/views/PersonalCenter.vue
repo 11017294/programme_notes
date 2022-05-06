@@ -32,7 +32,6 @@ export default {
         },*/
     },
     mounted() {
-        console.log(1)
         if(this.$route.name == 'noteManagement' || this.$route.name == 'myCollect'){
             this.navUrl = 'myNotes'
         } else{

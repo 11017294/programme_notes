@@ -19,7 +19,7 @@
             </el-col>
         </el-row>
         <el-row>
-            <el-descriptions title="个人信息" column="1" :colon="false" :labelStyle="{'width': '100px', 'height': '16px'}">
+            <el-descriptions title="个人信息" :column="1" :colon="false" :labelStyle="{'width': '100px', 'height': '16px'}">
                 <template slot="extra">
                     <el-button size="small" icon="el-icon-edit" type="primary" plain @click="editUser">编辑</el-button>
                 </template>
