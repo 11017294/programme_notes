@@ -7,7 +7,7 @@ import request from '@/utils/request'
  */
 export function fetchList(params) {
     return request({
-        url: '/test/note/search',
+        url: '/note/search',
         method: 'get',
         params: params
     })
@@ -20,7 +20,7 @@ export function fetchList(params) {
  */
 export function fetchContent(params) {
     return request({
-        url: '/test/content/getNoteById',
+        url: '/content/getNoteById',
         method: 'get',
         params: params
     })
@@ -33,7 +33,7 @@ export function fetchContent(params) {
  */
 export function login(params) {
     return request({
-        url: '/test/auth/login',
+        url: '/auth/login',
         method: 'post',
         params: params
     })
@@ -46,7 +46,7 @@ export function login(params) {
  */
 export function updateUserPwd(params) {
     return request({
-        url: '/test/user/updateUserPwd',
+        url: '/user/updateUserPwd',
         method: 'post',
         data: params
     })
@@ -59,7 +59,7 @@ export function updateUserPwd(params) {
  */
 export function register(params) {
     return request({
-        url: '/test/auth/register',
+        url: '/auth/register',
         method: 'post',
         params: params
     })
@@ -72,7 +72,7 @@ export function register(params) {
  */
 export function logout(params) {
     return request({
-        url: '/test/auth/logout',
+        url: '/auth/logout',
         method: 'post',
         params: params
     })
@@ -85,7 +85,7 @@ export function logout(params) {
  */
 export function addNote(params) {
     return request({
-        url: '/test/note/add',
+        url: '/note/add',
         method: 'post',
         data: params
     })
@@ -98,7 +98,7 @@ export function addNote(params) {
  */
 export function updateNote(params) {
     return request({
-        url: '/test/note/update',
+        url: '/note/update',
         method: 'post',
         data: params
     })
@@ -111,7 +111,7 @@ export function updateNote(params) {
  */
 export function deleteNote(params) {
     return request({
-        url: '/test/note/delete',
+        url: '/note/delete',
         method: 'post',
         params: params,
         handler: {ContentType: 'application/json'}
@@ -125,7 +125,7 @@ export function deleteNote(params) {
  */
 export function getNoteSort(params) {
     return request({
-        url: '/test/noteSort/getList',
+        url: '/noteSort/getList',
         method: 'get',
         params: params
     })
@@ -138,7 +138,7 @@ export function getNoteSort(params) {
  */
 export function getTag(params) {
     return request({
-        url: '/test/tag/getList',
+        url: '/tag/getList',
         method: 'get',
         params: params
     })
@@ -151,7 +151,7 @@ export function getTag(params) {
  */
 export function getNotesById(params) {
     return request({
-        url: '/test/note/getNoteByUserId',
+        url: '/note/getNoteByUserId',
         method: 'get',
         params: params
     })
@@ -164,7 +164,7 @@ export function getNotesById(params) {
  */
 export function getCollectNoteByUserId(params) {
     return request({
-        url: '/test/note/getCollectNoteByUserId',
+        url: '/note/getCollectNoteByUserId',
         method: 'get',
         params: params
     })
@@ -176,7 +176,7 @@ export function getCollectNoteByUserId(params) {
  * @returns {Promise<AxiosResponse<any>>}
  */
 export function authVerify (params) {
-    return request.get('test/user/verify/' + params, {})
+    return request.get('/user/verify/' + params, {})
 }
 
 /**
@@ -185,7 +185,7 @@ export function authVerify (params) {
  * @returns {Promise<AxiosResponse<any>>}
  */
 export function getUserById (params) {
-    return request.get('test/user/getUserById/' + params, {})
+    return request.get('/user/getUserById/' + params, {})
 }
 
 /**
@@ -195,7 +195,7 @@ export function getUserById (params) {
  */
 export function editUser(params) {
     return request({
-        url: 'test/user/edit',
+        url: '/user/edit',
         method: 'post',
         data: params
     })
@@ -208,7 +208,7 @@ export function editUser(params) {
  */
 export function uploadAvatar(params) {
     return request({
-        url: 'test/fileUpload/uploadAvatar',
+        url: '/fileUpload/uploadAvatar',
         method: 'post',
         data: params
     })
@@ -221,7 +221,7 @@ export function uploadAvatar(params) {
  */
 export function getUserCollectNote(params) {
     return request({
-        url: '/test/collect/getUserCollectNote',
+        url: '/collect/getUserCollectNote',
         method: 'get',
         params: params
     })
@@ -234,7 +234,7 @@ export function getUserCollectNote(params) {
  */
 export function userCollectNote(params) {
     return request({
-        url: '/test/collect/userCollectNote',
+        url: '/collect/userCollectNote',
         method: 'get',
         params: params
     })
@@ -247,7 +247,7 @@ export function userCollectNote(params) {
  */
 export function getNoteList(params) {
     return request({
-        url: '/test/note/getNoteList',
+        url: '/note/getNoteList',
         method: 'get',
         params: params
     })
@@ -260,7 +260,7 @@ export function getNoteList(params) {
  */
 export function addMessage(params) {
     return request({
-        url: '/test/message/addMessage',
+        url: '/message/addMessage',
         method: 'post',
         params: params
     })
@@ -273,7 +273,7 @@ export function addMessage(params) {
  */
 export function getNoteByTime (params) {
     return request({
-        url: '/test/sort/getSortList',
+        url: '/sort/getSortList',
         method: 'get',
         params: params
     })
@@ -286,7 +286,7 @@ export function getNoteByTime (params) {
  */
 export function getArticleByMonth (params) {
     return request({
-        url: '/test/sort/getArticleByMonth',
+        url: '/sort/getArticleByMonth',
         method: 'get',
         params: params
     })

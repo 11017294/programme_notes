@@ -24,10 +24,10 @@ class NotsWebApplicationTests {
     }
 
     public static void main(String[] args) {
-
+        all();
     }
 
-    private void all(){
+    private static void all(){
         List<String> tables = new ArrayList<>();
         tables.add("t_message");
         FastAutoGenerator.create("jdbc:mysql://localhost:3306/programme_Notes?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT&allowPublicKeyRetrieval=true",
@@ -50,7 +50,7 @@ class NotsWebApplicationTests {
                             .service("service")
                             .serviceImpl("service.impl")
                             .controller("controller")
-                            .parent("com.chen.nots_web")                           // 设置父包名
+                            .parent("com.chen")                           // 设置父包名
                             //.moduleName("system")                            // 设置父包模块名
                             .mapper("mapper")                                  // Mapper 包名
                             .xml("mapper")                                     // Mapper XML 包名
