@@ -26,3 +26,5 @@ bin-release/
 >>>>>>> acde379 (首次提交)
 /notes_web/target/
 /vue-admin-template/node_modules/
+/vue-admin-template/dist/
+/vue_notes_web/dist/
