@@ -22,8 +22,8 @@ export default {
   methods: {
     initDate: function() {
       getNoteContributeCount().then(response => {
-        const contributeDate = response.data.res.contributeDate
-        const noteContributeCount = response.data.res.noteContributeCount
+        const contributeDate = response.data.contributeDate
+        const noteContributeCount = response.data.noteContributeCount
         const chart = echarts.init(document.getElementById('container'))
         const option = {
           // 设置背景 backgroundColor: '#d0d0d0',
