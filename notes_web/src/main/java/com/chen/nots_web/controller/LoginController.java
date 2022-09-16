@@ -18,14 +18,18 @@ import com.chen.nots_web.global.holder.RequestHolder;
 import com.chen.nots_web.service.UserService;
 import com.chen.nots_web.utils.IpUtils;
 import com.chen.nots_web.utils.RedisUtil;
-import com.chen.nots_web.vo.ResultBase;
+import com.chen.nots_web.vo.BaseResponse;
+import com.chen.nots_web.vo.ResultUtils;
 import com.chen.nots_web.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -54,20 +58,20 @@ public class LoginController {
 
     @ApiOperation(value = "用户登录", notes = "用户登录")
     @PostMapping("/login")
-    public ResultBase login(HttpServletRequest request,
-                            @ApiParam(name = "userName", value = "用户名或邮箱或手机号") @RequestParam(name = "userName", required = false) String userName,
-                            @ApiParam(name = "passWord", value = "密码") @RequestParam(name = "passWord", required = false) String passWord,
-                            @ApiParam(name = "isRememberMe", value = "是否记住账号密码") @RequestParam(name = "isRememberMe", required = false, defaultValue = "false") Boolean isRememberMe){
+    public BaseResponse<String> login(HttpServletRequest request,
+                              @ApiParam(name = "userName", value = "用户名或邮箱或手机号") @RequestParam(name = "userName", required = false) String userName,
+                              @ApiParam(name = "passWord", value = "密码") @RequestParam(name = "passWord", required = false) String passWord,
+                              @ApiParam(name = "isRememberMe", value = "是否记住账号密码") @RequestParam(name = "isRememberMe", required = false, defaultValue = "false") Boolean isRememberMe){
 
         if (StrUtil.isBlank(userName)  || StrUtil.isBlank(passWord)) {
-            return ResultBase.error( "账号或密码不能为空");
+            return ResultUtils.error( "账号或密码不能为空");
         }
         String ip = ServletUtil.getClientIP(request);
         String limitCount = redisUtil.get(RedisConf.LOGIN_LIMIT + RedisConf.SEGMENTATION + ip);
         if(StrUtil.isNotBlank(limitCount)){
             Integer limitCountInt = Integer.valueOf(limitCount);
             if(limitCountInt >= 5){
-                return ResultBase.error("输入密码错误过多，已对您进行锁定30分钟");
+                return ResultUtils.error("输入密码错误过多，已对您进行锁定30分钟");
             }
         }
         boolean isEmail = Validator.isEmail(userName);
@@ -86,13 +90,13 @@ public class LoginController {
         User user = userService.getOne(wrapper);
 
         if(ObjectUtil.isNotNull(user) && user.getStatus() == 2){
-            return ResultBase.error("您的账号已被拉黑，如有疑问请联系站长");
+            return ResultUtils.error("您的账号已被拉黑，如有疑问请联系站长");
         }
 
         String inPassword = SecureUtil.md5(passWord);
         if(ObjectUtil.isNull(user) || !inPassword.equals(user.getPassWord())){
             setLoginCommit(request);
-            return ResultBase.error("账号或密码错误");
+            return ResultUtils.error("账号或密码错误");
         }
 
         String token = JWT.create()
@@ -114,17 +118,17 @@ public class LoginController {
         user.setTokenUid(IdUtil.simpleUUID());
         // 添加在线用户到Redis中【设置过期时间】
         userService.addOnlineUser(user, SysConf.EXPIRED_TIME);
-        return ResultBase.ok().data("token", token);
+        return ResultUtils.success(token);
     }
 
     @ApiOperation(value = "退出登录", notes = "退出登录")
     @PostMapping(value = "/logout")
-    public ResultBase logout() {
+    public BaseResponse<String> logout() {
         ServletRequestAttributes attribute = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attribute.getRequest();
         String token = request.getHeader("Authorization");
         if (StringUtils.isEmpty(token)) {
-            return ResultBase.error("退出失败");
+            return ResultUtils.error("退出失败");
         } else {
             // 获取在线用户信息
             String adminJson = redisUtil.get(RedisConf.LOGIN_TOKEN_KEY + RedisConf.SEGMENTATION + token);
@@ -137,13 +141,13 @@ public class LoginController {
             // 移除Redis中的用户
             redisUtil.delete(RedisConf.LOGIN_TOKEN_KEY + RedisConf.SEGMENTATION + token);
             //SecurityContextHolder.clearContext();
-            return ResultBase.ok();
+            return ResultUtils.success("成功");
         }
     }
 
     @ApiOperation(value = "用户注册", notes = "用户注册")
     @PostMapping("/register")
-    public ResultBase register(UserVO userVO) {
+    public BaseResponse<String> register(UserVO userVO) {
         HttpServletRequest request = RequestHolder.getRequest();
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.and(wrapper -> wrapper.eq(SQLConf.USER_NAME, userVO.getUserName()).or().eq(SQLConf.EMAIL, userVO.getEmail()));
@@ -152,16 +156,16 @@ public class LoginController {
             add("1");
         }};
         if (!Validator.isEmail(userVO.getEmail())) {
-            return ResultBase.error("邮箱不合法");
+            return ResultUtils.error("邮箱不合法");
         }
         queryWrapper.in(SQLConf.isDelete, deleteList);
         queryWrapper.last(SysConf.LIMIT_ONE);
         User user = userService.getOne(queryWrapper);
         if (user != null) {
             if(user.getUserName().equals(userVO.getUserName())){
-                return ResultBase.error("用户名：" + user.getUserName() + "已被注册");
+                return ResultUtils.error("用户名：" + user.getUserName() + "已被注册");
             }
-            return ResultBase.error("邮箱：" + user.getEmail() + "已注册过");
+            return ResultUtils.error("邮箱：" + user.getEmail() + "已注册过");
         }
         user = new User();
         user.setUserName(userVO.getUserName());
@@ -182,7 +186,7 @@ public class LoginController {
         user.setOs(map.get(SysConf.OS));
         user.setAvatar("user/Mikasa");
         user.insert();
-        return ResultBase.ok();
+        return ResultUtils.success("成功");
     }
 
 

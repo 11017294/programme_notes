@@ -7,7 +7,8 @@ import com.chen.nots_web.global.SQLConf;
 import com.chen.nots_web.global.SysConf;
 import com.chen.nots_web.service.CollectService;
 import com.chen.nots_web.utils.RedisUtil;
-import com.chen.nots_web.vo.ResultBase;
+import com.chen.nots_web.vo.BaseResponse;
+import com.chen.nots_web.vo.ResultUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,19 +38,21 @@ public class CollectController {
 
     @ApiOperation(value = "获取用户是否收藏该笔记", notes = "获取用户是否收藏该笔记", response = String.class)
     @GetMapping("/getUserCollectNote")
-    public ResultBase getUserCollectNote(HttpServletRequest request, String noteUid){
+    public BaseResponse<Collect> getUserCollectNote(HttpServletRequest request, String noteUid){
         String userUid = request.getAttribute(SysConf.USER_UID).toString();
         QueryWrapper<Collect> wrapper = new QueryWrapper<>();
         wrapper.eq(SQLConf.USER_UID, userUid);
         wrapper.eq(SQLConf.NOTE_UID, noteUid);
         wrapper.last(SysConf.LIMIT_ONE);
-        return ResultBase.ok().data("collect", collectService.getOne(wrapper));
+        Collect collect = collectService.getOne(wrapper);
+        return ResultUtils.success(collect);
     }
 
     @ApiOperation(value = "用户收藏笔记", notes = "用户收藏笔记", response = String.class)
     @GetMapping("/userCollectNote")
-    public ResultBase userCollectNote(HttpServletRequest request, String noteUid){
+    public BaseResponse<Integer> userCollectNote(HttpServletRequest request, String noteUid){
         String userUid = request.getAttribute(SysConf.USER_UID).toString();
-        return ResultBase.ok().data("collectCount", collectService.userCollectNote(userUid, noteUid));
+        int count = collectService.userCollectNote(userUid, noteUid);
+        return ResultUtils.success(count);
     }
 }

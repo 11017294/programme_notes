@@ -338,7 +338,7 @@ export default {
         params.append("keyword", that.keyword)
       }
       getUserList(params).then(response => {
-        let data = response.data.list
+        let data = response.data
         this.userData = data.records
         this.total = data.total
         this.listLoading = false

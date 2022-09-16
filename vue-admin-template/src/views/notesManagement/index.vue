@@ -249,7 +249,7 @@ export default {
         params.append("isOriginal", this.queryParams.originalKeyword)
       }
       getNoteList(params).then(response => {
-        let data = response.data.list
+        let data = response.data
         this.noteData = data.records
         this.total = data.total
         this.pageSize = data.size
@@ -266,14 +266,14 @@ export default {
     },
     getNoteSort() {     // 获取分类
       getNoteSort().then(res => {
-        this.noteSortData = res.data.list;
+        this.noteSortData = res.data;
       }).catch(err => {
         this.$message.error(err)
       })
     },
     getTag() {      // 获取标签
       getTag().then(res => {
-        this.tagData = res.data.list;
+        this.tagData = res.data;
       }).catch(err => {
         this.$message.error(err)
       })

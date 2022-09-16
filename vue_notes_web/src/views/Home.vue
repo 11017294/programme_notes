@@ -119,8 +119,8 @@
                 })
             },
             convertSearchData(that, response) {
-                if (response.code == 0) {
-                    let data = response.data.list;
+                if (response.code == 200) {
+                    let data = response.data;
                     that.isEnd = false;
                     //获取总页数
                     that.totalPages = data.records.length;

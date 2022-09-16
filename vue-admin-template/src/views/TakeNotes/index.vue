@@ -225,7 +225,7 @@
       // 获取分类
       getNoteSort() {
         getNoteSort().then(res => {
-          this.noteSortData = res.data.list;
+          this.noteSortData = res.data;
         }).catch(err => {
           this.$message.error(err)
         })
@@ -233,7 +233,7 @@
       // 获取标签
       getTag() {
         getTag().then(res => {
-          this.tagData = res.data.list;
+          this.tagData = res.data;
         }).catch(err => {
           this.$message.error(err)
         })
@@ -244,14 +244,14 @@
         if(uid != undefined) {
           getNoteById({uid: uid})
             .then(res => {
-              this.noteForm.uid = res.data.note.uid;
-              this.noteForm.title =  res.data.note.title;
-              this.noteForm.summary = res.data.note.summary;
-              this.noteForm.noteSortUid = res.data.note.noteSortUid;
-              this.noteForm.tagUid = res.data.note.tagUid;
-              this.noteForm.isOriginal = res.data.note.isOriginal;
-              this.noteForm.content = res.data.note.content;
-              this.noteForm.tagValue = res.data.note.tagUid.split(",")
+              this.noteForm.uid = res.data.uid;
+              this.noteForm.title =  res.data.title;
+              this.noteForm.summary = res.data.summary;
+              this.noteForm.noteSortUid = res.data.noteSortUid;
+              this.noteForm.tagUid = res.data.tagUid;
+              this.noteForm.isOriginal = res.data.isOriginal;
+              this.noteForm.content = res.data.content;
+              this.noteForm.tagValue = res.data.tagUid.split(",")
             })
             .catch(err => {
 

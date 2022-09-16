@@ -1,10 +1,14 @@
 package com.chen.nots_web.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.chen.nots_web.exception.BusinessException;
+import com.chen.nots_web.exception.ErrorCode;
 import com.chen.nots_web.service.PictureService;
 import com.chen.nots_web.utils.QiniuUtil;
+import com.chen.nots_web.vo.BaseResponse;
 import com.chen.nots_web.vo.PictureVO;
-import com.chen.nots_web.vo.ResultBase;
+import com.chen.nots_web.vo.ResultUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -35,18 +39,19 @@ public class PictureController {
 
     @ApiOperation(value = "获取图片列表", notes = "获取图片列表")
     @GetMapping("/getPictureList")
-    public ResultBase getPictureList(PictureVO pictureVO) {
-        return ResultBase.ok().data("list", pictureService.getPictureList(pictureVO));
+    public BaseResponse<IPage> getPictureList(PictureVO pictureVO) {
+        IPage page = pictureService.getPictureList(pictureVO);
+        return ResultUtils.success(page);
     }
 
     @ApiOperation(value = "删除图片", notes = "删除图片")
     @PostMapping("/deleteImage")
-    public ResultBase deleteImage(PictureVO pictureVO) {
+    public String deleteImage(PictureVO pictureVO) {
         int delete = qiniuUtil.deleteFileFromQiniu(pictureVO.getPicName());
         if(delete != 200){
-            return ResultBase.error("删除失败");
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR);
         }
-        return ResultBase.ok().data("id", pictureService.deleteImage(pictureVO));
+        return pictureService.deleteImage(pictureVO);
     }
 
 }

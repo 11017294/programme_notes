@@ -2,14 +2,18 @@ package com.chen.nots_web.controller;
 
 
 import cn.hutool.core.util.StrUtil;
+import com.chen.nots_web.entity.SysDictType;
+import com.chen.nots_web.exception.BusinessException;
+import com.chen.nots_web.exception.ErrorCode;
 import com.chen.nots_web.service.SysDictTypeService;
-import com.chen.nots_web.vo.ResultBase;
 import com.chen.nots_web.vo.SysDictTypeVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -29,38 +33,38 @@ public class SysDictTypeController {
 
     @ApiOperation(value = "根据字典类型获取字典数据", notes = "根据字典类型获取字典数据")
     @PostMapping("/getListByDictType")
-    public ResultBase getListByDictType(@ApiParam(name = "uid", value = "笔记UID") @RequestParam String dictType) {
+    public List<SysDictType> getListByDictType(@ApiParam(name = "uid", value = "笔记UID") @RequestParam String dictType) {
         if (StrUtil.isBlank(dictType)) {
-            return ResultBase.error("没有传入dictType参数");
+            throw new BusinessException(ErrorCode.REQUEST_PARAMS_ERROR);
         }
-        return ResultBase.ok().data("dictTypelist", sysDictTypeService.getListByDictType(dictType));
+        return sysDictTypeService.getListByDictType(dictType);
     }
 
     @ApiOperation(value = "添加字典类型", notes = "添加字典类型")
     @PostMapping("/add")
-    public ResultBase add(SysDictTypeVO sysDictTypeVO){
-        return ResultBase.ok().data("id", sysDictTypeService.addSysDictType(sysDictTypeVO));
+    public String add(SysDictTypeVO sysDictTypeVO){
+        return sysDictTypeService.addSysDictType(sysDictTypeVO);
     }
 
     @ApiOperation(value = "按uid删除字典类型", notes = "按uid删除字典类型")
     @PostMapping("/delete")
-    public ResultBase delete(@ApiParam(name = "uid", value = "笔记UID") @RequestBody String uid){
+    public String delete(@ApiParam(name = "uid", value = "笔记UID") @RequestBody String uid){
         if(StrUtil.isBlank(uid)){
-            return ResultBase.error("修改失败，没有传入uid");
+            throw new BusinessException(ErrorCode.REQUEST_PARAMS_ERROR);
         }
         boolean note = sysDictTypeService.removeById(uid);
-        if(note){
-            return ResultBase.ok().data("id",uid);
+        if(!note){
+            throw new BusinessException(ErrorCode.NOT_FOUND);
         }
-        return ResultBase.ok();
+        return uid;
     }
 
     @ApiOperation(value = "按uid修改字典类型", notes = "按uid修改字典类型")
     @PostMapping("/update")
-    public ResultBase update(SysDictTypeVO sysDictTypeVO){
-        if(StrUtil.isNotBlank(sysDictTypeVO.getUid())){
-            return ResultBase.ok().data("id", sysDictTypeService.editById(sysDictTypeVO));
+    public String update(SysDictTypeVO sysDictTypeVO){
+        if(StrUtil.isBlank(sysDictTypeVO.getUid())){
+            throw new BusinessException(ErrorCode.REQUEST_PARAMS_ERROR);
         }
-        return ResultBase.error("没有传入uid参数");
+        return sysDictTypeService.editById(sysDictTypeVO);
     }
 }

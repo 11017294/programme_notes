@@ -1,8 +1,11 @@
 package com.chen.nots_web.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.chen.nots_web.entity.WebVisit;
 import com.chen.nots_web.service.WebVisitService;
-import com.chen.nots_web.vo.ResultBase;
+import com.chen.nots_web.vo.BaseResponse;
+import com.chen.nots_web.vo.ResultUtils;
 import com.chen.nots_web.vo.WebVisitVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,7 +32,8 @@ public class WebVisitController {
 
     @ApiOperation(value = "获取用户访问列表", notes = "获取用户访问列表")
     @GetMapping("/getList")
-    public ResultBase getList(WebVisitVO webVisitVO) {
-        return ResultBase.ok().data("list", webVisitService.getPageList(webVisitVO));
+    public BaseResponse<IPage> getList(WebVisitVO webVisitVO) {
+        IPage<WebVisit> userPage = webVisitService.getPageList(webVisitVO);
+        return ResultUtils.success(userPage);
     }
 }

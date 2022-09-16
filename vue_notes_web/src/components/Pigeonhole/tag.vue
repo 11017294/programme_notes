@@ -59,8 +59,8 @@ export default {
             getTag()
                 .then(res => {
                     // 显示第一个标签的笔记
-                    this.getTagList(res.data.list[0])
-                    this.tagData = res.data.list;
+                    this.getTagList(res.data[0])
+                    this.tagData = res.data;
                 }).catch(err => {
                     this.$message.error(err);
             })
@@ -117,7 +117,7 @@ export default {
         },
         convertSearchData(that, response) {
             if (response.code == 0) {
-                let data = response.data.list;
+                let data = response.data;
                 that.isEnd = false;
                 //获取总页数
                 that.totalPages = data.records.length;

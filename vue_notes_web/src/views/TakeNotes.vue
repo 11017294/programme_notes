@@ -223,14 +223,14 @@ export default {
         },
         getNoteSort() {     // 获取分类
             getNoteSort().then(res => {
-                this.noteSortData = res.data.list;
+                this.noteSortData = res.data;
             }).catch(err => {
                 this.$message.error(err)
             })
         },
         getTag() {      // 获取标签
             getTag().then(res => {
-                this.tagData = res.data.list;
+                this.tagData = res.data;
             }).catch(err => {
                 this.$message.error(err)
             })
@@ -242,13 +242,13 @@ export default {
                 fetchContent({uid: uid})
                     .then(res => {
                         that.noteForm.uid = uid;
-                        that.noteForm.title =  res.data.note.title;
-                        that.noteForm.summary = res.data.note.summary;
-                        that.noteForm.noteSortUid = res.data.note.noteSortUid;
-                        that.noteForm.tagUid = res.data.note.tagUid;
-                        that.noteForm.isOriginal = res.data.note.isOriginal;
-                        that.noteForm.content = res.data.note.content;
-                        that.noteForm.tagValue = res.data.note.tagUid.split(",")
+                        that.noteForm.title =  res.data.title;
+                        that.noteForm.summary = res.data.summary;
+                        that.noteForm.noteSortUid = res.data.noteSortUid;
+                        that.noteForm.tagUid = res.data.tagUid;
+                        that.noteForm.isOriginal = res.data.isOriginal;
+                        that.noteForm.content = res.data.content;
+                        that.noteForm.tagValue = res.data.tagUid.split(",")
                     })
             }
         }

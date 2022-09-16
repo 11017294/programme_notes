@@ -56,8 +56,8 @@ export default {
         getNoteSort() {
             getNoteSort()
                 .then(res => {
-                    this.getSortList(res.data.list[0])
-                    this.sortData = res.data.list;
+                    this.getSortList(res.data[0])
+                    this.sortData = res.data;
                 }).catch(err => {
                 this.$message.error(err);
             })
@@ -114,7 +114,7 @@ export default {
         },
         convertSearchData(that, response) {
             if (response.code == 0) {
-                let data = response.data.list;
+                let data = response.data;
                 that.isEnd = false;
                 //获取总页数
                 that.totalPages = data.records.length;

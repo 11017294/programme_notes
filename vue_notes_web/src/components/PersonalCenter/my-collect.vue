@@ -70,7 +70,7 @@ export default {
         },
         convertSearchData(that, response) {
             if (response.code == 0) {
-                let data = response.data.list;
+                let data = response.data;
                 that.isEnd = false;
                 //获取总页数
                 that.totalPages = data.records.length;

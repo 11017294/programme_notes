@@ -165,7 +165,7 @@ export default {
       params.pageSize = this.pageSize;
       params.currentPage = this.currentPage;
       getOperateLog(params).then(response => {
-        let res = response.data.list
+        let res = response.data
         this.tableData = res.records;
         console.log(res)
         this.currentPage = res.current;

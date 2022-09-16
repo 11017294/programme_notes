@@ -4,7 +4,8 @@ import com.chen.nots_web.service.NoteService;
 import com.chen.nots_web.service.TagService;
 import com.chen.nots_web.service.UserService;
 import com.chen.nots_web.service.WebVisitService;
-import com.chen.nots_web.vo.ResultBase;
+import com.chen.nots_web.vo.BaseResponse;
+import com.chen.nots_web.vo.ResultUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -41,39 +42,39 @@ public class NotesSysController {
 
     @ApiOperation(value = "注册用户数", notes = "注册用户数")
     @GetMapping("/getUserCount")
-    public ResultBase getUserCount() {
-        return ResultBase.ok().data("count", userService.count());
+    public int getUserCount() {
+        return userService.count();
     }
 
     @ApiOperation(value = "文章数", notes = "文章数")
     @GetMapping("/getNotesCount")
-    public ResultBase getNotesCount() {
-        return ResultBase.ok().data("count", noteService.count());
+    public int getNotesCount() {
+        return noteService.count();
     }
 
     @ApiOperation(value = "标签数", notes = "标签数")
     @GetMapping("/getTagCount")
-    public ResultBase getTagCount() {
-        return ResultBase.ok().data("count", tagService.count());
+    public int getTagCount() {
+        return tagService.count();
     }
 
     @ApiOperation(value = "浏览数", notes = "浏览数")
     @GetMapping("/getViewingCount")
-    public ResultBase getViewingCount() {
-        return ResultBase.ok().data("count", webVisitService.getWebVisitCount());
+    public int getViewingCount() {
+        return webVisitService.getWebVisitCount();
     }
 
     @ApiOperation(value = "获取一年内的文章贡献数", notes = "获取一年内的文章贡献度")
     @GetMapping(value = "/getNoteContributeCount")
-    public ResultBase getNoteContributeCount() {
+    public BaseResponse<Map<String, Object>> getNoteContributeCount() {
         Map<String, Object> resultMap = noteService.getNoteContributeCount();
-        return ResultBase.ok().data("res", resultMap);
+        return ResultUtils.success(resultMap);
     }
 
     @ApiOperation(value = "获取最近一周用户独立IP数和访问量", notes = "获取最近一周用户独立IP数和访问量")
     @RequestMapping(value = "/getVisitByWeek", method = RequestMethod.GET)
-    public ResultBase getVisitByWeek() {
+    public BaseResponse<Map<String, Object>> getVisitByWeek() {
         Map<String, Object> visitByWeek = webVisitService.getVisitByWeek();
-        return ResultBase.ok().data("res" ,visitByWeek);
+        return ResultUtils.success(visitByWeek);
     }
 }

@@ -157,7 +157,7 @@ export default {
         fetchContent() {
             let that = this;
             fetchContent({uid: that.noteUid}).then(res => {
-                that.noteData = res.data.note
+                that.noteData = res.data
                 if(that.$store.state.isLogin){
 
                     getUserCollectNote({"noteUid": that.noteData.uid})

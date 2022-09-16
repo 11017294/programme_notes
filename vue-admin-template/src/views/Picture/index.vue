@@ -89,7 +89,7 @@ export default {
       params.append("currentPage", this.currentPage)
       getPictureList(params)
         .then(res => {
-          let data = res.data.list
+          let data = res.data
           this.tableData = data.records
           this.total = data.total
           this.pageSize = data.size

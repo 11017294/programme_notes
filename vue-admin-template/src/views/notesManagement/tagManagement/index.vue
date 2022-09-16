@@ -190,7 +190,7 @@ export default {
         params.append("keyword", this.keyword)
       }
       getTagList(params).then(response => {
-        let data = response.data.list
+        let data = response.data
         this.tableData = data.records
         this.total = data.total
         this.pageSize = data.size

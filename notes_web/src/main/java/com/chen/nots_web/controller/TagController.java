@@ -3,18 +3,25 @@ package com.chen.nots_web.controller;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.chen.nots_web.entity.Tag;
+import com.chen.nots_web.exception.BusinessException;
+import com.chen.nots_web.exception.ErrorCode;
 import com.chen.nots_web.global.SQLConf;
 import com.chen.nots_web.service.TagService;
-import com.chen.nots_web.vo.ResultBase;
 import com.chen.nots_web.vo.TagVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -35,52 +42,52 @@ public class TagController {
 
     @ApiOperation(value = "获取全部标签列表", notes = "获取全部标签列表")
     @GetMapping("/getList")
-    public ResultBase getList(){
-        return ResultBase.ok().data("list", tagService.getAll());
+    public List<Tag> getList(){
+        return tagService.getAll();
     }
 
     @ApiOperation(value = "获取标签分类列表", notes = "获取标签分类列表")
     @GetMapping("/getTagList")
-    public ResultBase getTagList(TagVO tagVO){
-        return ResultBase.ok().data("list", tagService.getTagList(tagVO));
+    public IPage<Tag> getTagList(TagVO tagVO){
+        return tagService.getTagList(tagVO);
     }
 
     @ApiOperation(value = "删除标签", notes = "删除标签")
     @PostMapping("/delete")
-    public ResultBase delete(@ApiParam(name = "uid", value = "标签UID") String uid) {
+    public String delete(@ApiParam(name = "uid", value = "标签UID") String uid) {
         if(StringUtils.isBlank(uid)){
-            return ResultBase.error("删除失败，没有传入uid");
+            throw new BusinessException(ErrorCode.REQUEST_PARAMS_ERROR);
         }
         boolean tag = tagService.removeById(uid);
-        if(tag){
-            return ResultBase.ok().data("id",uid);
+        if(!tag){
+            throw new BusinessException(ErrorCode.NOT_FOUND);
         }
-        return ResultBase.error("删除失败，没有ID:" + uid + "的标签");
+        return uid;
     }
 
     @ApiOperation(value = "增加标签", notes = "增加标签", response = String.class)
     @PostMapping("/add")
-    public ResultBase add(TagVO tagVO) {
+    public String add(TagVO tagVO) {
         log.info("增加标签");
         QueryWrapper<Tag> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(SQLConf.CONTENT, tagVO.getContent());
         Tag tempTag = tagService.getOne(queryWrapper);
         if(ObjectUtil.isNotEmpty(tempTag)){
-            return ResultBase.error("已存在《" + tagVO.getContent() + "》标签");
+            throw new BusinessException(ErrorCode.CONFLICT);
         }
-        return ResultBase.ok().data("id", tagService.addTag(tagVO));
+        return tagService.addTag(tagVO);
     }
 
     @ApiOperation(value = "编辑标签", notes = "编辑标签", response = String.class)
     @PostMapping("/edit")
-    public ResultBase edit(TagVO tagVO) {
+    public String edit(TagVO tagVO) {
         log.info("编辑标签");
         QueryWrapper<Tag> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(SQLConf.CONTENT, tagVO.getContent());
         Tag tag = tagService.getOne(queryWrapper);
         if(ObjectUtil.isNotEmpty(tag) && !tag.getUid().equals(tagVO.getUid())){
-            return ResultBase.error("已存在《" + tagVO.getContent() + "》标签");
+            throw new BusinessException(ErrorCode.CONFLICT);
         }
-        return ResultBase.ok().data("id", tagService.editTag(tagVO));
+        return tagService.editTag(tagVO);
     }
 }

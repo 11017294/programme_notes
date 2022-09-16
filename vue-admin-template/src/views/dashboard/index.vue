@@ -95,7 +95,7 @@ export default {
     // 获取用户数
     getUserCount() {
       getUserCount().then(response => {
-        this.userCount = response.data.count
+        this.userCount = response.data
       }).catch(err => {
         this.$message.error(err)
       })
@@ -103,7 +103,7 @@ export default {
     // 获取标签数
     getTagCount() {
       getNotesCount().then(response => {
-        this.noteCount = response.data.count
+        this.noteCount = response.data
       }).catch(err => {
         this.$message.error(err)
       })
@@ -111,7 +111,7 @@ export default {
     // 获取笔记数
     getNoteCount() {
       getTagCount().then(response => {
-        this.tagCount = response.data.count
+        this.tagCount = response.data
       }).catch(err => {
         this.$message.error(err)
       })
@@ -119,7 +119,7 @@ export default {
     // 获取ip数
     getIpCount() {
       getViewingCount().then(response => {
-        this.ipCount = response.data.count
+        this.ipCount = response.data
       }).catch(err => {
         this.$message.error(err)
       })
@@ -131,7 +131,7 @@ export default {
     // 一周内文章贡献统计图
     getVisitByWeek() {
       getVisitByWeek().then(response => {
-        var visitByWeek = response.data.res
+        var visitByWeek = response.data
         var lineChartData = {
           date: visitByWeek.date,
           expectedData: visitByWeek.pv,

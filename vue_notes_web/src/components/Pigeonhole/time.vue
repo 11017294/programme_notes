@@ -44,8 +44,8 @@ export default {
         getNoteByTime() {
             getNoteByTime()
                 .then(res => {
-                    this.getSortList(res.data.list[0])
-                    this.noteTimeData = res.data.list
+                    this.getSortList(res.data[0])
+                    this.noteTimeData = res.data
                 }).catch(err => {
                     this.$message.error(err);
                 })
@@ -65,7 +65,7 @@ export default {
             params.append("monthDate", month);
             getArticleByMonth(params)
                 .then(res => {
-                    this.noteData = res.data.list
+                    this.noteData = res.data
                 })
                 .catch(err => {
                     this.$message.error(err)

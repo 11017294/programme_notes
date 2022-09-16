@@ -18,6 +18,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sysDictData")
 public class SysDictDataController {
 
-
-
 }
