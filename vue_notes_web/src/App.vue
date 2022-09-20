@@ -31,12 +31,12 @@
                 authVerify(token).then(res => {     // 根据token获取用户登录信息
                     that.$store.commit("SET_IS_LOGIN", true)
                     that.$store.commit("SET_TOKEN", token)
-                    that.$store.commit("SET_USERINFO", res.data.info)
+                    that.$store.commit("SET_USERINFO", res.data)
 
                     let userUid = that.$store.state.userInfo.userUid;
                     getUserById(userUid).then(res => {  // 根据用户id获取用户个人信息
-                        localStorage.setItem('userInfo', JSON.stringify(res.data.user));
-                        this.$store.commit("SET_AVATAR", res.data.user.avatar)
+                        localStorage.setItem('userInfo', JSON.stringify(res.data));
+                        this.$store.commit("SET_AVATAR", res.data.avatar)
                     }).catch(err => {
                         that.$message.error(err);
                     })

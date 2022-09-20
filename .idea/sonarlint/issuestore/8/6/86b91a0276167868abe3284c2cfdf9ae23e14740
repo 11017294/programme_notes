@@ -1,0 +1,13 @@
+
+Jjavascript:S1117¤"-'res' is already declared in the upper scope.(öÍçÍ
+†javascript:S1172«"]Remove the unused function parameter "err" or rename it to "_err" to make intention explicit.(Ã‰½ˆùÿÿÿÿ8£Ä¼«´0
+Bjavascript:S1186«" Unexpected empty arrow function.(Ã‰½ˆùÿÿÿÿ
+†javascript:S1172¸"]Remove the unused function parameter "err" or rename it to "_err" to make intention explicit.(Ã‰½ˆùÿÿÿÿ8£Ä¼«´0
+Bjavascript:S1186¸" Unexpected empty arrow function.(Ã‰½ˆùÿÿÿÿ
+IWeb:AvoidCommentedOutCodeCheck"Remove this commented out code.(Úèê
+LWeb:ImgWithoutAltCheck"%Add an "alt" attribute to this image.(²³¿úÿÿÿÿ
+HWeb:BoldAndItalicTagsCheck!"Replace this <i> tag by <em>.(Ç’úºıÿÿÿÿ
+HWeb:BoldAndItalicTagsCheck%"Replace this <i> tag by <em>.(Ç“–üÿÿÿÿ
+NWeb:AvoidCommentedOutCodeCheck?"Remove this commented out code.(’‹¿Çüÿÿÿÿ
+HWeb:BoldAndItalicTagsCheckJ"Replace this <i> tag by <em>.(’¢Ñøÿÿÿÿ
+NWeb:AvoidCommentedOutCodeCheckU"Remove this commented out code.(‹òá¤ıÿÿÿÿ

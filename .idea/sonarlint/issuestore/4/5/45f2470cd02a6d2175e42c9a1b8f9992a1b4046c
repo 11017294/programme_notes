@@ -1,0 +1,53 @@
+
+J
+java:S3740Y"/Provide the parametrized type for this generic.(–öòûÿÿÿÿ
+J
+java:S3740["/Provide the parametrized type for this generic.(û›÷‘úÿÿÿÿ
+u
+java:S2293¡"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ñ·Ğîúÿÿÿÿ
+o
+java:S1192*"TDefine a constant instead of duplicating this literal "yyyy-MM-dd HH:mm:ss" 8 times.(†£êüÿÿÿÿ
+‡
+java:S1319…"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÁŞÖ‰
+Œ
+java:S1319›"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ŞºÿÄüÿÿÿÿ
+w
+java:S1488,"\Immediately return this expression instead of assigning it to the temporary variable "json".(‘×¶ùÿÿÿÿ
+s
+java:S1488ğ"\Immediately return this expression instead of assigning it to the temporary variable "pojo".(‹èĞĞ
+u
+java:S1488ÿ"YImmediately return this expression instead of assigning it to the temporary variable "t".(¼‹×³şÿÿÿÿ
+x
+java:S1488‘"\Immediately return this expression instead of assigning it to the temporary variable "list".(”·Ï±ûÿÿÿÿ
+e
+java:S1104!"OMake log a static final constant or non-public and provide accessors if needed.(ÁÙêÒ
+?
+java:S1444!")Make this "public static log" field final(ÁÙêÒ
+U
+java:S1118":Add a private constructor to hide the implicit public one.(ôÖ®¬ùÿÿÿÿ
+:
+java:S1168C"$Return an empty map instead of null.(¥¹ï
+O
+java:S2864N"4Iterate over the "entrySet" instead of the "keySet".(½Ö²’ûÿÿÿÿ
+@
+java:S1181e"%Catch Exception instead of Throwable.(‡˜ÚÚøÿÿÿÿ
+E
+java:S1197\"*Move the array designators [] to the type.(¦ìµ½ûÿÿÿÿ
+6
+java:S3878b"Remove this array creation.(¶ßƒƒüÿÿÿÿ
+=
+java:S1452…"&Remove usage of generic wildcard type.(ÁŞÖ‰
+B
+java:S1452›"&Remove usage of generic wildcard type.(ŞºÿÄüÿÿÿÿ
+C
+java:S1172Ì",Remove this unused method parameter "clazz".(éÜ×³
+=
+java:S1452Ì"&Remove usage of generic wildcard type.(éÜ×³
+B
+java:S1168–"+Return an empty collection instead of null.(¥¹ï
+\
+java:S2147²"ECombine this catch with the one at line 304, which has the same body.(Å¡ß
+\
+java:S2147´"ECombine this catch with the one at line 304, which has the same body.(åşáÿ
+a
+java:S2147¶"ECombine this catch with the one at line 304, which has the same body.(ÿëÛßúÿÿÿÿ

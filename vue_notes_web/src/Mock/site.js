@@ -2,7 +2,7 @@ const Mock = require('mockjs');
 export default [
     // 站点信息
     {
-        url: '/site',
+        url: '/notes/site',
         type: 'get',
         response: () => {
             return {
@@ -20,7 +20,7 @@ export default [
     },
     // 站点社交信息
     {
-        url: '/social',
+        url: '/notes/social',
         type: 'get',
         response: () => {
             return {

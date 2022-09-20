@@ -70,7 +70,7 @@ export default {
         },
         mounted(){
             window.addEventListener('scroll', this.watchScroll)
-            this.fetchCategory()
+            // this.fetchCategory()
         },
         beforeDestroy () {
             window.removeEventListener("scroll", this.watchScroll)
@@ -89,13 +89,14 @@ export default {
                 }
                 this.lastScrollTop = scrollTop
             },
-            fetchCategory() {
-                fetchCategory().then(res => {
-                    this.category = res.data
-                }).catch(err => {
-                    console.log(err)
-                })
-            },
+            // todo 临时注释（作用未知）
+            // fetchCategory() {
+            //     fetchCategory().then(res => {
+            //         this.category = res.data
+            //     }).catch(err => {
+            //         console.log(err)
+            //     })
+            // },
             // 点击头像触发的动作
             handleCommand(command) {
                 switch (command) {
