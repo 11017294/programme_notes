@@ -99,11 +99,7 @@ export default {
         if(this.$store.state.isLogin){
             getUserCollectNote({"noteUid": this.post.uid})
                 .then(res => {
-                    if(res.data.collect){
-                        this.isCollect = true;
-                    } else {
-                        this.isCollect = false;
-                    }
+                    this.isCollect = res.data != null;
                 })
                 .catch(err => {})
         } else {

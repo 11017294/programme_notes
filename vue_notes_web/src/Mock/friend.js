@@ -18,11 +18,11 @@ for (let i = 0; i < count; i++) {
 
 export default [
     {
-        url: '/friend',
+        url: '/notes/friend',
         type: 'get',
         response: config => {
             return {
-                code: 20000,
+                code: 200,
                 data: List
             }
         }
