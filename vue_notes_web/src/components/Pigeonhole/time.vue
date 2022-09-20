@@ -1,5 +1,5 @@
 <template>
-    <el-container>
+    <el-container class="time">
         <el-aside>
             <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
                 <el-timeline>
@@ -109,6 +109,11 @@ export default {
     height: 600px;
     line-height: 36px;
     background-color: #ffffff;
+}
+
+.time {
+    height: 600px;
+    line-height: 20px
 }
 
 .el-timeline-item a{

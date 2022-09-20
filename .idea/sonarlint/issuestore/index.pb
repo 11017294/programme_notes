@@ -184,8 +184,6 @@ S
 #vue-admin-template/src/api/table.js,e\9\e9970d7883fa2e0b36923e8196aa84d5dea72181
 r
 Bnotes_web/src/main/java/com/chen/nots_web/service/NoteService.java,a\8\a8f6c95e17af08f5657c0ff7f20cedb8e64c854d
-Q
-!vue_notes_web/src/router/index.js,8\8\883c03bc5870c4ceea9e94549a69fbb8da7d9912
 k
 ;notes_web/src/main/java/com/chen/nots_web/vo/CollectVO.java,4\e\4ea8fe0fbd5d309cc2e2b3c1c88a8d1775373ef7
 C
@@ -238,8 +236,6 @@ W
 'vue-admin-template/src/utils/request.js,d\e\dea5b119623d7c2ac3b800bfa024b1513c36b824
 R
 "vue_notes_web/src/utils/request.js,d\4\d4d36ad608fe111b9e4cbcdd080a94e69a8516fc
-`
-0vue_notes_web/src/components/Pigeonhole/sort.vue,b\f\bf44f1bd68df7b68fcff6e2ae73b4fcaface05df
 
 Onotes_web/src/main/java/com/chen/nots_web/controller/SysDictDataController.java,2\1\21bbbee2579099baf0bbd5f9d5558b9f02b84e51
 
@@ -248,8 +244,6 @@ w
 Gnotes_web/src/main/java/com/chen/nots_web/controller/TagController.java,b\2\b2afcc76757ed428018e366053f5ed4aa222b273
 U
 %vue_notes_web/src/views/TakeNotes.vue,9\9\99704440b152fd66d82e694f99e4552835a3d77c
-`
-0vue_notes_web/src/components/Pigeonhole/time.vue,1\d\1d1951e09ab12da67a00e210e5560de405b3e1ee
 x
 Hnotes_web/src/main/java/com/chen/nots_web/controller/UserController.java,c\f\cfedfd1fe71453067e00cab2413c944f73406326
 |
@@ -260,5 +254,3 @@ T
 $vue_notes_web/src/views/Articles.vue,8\6\86b91a0276167868abe3284c2cfdf9ae23e14740
 j
 :vue_notes_web/src/components/PersonalCenter/my-collect.vue,5\4\54016e0d470bce77312586204aea46b2490eb67f
-_
-/vue_notes_web/src/components/Pigeonhole/tag.vue,1\c\1c7b1a8746192377230c4309d050d7c47af0f469
