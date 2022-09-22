@@ -292,6 +292,28 @@ export function getArticleByMonth (params) {
     })
 }
 
+/**
+ * 文章评论
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function comment (params) {
+    return request({
+        url: '/comment/add',
+        method: 'post',
+        params: params
+    })
+}
+
+/**
+ * 获取文章的评论信息
+ * @param params
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export function articleComment(articleUid) {
+    return request.get(`/comment/getByArticleUid/${articleUid}`, {})
+}
+
 export function fetchFocus() {
     return request({
         url: '/focus/list',

@@ -202,3 +202,26 @@ CREATE TABLE `t_web_visit` (
 ALTER TABLE  t_user ADD status tinyint(1)  unsigned NOT NULL DEFAULT '1' COMMENT '状态，2表示被拉黑';
 
 ALTER TABLE  t_message ADD status tinyint(1)  unsigned NOT NULL DEFAULT '1' COMMENT '状态，2表示已处理';
+
+/*评论*/
+DROP TABLE IF EXISTS `t_comment`;
+create table t_comment
+(
+    uid                 varchar(32)                                            not null comment '主键uid'
+        primary key,
+    article_uid         varchar(32)                                            null comment '文章的uid',
+    parent_uid          varchar(32)                                            null comment '父评论uid',
+    comment_user_uid    varchar(32)                                            null comment '评论用户的用户uid',
+    target_user_uid     varchar(32)                                            null comment '被评论的用户的uid',
+    content             varchar(1024)                                          null comment '评论内容',
+    is_delete           tinyint(1) unsigned zerofill default 0                 not null comment '是否删除，1表示已删除',
+    create_time         timestamp                    default CURRENT_TIMESTAMP not null comment '创建时间',
+    update_time         timestamp                    default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    comment_user_name   varchar(255)                                           null comment '评论用户的用户名称',
+    comment_user_avatar varchar(255)                                           null comment '评论用户的用户头像',
+    target_user_name    varchar(255)                                           null comment '被评论用户的用户名称',
+    target_user_avatar  varchar(255)                                           null comment '被评论用户的用户头像',
+    constraint comment_id_uindex
+        unique (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论信息';
+

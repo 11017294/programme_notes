@@ -69,7 +69,7 @@ export default {
                 })
         },
         convertSearchData(that, response) {
-            if (response.code == 0) {
+            if (response.code == 200) {
                 let data = response.data;
                 that.isEnd = false;
                 //获取总页数

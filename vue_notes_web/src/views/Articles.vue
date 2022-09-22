@@ -81,16 +81,13 @@
                         <p>声明：编程笔记|版权所有，违者必究|如未注明</p>
                         <p>转载：转载请注明原文链接<a href="/"></a></p>
                     </div>
-                    <!--评论-->
-<!--
-                    <div class="comments">
-                        <comment v-for="item in comments" :key="item.comment.id" :comment="item.comment">
-                            <template v-if="item.reply.length">
-                                <comment v-for="reply in item.reply" :key="reply.id" :comment="reply"></comment>
-                            </template>
-                        </comment>
-                    </div>
-                    -->
+                    <!-- 评论 -->
+                    <comment
+                        :commentList="comments"
+                        :articleId="noteData.uid"
+                        :count="count"
+                        @reloadComment="comments"
+                    />
                 </article>
             </main>
         </div>
@@ -100,9 +97,9 @@
 <script>
 import Banner from '@/components/banner'
 import sectionTitle from '@/components/section-title'
-import comment from '@/components/comment'
+import comment from '@/components/article/Comment'
 import menuTree from '@/components/menu-tree'
-import {fetchComment, fetchContent, getUserCollectNote, userCollectNote} from '../api'
+import {fetchComment, fetchContent, getUserCollectNote, userCollectNote, articleComment} from '../api'
 
 export default {
     name: 'Articles',
@@ -110,6 +107,7 @@ export default {
         return {
             showDonate: false,
             comments: [],
+            count: 0,
             menus: [],
             noteData: {},
             noteUid: null,
@@ -140,13 +138,6 @@ export default {
         menuTree
     },
     methods: {
-        getComment() {
-            fetchComment().then(res => {
-                this.comments = res.data || []
-            }).catch(err => {
-                console.log(err)
-            })
-        },
         fetchH(arr, left, right) {
             if (right) {
                 return arr.filter(item => item.offsetTop > left && item.offsetTop < right)
@@ -162,7 +153,7 @@ export default {
 
                     getUserCollectNote({"noteUid": that.noteData.uid})
                         .then(res => {
-                            if(res.data.collect){
+                            if(res.data){
                                 that.isCollect = true;
                             } else {
                                 that.isCollect = false;
@@ -177,18 +168,31 @@ export default {
         collect() {
             if(this.$store.state.isLogin){
                 this.isCollect = !this.isCollect;
-                userCollectNote({"noteUid": this.post.uid})
+                userCollectNote({"noteUid": this.noteData.uid})
                     .then(res => {
-                        this.post.collectCount = res.data.collectCount;
+                        this.noteData.collectCount = res.data.collectCount;
                     })
                     .catch(err => {})
             } else{
                 this.$message.warning("你未登录还不能收藏笔记")
             }
+        },
+        // 获取文章评论
+        fetchComment() {
+            articleComment(this.noteUid)
+                .then(res => {
+                    this.count = res.data.count;
+                    this.comments = res.data.comments;
+                    console.log(res)
+                })
+                .catch(err => {
+                    this.$message.error(err)
+            })
         }
     },
     mounted() {
         this.fetchContent();
+        this.fetchComment();
     },
     created() {
         this.noteUid = this.$route.query.uid;
