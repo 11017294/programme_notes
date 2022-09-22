@@ -2,7 +2,6 @@
     <div>
         <div class="comment-title"><i class="iconfont "/>评论</div>
         <!-- 评论框 -->
-
         <el-row>
             <el-col :span="24">
                 <div class="comment-input">
@@ -27,7 +26,23 @@
         <div v-if="count > 0">
             <!-- 评论数量 -->
             <div class="count">{{ count }} 评论</div>
-
+            <!-- 评论列表 -->
+            <div
+                style="display:flex"
+                class="pt-5"
+                v-for="(item, index) of commentList"
+                :key="item.uid"
+            >
+<!--                &lt;!&ndash; 头像 &ndash;&gt;-->
+<!--                <v-avatar size="40" class="comment-avatar">-->
+<!--                    <img :src="item.avatar" />-->
+<!--                </v-avatar>-->
+                <!-- 用户名 -->
+                <div class="comment-user">
+                    <span>{{ item.commentUserName }}</span>
+                    <span>{{ item.content }}</span>
+                </div>
+            </div>
         </div>
         <!-- 没有评论提示 -->
         <div v-else style="padding:1.25rem;text-align:center">
@@ -79,7 +94,7 @@ export default {
             params.append("commentUserUid", that.$store.state.userInfo.userUid);
 
             comment(params).then(res => {
-
+                this.$emit("reloadComment");
             }).catch(err => {
                 that.$message.error(err)
             })

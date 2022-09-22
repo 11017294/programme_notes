@@ -353,11 +353,3 @@ export function fetchSiteInfo() {
         params: {}
     })
 }
-
-export function fetchComment() {
-    return request({
-        url: '/comment',
-        method: 'get',
-        params: {}
-    })
-}

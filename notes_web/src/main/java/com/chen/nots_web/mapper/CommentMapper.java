@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface CommentMapper extends BaseMapper<Comment> {
 
-    @Select(" select * from t_comment where article_uid = #{articleUid} and is_delete = 0 ")
+    @Select(" select * from t_comment where article_uid = #{articleUid} and is_delete = 0 order by create_Time desc")
     List<Comment> selectByArticleUid(String articleUid);
 
 }

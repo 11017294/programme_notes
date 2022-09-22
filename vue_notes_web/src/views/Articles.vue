@@ -86,7 +86,7 @@
                         :commentList="comments"
                         :articleId="noteData.uid"
                         :count="count"
-                        @reloadComment="comments"
+                        @reloadComment="fetchComment"
                     />
                 </article>
             </main>
@@ -99,7 +99,7 @@ import Banner from '@/components/banner'
 import sectionTitle from '@/components/section-title'
 import comment from '@/components/article/Comment'
 import menuTree from '@/components/menu-tree'
-import {fetchComment, fetchContent, getUserCollectNote, userCollectNote, articleComment} from '../api'
+import {fetchContent, getUserCollectNote, userCollectNote, articleComment} from '../api'
 
 export default {
     name: 'Articles',
@@ -183,7 +183,6 @@ export default {
                 .then(res => {
                     this.count = res.data.count;
                     this.comments = res.data.comments;
-                    console.log(res)
                 })
                 .catch(err => {
                     this.$message.error(err)
