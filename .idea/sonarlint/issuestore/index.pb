@@ -41,8 +41,6 @@ D
 sql脚本/t_note.sql,e\8\e8a2904699ae3d8427c2fdb00eb86dc5879a603a
 t
 Dnotes_web/src/main/java/com/chen/nots_web/mapper/WebVisitMapper.java,0\0\00051f52bc4ae286000da5375f746e487700c065
-g
-7vue_notes_web/src/components/PersonalCenter/install.vue,2\a\2a4c6a187742dd6dabb44782cbc04119c060bab1
 s
 Cnotes_web/src/main/java/com/chen/nots_web/mapper/CollectMapper.java,8\b\8bc97464c52d4e644375af5ad83d157bec25a0d5
 x

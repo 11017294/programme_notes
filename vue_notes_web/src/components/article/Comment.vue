@@ -56,15 +56,24 @@
                                 {{ item.createTime | parseTime }}
                             </el-col>
                         </el-row>
+                        <!--评论内容-->
                         <el-row class="content">
                             {{ item.content }}
                         </el-row>
+                        <!-- 回复按钮 -->
+                        <el-row class="replyCommentBtn">
+                            <el-link icon="el-icon-chat-square"
+                                     :underline="false"
+                                     @click="replyComment(index, item)"
+                            >回复</el-link>
+                        </el-row>
+                        <!-- 回复框 -->
+                        <reply ref="reply" />
                     </el-col>
                 </el-row>
-
-
             </div>
         </div>
+
         <!-- 没有评论提示 -->
         <div v-else style="padding:1.25rem;text-align:center">
             来发评论吧~
@@ -74,10 +83,14 @@
 
 <script>
 
+import reply from "@/components/article/Reply";
 import { comment } from "@/api";
 
 export default {
-
+    name: "Comment",
+    components: {
+        reply,
+    },
     props: {
         commentList: {
             type: Array
@@ -119,6 +132,18 @@ export default {
             }).catch(err => {
                 that.$message.error(err)
             })
+        },
+        replyComment(index, item) {
+            this.$refs.reply.forEach(item => {
+                item.$el.style.display = "none";
+            });
+            //传值给回复框
+            this.$refs.reply[index].commentContent = "";
+            this.$refs.reply[index].targeNickName = item.commentUserNickName;
+            this.$refs.reply[index].targetUserUid = item.commentUserUid;
+            this.$refs.reply[index].parentUid = this.commentList[index].uid;
+            this.$refs.reply[index].index = index;
+            this.$refs.reply[index].$el.style.display = "block";
         }
     },
 
@@ -150,12 +175,16 @@ export default {
 }
 
 .userName, .time {
-    margin: 5px;
+    margin: 5px 0px;
     font-size: 12px;
 }
 
+.replyCommentBtn {
+    margin: 5px 0px;
+}
+
 .content {
-    margin: 10px 30px 5px 5px;
+    margin: 10px 30px 5px 0px;
     line-height: 28px
 }
 
