@@ -27,21 +27,42 @@
             <!-- 评论数量 -->
             <div class="count">{{ count }} 评论</div>
             <!-- 评论列表 -->
-            <div
-                style="display:flex"
-                class="pt-5"
-                v-for="(item, index) of commentList"
-                :key="item.uid"
-            >
-<!--                &lt;!&ndash; 头像 &ndash;&gt;-->
-<!--                <v-avatar size="40" class="comment-avatar">-->
-<!--                    <img :src="item.avatar" />-->
-<!--                </v-avatar>-->
-                <!-- 用户名 -->
-                <div class="comment-user">
-                    <span>{{ item.commentUserName }}</span>
-                    <span>{{ item.content }}</span>
-                </div>
+            <div v-for="(item, index) of commentList" :key="item.commentUserUid">
+                <!-- 分割线 -->
+                <el-divider></el-divider>
+                <el-row>
+                    <!--头像-->
+                    <el-col :span="2">
+                        <!--todo 路径错误-->
+                        <el-avatar v-if="!item.commentUserAvatar" :size="45"
+                                   :src="item.commentUserAvatar">
+                        <!-- this.global.file_path -->
+                        </el-avatar>
+                        <el-avatar v-else :size="45">
+                            <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+                        </el-avatar>
+                    </el-col>
+
+                    <el-col :span="22">
+                        <!--用户昵称-->
+                        <el-row>
+                            <el-col :span="2" class="userName">
+                                {{ item.commentUserNickName }}
+                            </el-col>
+                        </el-row>
+                        <!--发表时间-->
+                        <el-row>
+                            <el-col :span="18" class="time">
+                                {{ item.createTime | parseTime }}
+                            </el-col>
+                        </el-row>
+                        <el-row class="content">
+                            {{ item.content }}
+                        </el-row>
+                    </el-col>
+                </el-row>
+
+
             </div>
         </div>
         <!-- 没有评论提示 -->
@@ -126,6 +147,16 @@ export default {
     line-height: 1.75;
     font-size: 1.25rem;
     font-weight: bold;
+}
+
+.userName, .time {
+    margin: 5px;
+    font-size: 12px;
+}
+
+.content {
+    margin: 10px 30px 5px 5px;
+    line-height: 28px
 }
 
 </style>

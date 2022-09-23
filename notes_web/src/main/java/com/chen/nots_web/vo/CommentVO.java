@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,14 +35,17 @@ public class CommentVO extends BaseVO<Comment> {
     @ApiModelProperty("评论内容")
     private String content;
 
+    @ApiModelProperty("创建时间")
+    private Date createTime;
+
     @ApiModelProperty("评论用户的用户名称")
-    private String commentUserName;
+    private String commentUserNickName;
 
     @ApiModelProperty("评论用户的用户头像")
     private String commentUserAvatar;
 
     @ApiModelProperty("被评论用户的用户名称")
-    private String targetUserName;
+    private String targetUserNickName;
 
     @ApiModelProperty("被评论用户的用户头像")
     private String targetUserAvatar;

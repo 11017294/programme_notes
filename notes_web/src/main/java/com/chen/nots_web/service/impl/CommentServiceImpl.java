@@ -37,14 +37,14 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         User commentUser = userService.getById(comment.getCommentUserUid());
         if(Objects.nonNull(commentUser)){
             comment.setCommentUserAvatar(commentUser.getAvatar());
-            comment.setCommentUserName(commentUser.getUserName());
+            comment.setCommentUserNickName(commentUser.getNickName());
         }
 
         // 查询被评论用户 信息
         User targetUser = userService.getById(comment.getTargetUserUid());
         if(Objects.nonNull(targetUser)){
             comment.setTargetUserAvatar(targetUser.getAvatar());
-            comment.setTargetUserName(targetUser.getUserName());
+            comment.setTargetUserNickName(targetUser.getNickName());
         }
 
         comment.insert();

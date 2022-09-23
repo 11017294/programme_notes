@@ -217,9 +217,9 @@ create table t_comment
     is_delete           tinyint(1) unsigned zerofill default 0                 not null comment '是否删除，1表示已删除',
     create_time         timestamp                    default CURRENT_TIMESTAMP not null comment '创建时间',
     update_time         timestamp                    default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
-    comment_user_name   varchar(255)                                           null comment '评论用户的用户名称',
+    comment_user_nick_name   varchar(255)                                           null comment '评论用户的用户昵称',
     comment_user_avatar varchar(255)                                           null comment '评论用户的用户头像',
-    target_user_name    varchar(255)                                           null comment '被评论用户的用户名称',
+    target_user_nick_name    varchar(255)                                           null comment '被评论用户的用户昵称',
     target_user_avatar  varchar(255)                                           null comment '被评论用户的用户头像',
     constraint comment_id_uindex
         unique (uid)

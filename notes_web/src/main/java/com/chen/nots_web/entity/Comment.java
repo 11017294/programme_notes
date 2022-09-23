@@ -43,16 +43,16 @@ public class Comment extends SuperEntity<Comment> {
     private String content;
 
     @ApiModelProperty("评论用户的用户名称")
-    @TableField("comment_user_name")
-    private String commentUserName;
+    @TableField("comment_user_nick_name")
+    private String commentUserNickName;
 
     @ApiModelProperty("评论用户的用户头像")
     @TableField("comment_user_avatar")
     private String commentUserAvatar;
 
     @ApiModelProperty("被评论用户的用户名称")
-    @TableField("target_user_name")
-    private String targetUserName;
+    @TableField("target_user_nick_name")
+    private String targetUserNickName;
 
     @ApiModelProperty("被评论用户的用户头像")
     @TableField("target_user_avatar")
