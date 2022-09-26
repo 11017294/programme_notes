@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author：MaybeBin
  * @date: 2022-01-25 09:30
  */
-@MapperScan("com.chen.nots_web.mapper")
+@MapperScan("com.chen.nots_web.mapper*")
 @EnableTransactionManagement
 @Configuration
 public class MyBatisPulsConfig {
