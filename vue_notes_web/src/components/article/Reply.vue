@@ -12,7 +12,11 @@
                 v-model="commentContent">
             </el-input>
         </div>
-        <el-button style="margin:10px 0px;" type="primary" class="grid-content bg-purple-light" @click="replyComment">回复</el-button>
+        <el-row type="flex" class="row-bg" justify="end">
+            <el-button style="margin:10px 0px;"
+                       type="primary"
+                       @click="replyComment">回复</el-button>
+        </el-row>
     </div>
 </template>
 
