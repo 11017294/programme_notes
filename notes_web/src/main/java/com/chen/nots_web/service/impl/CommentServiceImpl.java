@@ -1,6 +1,7 @@
 package com.chen.nots_web.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.chen.nots_web.entity.Comment;
 import com.chen.nots_web.entity.User;
@@ -13,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -58,6 +60,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             return null;
         }
 
+        // 转换实体类
         List<CommentVO> commentVOList = commentList.stream().map(comment -> {
                     CommentVO commentVO = new CommentVO();
                     BeanUtils.copyProperties(comment, commentVO);
@@ -65,6 +68,29 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
                 })
                 .collect(Collectors.toList());
 
-        return CommentRespVo.returnResult(commentVOList, commentList.size());
+        // 获取父评论
+        List<CommentVO> parentList = commentVOList.stream()
+                .filter(t -> StringUtils.isBlank(t.getParentUid()))
+                .collect(Collectors.toList());
+
+        for (CommentVO commentVO : parentList) {
+            childrenList(commentVO, commentVOList);
+        }
+
+        return CommentRespVo.returnResult(parentList, commentList.size());
     }
+
+    // 获取子评论
+    private void childrenList(CommentVO parentComment, List<CommentVO> commentVOList){
+        List<CommentVO> childrenList = new ArrayList<>();
+
+        for (CommentVO commentVO : commentVOList) {
+            if(Objects.equals(parentComment.getUid(), commentVO.getParentUid())){
+                childrenList.add(commentVO);
+            }
+        }
+
+        parentComment.setChildrenList(childrenList);
+    }
+
 }

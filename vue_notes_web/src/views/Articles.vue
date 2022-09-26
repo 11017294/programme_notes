@@ -84,7 +84,7 @@
                     <!-- 评论 -->
                     <comment
                         :commentList="comments"
-                        :articleId="noteData.uid"
+                        :articleUid="noteData.uid"
                         :count="count"
                         @reloadComment="fetchComment"
                     />

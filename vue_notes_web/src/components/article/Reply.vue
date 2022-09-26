@@ -26,6 +26,7 @@ export default {
             targeNickName: "",
             targetUserUid: null,
             parentUid: null,
+            articleUid: null,
             commentContent: ""
         };
     },
@@ -33,6 +34,10 @@ export default {
         // 回复评论
         replyComment() {
             let that = this;
+            if(!that.$store.state.isLogin){
+                that.$message.warning("未登录不能进行评论");
+                return false;
+            }
             //判空
             if (that.commentContent.trim() === "") {
                 that.$message.warning("评论不能为空");
@@ -40,16 +45,17 @@ export default {
             }
 
             let params = new URLSearchParams();
-            params.append("articleUid", that.articleId);
+            params.append("articleUid", that.articleUid);
             params.append("commentUserUid", that.$store.state.userInfo.userUid);
             params.append("targetUserUid", that.targetUserUid);
             params.append("parentUid", that.parentUid);
             params.append("content", that.commentContent);
 
-            comment().then(res => {
-
+            comment(params).then(res => {
+                this.$emit("reloadReply");
+                this.$refs.reply.style.display = "none";
             }).catch(err => {
-
+                that.$message.error(err);
             })
         }
     }
