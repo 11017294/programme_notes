@@ -27,7 +27,7 @@
             <!-- 评论数量 -->
             <div class="count">{{ count }} 评论</div>
             <!-- 评论列表 -->
-            <div v-for="(item, index) of commentList" :key="item.commentUserUid">
+            <div v-for="(item, index) of commentList" :key="item.uid">
                 <!-- 分割线 -->
                 <el-divider/>
                 <el-row>

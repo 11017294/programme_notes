@@ -181,8 +181,10 @@ export default {
         fetchComment() {
             articleComment(this.noteUid)
                 .then(res => {
-                    this.count = res.data.count;
-                    this.comments = res.data.comments;
+                    if(res.data){
+                        this.count = res.data.count;
+                        this.comments = res.data.comments;
+                    }
                 })
                 .catch(err => {
                     this.$message.error(err)

@@ -1,10 +1,0 @@
-
-wjavascript:S3776"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(ÌÛãÁ8®Öôïµ0
-Wjavascript:S6353";Use concise character class syntax '\d' instead of '[0-9]'.(ØÀË¼
-javascript:S1488."`Immediately return this expression instead of assigning it to the temporary variable "time_str".(‘Ëºÿÿÿÿÿ
-‹javascript:S1172."cRemove the unused function parameter "result" or rename it to "_result" to make intention explicit.(‘Ëºÿÿÿÿÿ8İÖôïµ0
-Ljavascript:S3504|")Unexpected var, use let or const instead.(•ıÏñ8íÖôïµ0
-@javascript:S2310€"Remove this assignment of "i".(é²ŒÆıÿÿÿÿ
-ijavascript:S4138‹"LExpected a `for-of` loop instead of a `for` loop with this simple iteration.(óıÉ¢
-Pjavascript:S1117´".'args' is already declared in the upper scope.(²“ä÷ùÿÿÿÿ
-Ojavascript:S1854¼"2Remove this useless assignment to variable "args".(ŸÃ«÷

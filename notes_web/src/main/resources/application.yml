@@ -4,7 +4,7 @@ spring:
     # 添加其他的配置文件
     active: dataSource, resources
   application:
-    name: nots_web
+    name: notes_web
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai

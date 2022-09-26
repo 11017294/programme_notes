@@ -240,8 +240,6 @@ o
 Nnotes_web/src/main/java/com/chen/nots_web/service/impl/PictureServiceImpl.java,6\9\69df022fe44de3067c67405e5a3edf44834c2824
 M
 vue_notes_web/.env.production,7\5\75ac1feb9bd99a3506fc2d2eb9d4efb287dabaf0
-P
- vue_notes_web/src/utils/index.js,e\4\e4da14f949e2894906c19740ee18bc5a6bc55ffb
 Q
 !vue_notes_web/src/views/About.vue,2\b\2bfb59842b22d527ab417c321d00f89c067769ed
 Q
@@ -320,8 +318,6 @@ u
 Enotes_web/src/test/java/com/chen/nots_web/HandleMaxRepeatProblem.java,8\a\8a06b012b99365a609512352326ac2168da08fdd
 s
 Cnotes_web/src/main/java/com/chen/nots_web/mapper/CommentMapper.java,6\e\6e473875bdc3ce8c07bf059c84e6ae6ebd34fbc0
-N
-vue_notes_web/src/api/index.js,0\6\06707de35011404b548f93c8c3a148a75fd64b6b
 Q
 !vue-admin-template/src/Global.vue,8\0\80844ad924fe8e5dd9d71c4a41ca2e2834a782ac
 `
