@@ -56,7 +56,7 @@ public class MyExport<T> {
      *
      * @param exportBaseService 策略接口
      * @param response
-     * @param fileName excle文件名
+     * @param fileName excel文件名
      * @param clazz 导出的实体类Class
      * @throws IOException
      */
@@ -69,16 +69,12 @@ public class MyExport<T> {
      * @param exportBaseService 策略接口
      * @param response
      * @param sheetName sheet名
-     * @param fileName excle文件名
+     * @param fileName excel文件名
      * @param clazz 导出的实体类Class
      * @throws IOException
      */
     public static void dataExport(ExportBaseService exportBaseService, HttpServletResponse response, String fileName, Class clazz, String sheetName) throws IOException {
         new MyExport(exportBaseService, response, fileName, clazz, sheetName);
-    }
-
-    public MyExport (){
-
     }
 
     public MyExport (ExportBaseService<T> exportBaseService, HttpServletResponse response, String fileName, Class<T> clazz, String sheetName) throws IOException {
@@ -137,7 +133,7 @@ public class MyExport<T> {
      */
     private void export(){
         long startTime = System.currentTimeMillis();
-        log.info("{}\t导出开始时间:{}", clazz.getName(), startTime);
+        log.info("{}\t总数：{}\t导出开始时间:{}", clazz.getName(), totalCount, startTime);
         for (int i = 0; i < this.sheetNum; i++) {
             log.info("{}\t第{}个Sheet", clazz.getName(), i + 1);
             //创建Sheet
