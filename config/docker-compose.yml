@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  # 服务名称
+  nginx:
+    image: nginx:1.20
+    ports:
+      - 80:80
+    volumes:
+      - /root/nginx/html:/usr/share/nginx/html
+      - /root/nginx/nginx.conf:/usr/share/nginx/nginx.conf
+    # 解决nginx的文件调用的权限问题
+    privileged: true
+  mysql:
+    image: mysql:8
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=333
+  redis:
+    image: redis:latest
+  notes:
+    image: notes:latest
+    # 在当前目录下寻找Dockerfile文件
+    build: .
+    ports:
+      - 9090:9090
+    depends_on:
+      - mysql
+      - redis

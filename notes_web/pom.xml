@@ -204,7 +204,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.7.RELEASE</version>
                 <configuration>
-                    <mainClass>com.chen.programmeNotes.ProgrammeNotesApplication</mainClass>
+                    <mainClass>com.chen.notes_web.ProgrammeNotesApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

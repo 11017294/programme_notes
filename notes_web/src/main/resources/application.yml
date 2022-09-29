@@ -2,7 +2,7 @@
 spring:
   profiles:
     # 添加其他的配置文件
-    active: dataSource, resources
+    active: pro, resources
   application:
     name: notes_web
   jackson:
