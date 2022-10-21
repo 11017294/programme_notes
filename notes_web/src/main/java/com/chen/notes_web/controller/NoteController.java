@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.chen.notes_web.annotion.log.BussinessLog;
 import com.chen.notes_web.exception.BusinessException;
 import com.chen.notes_web.exception.ErrorCode;
+import com.chen.notes_web.exception.ExceptionUtils;
 import com.chen.notes_web.global.enums.EBehavior;
 import com.chen.notes_web.service.NoteService;
 import com.chen.notes_web.vo.*;
@@ -71,9 +72,7 @@ public class NoteController {
     @ApiOperation(value = "删除笔记", notes = "删除笔记")
     @PostMapping("/delete")
     public String delete(@ApiParam(name = "uid", value = "笔记UID") String uid) {
-        if(StringUtils.isBlank(uid)){
-            throw new BusinessException(ErrorCode.REQUEST_PARAMS_ERROR);
-        }
+        ExceptionUtils.isBlank(uid, ErrorCode.REQUEST_PARAMS_ERROR);
         boolean note = noteService.removeById(uid);
         if(!note){
             throw new BusinessException(ErrorCode.NOT_FOUND);
