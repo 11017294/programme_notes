@@ -5,7 +5,7 @@ spring:
     # 数据源名称
     name: defaultDataSource
     # 数据库连接地址
-    url: jdbc:mysql://192.168.32.128:3306/programme_Notes?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://mysql:3306/programme_Notes?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     #url: jdbc:mysql://120.24.48.80:3306/programme_notes?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     #    url: jdbc:mysql://192.168.32.128:3306/programme_notes?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     # 数据库用户名&密码：
@@ -19,7 +19,7 @@ spring:
       enabled: true
     redis:
       database: 0           # Redis服务器数据库
-      host: 192.168.32.128  # Redis服务器地址
+      host: redis           # Redis服务器地址
       port: 6379            # Redis服务器连接端口
       password: 123456      # Redis服务器连接密码（默认为空）
       timeout: 6000ms       # 连接超时时间（毫秒）

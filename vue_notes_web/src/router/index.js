@@ -11,6 +11,12 @@ const routes = [
         meta: { title: '首页'}
     },
     {
+        path: '/variable',
+        name: 'variable',
+        component: () => import('../views/Variable.vue'),
+        meta: { title: '工具'},
+    },
+    {
         path: '/pigeonhole',
         name: 'pigeonhole',
         component: () => import('../views/Pigeonhole.vue'),

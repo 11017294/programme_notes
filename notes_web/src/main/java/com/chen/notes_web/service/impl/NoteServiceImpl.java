@@ -195,12 +195,10 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
     @Override
     public IPage getNoteList(NoteVO noteVO) {
         QueryWrapper<Note> wrapper = new QueryWrapper<>();
-        if(StrUtil.isNotBlank(noteVO.getTagUid())) {
-            wrapper.like(SQLConf.TAG_UID, noteVO.getTagUid());
-        }
-        if(StrUtil.isNotBlank(noteVO.getNoteSortUid())) {
-            wrapper.eq(SQLConf.NOTE_SORT_UID, noteVO.getNoteSortUid());
-        }
+
+        wrapper.like(StrUtil.isNotBlank(noteVO.getTagUid()), SQLConf.TAG_UID, noteVO.getTagUid())
+                .eq(StrUtil.isNotBlank(noteVO.getNoteSortUid()), SQLConf.NOTE_SORT_UID, noteVO.getNoteSortUid());
+
         wrapper.select(Note.class, i -> !i.getProperty().equals(SQLConf.CONTENT));
         Page page = new Page(noteVO.getCurrentPage(), noteVO.getPageSize());
         IPage<Note> noteList = noteMapper.selectPage(page, wrapper);
