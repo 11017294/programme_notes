@@ -3,12 +3,7 @@ bin-debug/
 bin-release/
 [Oo]bj/
 [Bb]in/
-*node_modules/*
-<<<<<<< HEAD
-=======
->>>>>>> acde379 (首次提交)
 
-# Other files and folders
 .settings/
 
 # Executables
@@ -17,14 +12,10 @@ bin-release/
 *.ipa
 *.apk
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
-<<<<<<< HEAD
-=======
-/vue_notes_web/node_modules/
->>>>>>> acde379 (首次提交)
 /notes_web/target/
 /vue-admin-template/node_modules/
 /vue-admin-template/dist/
+/vue_notes_web/node_modules/
 /vue_notes_web/dist/
+/.idea/
+/logs/
