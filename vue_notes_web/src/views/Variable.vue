@@ -5,7 +5,7 @@
             <el-input placeholder="请输入内容"
                       v-model="value"
                       ref="inputRef"
-                      maxlength="200"
+                      maxlength="1000"
                       @keyup.enter.native="search"
                       class="input-with-select">
                 <el-button slot="append"
@@ -28,6 +28,7 @@
                 style="width: 100%">
                 <el-table-column
                     prop="nameMethod"
+                    width="300"
                     label="命名法">
                 </el-table-column>
                 <el-table-column
@@ -196,7 +197,7 @@ export default {
 
 <style lang="less" scoped>
     .variable {
-        width: 40%;
+        width: 50%;
         margin: auto;
         margin-top: 12%;
         background: #ffffff;
