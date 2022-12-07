@@ -310,17 +310,14 @@ public class NoteServiceImpl extends SuperServiceImpl<NoteMapper, Note> implemen
         HashMap<String, List<Note>> monthMap = new HashMap<>();
         while(iterator.hasNext()){
             Note note = iterator.next();
+            // 得到笔记创建月份
             String month = new SimpleDateFormat("yyyy年MM月").format(note.getCreateTime());
             monthSet.add(month);
-            if(ObjectUtil.isEmpty(monthMap.get(month))){
-                List<Note> list = new ArrayList<>(1);
-                list.add(note);
-                monthMap.put(month, list);
-            } else{
-                List<Note> list = monthMap.get(month);
-                list.add(note);
-                monthMap.put(month, list);
-            }
+            // monthMap.get(month)不存在即new一个list
+            List<Note> list = Optional.ofNullable(monthMap.get(month)).orElse(new ArrayList<>());
+            list.add(note);
+            // 将对应的文章存入到相应月份中
+            monthMap.put(month, list);
         }
         // 缓存该月份下所有文章
         monthMap.forEach((key, value) -> {
